@@ -1,4 +1,4 @@
-package org.example.presentation;
+package org.gruppe06.presentation;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

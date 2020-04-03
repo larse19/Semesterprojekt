@@ -1,6 +1,6 @@
-package org.example.domain;
+package org.gruppe06.domain;
 
-import org.example.presentation.App;
+import org.gruppe06.presentation.App;
 
 public class Main {
 
