@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import org.gruppe06.persistance.Postgres;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,7 +20,7 @@ public class PrimaryController implements Initializable {
 
     @FXML
     void switchToSecondary(ActionEvent event) {
-        textLabel.setText("Anders er for vild");
+        textLabel.setText(Postgres.getPeople().toString());
     }
 
     @Override
