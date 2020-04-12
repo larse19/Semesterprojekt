@@ -7,7 +7,7 @@ import java.util.HashMap;
 //This class is purely meant for testing queries with the database
 public class Postgres {
 
-    private static DatabaseConnection dbc = new DatabaseConnection();
+    private static DatabaseConnection dbc = DatabaseConnection.getDatabaseConnection();
 
     public static HashMap<String, String> getPeople() {
 
