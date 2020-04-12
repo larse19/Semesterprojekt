@@ -5,9 +5,10 @@ import java.sql.*;
 //Class that connects to database
 public class DatabaseConnection {
 
+    private static DatabaseConnection databaseConnection = null;
     private Connection connection;
 
-    public DatabaseConnection() {
+    private DatabaseConnection() {
         //Gets the required drivers
         try {
             Class.forName("org.postgresql.Driver");
@@ -26,6 +27,13 @@ public class DatabaseConnection {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static DatabaseConnection getDatabaseConnection(){
+        if(databaseConnection == null){
+            databaseConnection = new DatabaseConnection();
+        }
+        return databaseConnection;
     }
 
     public Connection getConnection(){

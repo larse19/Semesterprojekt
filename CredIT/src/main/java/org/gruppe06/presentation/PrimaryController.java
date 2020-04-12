@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import org.gruppe06.domain.CredtIT;
 import org.gruppe06.persistance.Postgres;
 
 import java.net.URL;
@@ -20,7 +21,7 @@ public class PrimaryController implements Initializable {
 
     @FXML
     void switchToSecondary(ActionEvent event) {
-        textLabel.setText(Postgres.getPeople().toString());
+        textLabel.setText(CredtIT.getProgram(1).toString());
     }
 
     @Override
