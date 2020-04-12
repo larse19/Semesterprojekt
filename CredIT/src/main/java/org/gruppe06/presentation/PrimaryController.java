@@ -21,7 +21,7 @@ public class PrimaryController implements Initializable {
 
     @FXML
     void switchToSecondary(ActionEvent event) {
-        textLabel.setText(CredtIT.getProgram(1).toString());
+        textLabel.setText(CredtIT.getProgram("Badehotellet S07E01: Ingen tyskere her").toString());
     }
 
     @Override
