@@ -19,7 +19,7 @@ public class ProgramDataHandler {
         connection = databaseConnection.getConnection();
     }
 
-    //Private method, for getting cast members from a specifik program
+    //Private method, for getting cast members from a specific program
     private ArrayList<CastMember> getCastMembers(int programID) {
 
         ArrayList<CastMember> castMembers = new ArrayList<>();
@@ -97,16 +97,23 @@ public class ProgramDataHandler {
 
     }
 
-    //Get program based on name (Has to be exact for now)
+    //Get program based on name (name doesn't have to be complete, but has to be spelled right)
     public Program getProgram(String programName){
 
-        HashMap<Integer, String> programs = getAllProgramIdAndNames();
         Program program = null;
 
-        for(int k : programs.keySet()){
-            if(programs.get(k).equals(programName)){
-                program = getProgram(k);
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM programs where name LIKE ?");
+            ps.setString(1,programName+"%");
+
+            ResultSet set = ps.executeQuery();
+
+            while(set.next()){
+                program = getProgram(set.getInt("ID"));
             }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         //TODO Returning an empty program is not good, need rework
