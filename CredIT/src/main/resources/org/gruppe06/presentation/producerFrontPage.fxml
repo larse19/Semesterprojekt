@@ -6,15 +6,15 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gruppe06.presentation.producerFrontPageController">
    <children>
-      <Button layoutX="68.0" layoutY="532.0" mnemonicParsing="false" text="Log ud" />
-      <TextArea layoutX="400.0" layoutY="186.0" prefHeight="319.0" prefWidth="344.0" text="Søge resultater her." />
+      <Button fx:id="signOutButton" layoutX="68.0" layoutY="532.0" mnemonicParsing="false" onAction="#signOutHandler" text="Log ud" />
+      <TextArea fx:id="searchResultField" layoutX="400.0" layoutY="186.0" prefHeight="319.0" prefWidth="344.0" text="Søge resultater her." />
       <Label layoutX="318.0" layoutY="67.0" prefHeight="45.0" prefWidth="164.0" text="TV 2 CRED IT SYSTEM" />
-      <TextField layoutX="68.0" layoutY="186.0" />
-      <Button layoutX="230.0" layoutY="186.0" mnemonicParsing="false" text="Søg" />
+      <TextField fx:id="searchField" layoutX="68.0" layoutY="186.0" />
+      <Button fx:id="searchButton" layoutX="230.0" layoutY="186.0" mnemonicParsing="false" onAction="#searchHandler" text="Søg" />
       <Label layoutX="114.0" layoutY="292.0" text="Navn på bruger her" />
-      <Button layoutX="108.0" layoutY="333.0" mnemonicParsing="false" text="Opret nyt program" />
-      <Button layoutX="103.0" layoutY="389.0" mnemonicParsing="false" text="Rediger programmer" />
+      <Button fx:id="createProgramButton" layoutX="108.0" layoutY="333.0" mnemonicParsing="false" onAction="#createProgramHandler" text="Opret nyt program" />
+      <Button fx:id="editProgramButton" layoutX="103.0" layoutY="389.0" mnemonicParsing="false" onAction="#editProgramHandler" text="Rediger programmer" />
    </children>
 </AnchorPane>
