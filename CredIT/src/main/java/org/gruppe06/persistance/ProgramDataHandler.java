@@ -103,7 +103,7 @@ public class ProgramDataHandler {
         Program program = null;
 
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM programs where name LIKE ?");
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM programs where name iLIKE ?");
             ps.setString(1,programName+"%");
 
             ResultSet set = ps.executeQuery();
