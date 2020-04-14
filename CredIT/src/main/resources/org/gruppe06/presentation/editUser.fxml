@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="371.0" layoutY="63.0" text="Rediger bruger" />
+      <ListView fx:id="usersList" layoutX="120.0" layoutY="119.0" prefHeight="427.0" prefWidth="235.0" />
+      <TextField fx:id="roleField" layoutX="430.0" layoutY="154.0" />
+      <Label layoutX="491.0" layoutY="190.0" text="Navn" />
+      <Label layoutX="491.0" layoutY="129.0" text="Rolle" />
+      <Button fx:id="backButton" layoutX="36.0" layoutY="546.0" mnemonicParsing="false" onAction="#backButtonHandler" text="Back" />
+      <Button fx:id="updateButton" layoutX="599.0" layoutY="241.0" mnemonicParsing="false" onAction="#updateButtonHandler" text="Opdater" />
+      <TextField fx:id="nameField" layoutX="430.0" layoutY="214.0" />
+      <TextField fx:id="usernameField" layoutX="430.0" layoutY="270.0" />
+      <Label layoutX="480.0" layoutY="306.0" text="Password" />
+      <Label layoutX="474.0" layoutY="245.0" text="Brugernavn" />
+      <TextField fx:id="passwordField" layoutX="430.0" layoutY="330.0" />
+      <Button fx:id="deleteUserButton" layoutX="542.0" layoutY="431.0" mnemonicParsing="false" onAction="#deleteUserButtonHandler" text="Slet bruger" />
+      <TextField fx:id="userSearchField" layoutX="120.0" layoutY="80.0" />
+      <Button fx:id="searchButton" layoutX="280.0" layoutY="80.0" mnemonicParsing="false" onAction="#searchButtonHandler" text="Søg" />
+   </children>
+</AnchorPane>
