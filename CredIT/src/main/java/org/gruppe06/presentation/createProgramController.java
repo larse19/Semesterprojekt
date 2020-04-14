@@ -49,7 +49,7 @@ public class createProgramController {
 
     @FXML
     void returnHandler(ActionEvent event) throws IOException {
-        App.setRoot("producerFrontPage");
+        App.setRoot("adminFrontPage");
     }
 
 }

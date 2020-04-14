@@ -35,7 +35,7 @@ public class addCastMembersController {
 
     @FXML
     void doneButtonHandler(ActionEvent event) throws IOException {
-        App.setRoot("producerFrontPage");
+        App.setRoot("adminFrontPage");
     }
 
 }
