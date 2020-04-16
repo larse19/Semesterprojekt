@@ -1,8 +1,8 @@
-package org.gruppe06.domain;
+package org.gruppe06.persistance;
 
-import java.util.ArrayList;
+import org.gruppe06.interfaces.IProducer;
 
-public class Producer extends Person{
+public class Producer extends Person implements IProducer {
 
     public Producer(String ID, String name) {
         super(ID, name);

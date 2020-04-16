@@ -1,6 +1,8 @@
 package org.gruppe06.persistance;
 
-import org.gruppe06.domain.*;
+import org.gruppe06.interfaces.ICastMember;
+import org.gruppe06.interfaces.IProducer;
+import org.gruppe06.interfaces.IProgram;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,9 +22,9 @@ public class ProgramDataHandler {
     }
 
     //Private method, for getting cast members from a specific program
-    private ArrayList<CastMember> getCastMembers(int programID) {
+    private ArrayList<ICastMember> getCastMembers(int programID) {
 
-        ArrayList<CastMember> castMembers = new ArrayList<>();
+        ArrayList<ICastMember> castMembers = new ArrayList<>();
 
         try {
             PreparedStatement castPS = connection.prepareStatement("select cast_members.ID as ID, cast_members.name as cast_name, worked_on.role as role from programs INNER JOIN worked_on ON programs.ID = worked_on.program_ID INNER JOIN cast_members on cast_members.ID = worked_on.cast_member_ID where program_ID = ?");
@@ -68,10 +70,10 @@ public class ProgramDataHandler {
     }
 
     //Get program based on ID
-    public Program getProgram(int programID) {
+    public IProgram getProgram(int programID) {
 
         String name = "";
-        ArrayList<Producer> producers = new ArrayList<>();
+        ArrayList<IProducer> producers = new ArrayList<>();
 
         try {
             PreparedStatement producersPS = connection.prepareStatement("select producers.ID as ID, producers.name as producer_name, programs.name as program_name from programs INNER JOIN produces_program on produces_program.program_id = programs.ID INNER JOIN producers on producers.ID = produces_program.producer_id where programs.id = ?");
@@ -98,9 +100,9 @@ public class ProgramDataHandler {
     }
 
     //Get program based on name (name doesn't have to be complete, but has to be spelled right)
-    public Program getProgram(String programName){
+    public IProgram getProgram(String programName){
 
-        Program program = null;
+        IProgram program = null;
 
         try {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM programs where name iLIKE ?");

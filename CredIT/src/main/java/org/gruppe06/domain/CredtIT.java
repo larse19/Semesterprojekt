@@ -1,9 +1,9 @@
 package org.gruppe06.domain;
 
+import org.gruppe06.interfaces.IProgram;
 import org.gruppe06.persistance.DatabaseConnection;
 import org.gruppe06.persistance.ProgramDataHandler;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 
 public class CredtIT {
@@ -16,11 +16,11 @@ public class CredtIT {
         programDataHandler = new ProgramDataHandler();
     }
 
-    public static Program getProgram(int programID){
+    public static IProgram getProgram(int programID){
         return programDataHandler.getProgram(programID);
     }
 
-    public static Program getProgram(String programName){
+    public static IProgram getProgram(String programName){
         return programDataHandler.getProgram(programName);
     }
 

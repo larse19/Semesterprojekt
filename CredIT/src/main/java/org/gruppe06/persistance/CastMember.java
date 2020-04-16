@@ -1,17 +1,18 @@
-package org.gruppe06.domain;
+package org.gruppe06.persistance;
 
-import java.util.Map;
+import org.gruppe06.interfaces.ICastMember;
+import org.gruppe06.interfaces.IRole;
 
-public class CastMember extends Person {
+public class CastMember extends Person implements ICastMember {
 
-    private Role roleOnProgram;
+    private IRole roleOnProgram;
 
     public CastMember(String ID, String name, Role roleOnProgram) {
         super(ID, name);
         this.roleOnProgram = roleOnProgram;
     }
 
-    public Role getRoleOnProgram() {
+    public IRole getRoleOnProgram() {
         return roleOnProgram;
     }
 

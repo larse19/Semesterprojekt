@@ -1,6 +1,9 @@
-package org.gruppe06.domain;
+package org.gruppe06.persistance;
 
-public class Person {
+import org.gruppe06.interfaces.IPerson;
+import org.gruppe06.interfaces.IProgram;
+
+public class Person implements IPerson {
 
     private String name;
     private String ID;

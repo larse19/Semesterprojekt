@@ -1,7 +1,5 @@
 package org.gruppe06.persistance;
 
-import org.gruppe06.domain.CastMember;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -65,7 +63,7 @@ public class CastMemberDataHandler {
             while(getCastMemberRS.next()) {
                 System.out.println(getCastMemberRS.getString("name"));
             }
-            if(castMemberName == " "){
+            if(castMemberName.equals(" ")){
                 System.out.println("No such existing cast member");
             }
         } catch (SQLException e) {
