@@ -1,6 +1,8 @@
-package org.gruppe06.domain;
+package org.gruppe06.persistance;
 
-public class Role {
+import org.gruppe06.interfaces.IRole;
+
+public class Role implements IRole {
 
     private String role;
 

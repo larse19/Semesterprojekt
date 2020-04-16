@@ -1,6 +1,8 @@
-package org.gruppe06.domain;
+package org.gruppe06.persistance;
 
-public class Actor extends Role{
+import org.gruppe06.interfaces.IActor;
+
+public class Actor extends Role implements IActor {
 
     private String characterName;
 
