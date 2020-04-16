@@ -12,6 +12,11 @@ public class CastMember extends Person implements ICastMember {
         this.roleOnProgram = roleOnProgram;
     }
 
+    public CastMember(String ID, String name){
+        super(ID, name);
+        this.roleOnProgram = null;
+    }
+
     public IRole getRoleOnProgram() {
         return roleOnProgram;
     }

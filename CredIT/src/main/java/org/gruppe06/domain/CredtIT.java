@@ -1,6 +1,7 @@
 package org.gruppe06.domain;
 
 import org.gruppe06.interfaces.IProgram;
+import org.gruppe06.persistance.CastMemberDataHandler;
 import org.gruppe06.persistance.DatabaseConnection;
 import org.gruppe06.persistance.ProgramDataHandler;
 
@@ -10,10 +11,12 @@ public class CredtIT {
 
     private DatabaseConnection databaseConnection;
     private static ProgramDataHandler programDataHandler;
+    private static CastMemberDataHandler castMemberDataHandler;
 
     public CredtIT(){
         databaseConnection = DatabaseConnection.getDatabaseConnection();
         programDataHandler = new ProgramDataHandler();
+        castMemberDataHandler = new CastMemberDataHandler();
     }
 
     public static IProgram getProgram(int programID){

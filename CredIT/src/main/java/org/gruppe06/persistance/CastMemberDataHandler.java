@@ -1,5 +1,7 @@
 package org.gruppe06.persistance;
 
+import org.gruppe06.interfaces.ICastMember;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,18 +13,17 @@ public class CastMemberDataHandler {
     private DatabaseConnection databaseConnection;
     private Connection connection;
 
-    private CastMember castMember;
-
     public CastMemberDataHandler(){
         databaseConnection = DatabaseConnection.getDatabaseConnection();
         connection = databaseConnection.getConnection();
     }
 
     //This method creates a cast member into the cast_member table.
-    public void createCastMember(String castMemberName){
+    public void createCastMember(String castMemberID, String castMemberName){
         try {
             PreparedStatement createCastMemberPS = connection.prepareStatement("INSERT INTO cast_members(id, name) VALUES (?, ?);");
-            createCastMemberPS.setString(1 , castMemberName);
+            createCastMemberPS.setString(1, castMemberID);
+            createCastMemberPS.setString(2, castMemberName);
             createCastMemberPS.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -38,33 +39,33 @@ public class CastMemberDataHandler {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     //This method updates cast member names, not id.
-    public void updateCastMember(String castMemberName){
+    public void updateCastMember(String castMemberID, String castMemberName){
         try {
-            PreparedStatement createCastMemberPS = connection.prepareStatement("ALTER TABLE cast_members SET name = ? WHERE id = castID;");
+            PreparedStatement createCastMemberPS = connection.prepareStatement("UPDATE cast_members SET name = ? WHERE id = ?;");
             createCastMemberPS.setString(1, castMemberName);
+            createCastMemberPS.setString(2, castMemberID);
             createCastMemberPS.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     //Method to get a cast member from the database
-    public CastMember getCastMember(String castMemberName) {
+    public ICastMember getCastMember(String castMemberName) throws NullPointerException{
+        ICastMember castMember = null;
         try {
             PreparedStatement getCastMemberPS = connection.prepareStatement("SELECT * FROM cast_members WHERE name like ?;");
-            getCastMemberPS.setString(1, castMemberName);
+            getCastMemberPS.setString(1, "%"+castMemberName+"%");
             ResultSet getCastMemberRS = getCastMemberPS.executeQuery();
 
             while(getCastMemberRS.next()) {
-                System.out.println(getCastMemberRS.getString("name"));
+                castMember = new CastMember(getCastMemberRS.getString("ID"), getCastMemberRS.getString("name"));
             }
             if(castMemberName.equals(" ")){
-                System.out.println("No such existing cast member");
+                throw new NullPointerException();
             }
         } catch (SQLException e) {
             e.printStackTrace();
