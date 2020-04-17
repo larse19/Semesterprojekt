@@ -2,7 +2,6 @@ package org.gruppe06.domain;
 
 import org.gruppe06.interfaces.ICastMember;
 import org.gruppe06.persistance.CastMemberDataHandler;
-import org.gruppe06.persistance.DatabaseConnection;
 
 public class CastMemberSystem {
 

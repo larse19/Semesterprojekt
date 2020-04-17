@@ -4,11 +4,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
 public class addCastMembersController {
+
+    @FXML
+    private RadioButton actorRadioButton;
 
     @FXML
     private TextField nameFIeld;
@@ -38,4 +42,7 @@ public class addCastMembersController {
         App.setRoot("adminFrontPage");
     }
 
+    @FXML
+    public void actorHandler(ActionEvent actionEvent) {
+    }
 }
