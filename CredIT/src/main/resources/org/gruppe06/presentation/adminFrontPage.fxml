@@ -6,17 +6,26 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gruppe06.presentation.adminFrontPageController">
-   <children>
-      <Button fx:id="signOutButton" layoutX="68.0" layoutY="532.0" mnemonicParsing="false" onAction="#signOutButtonHandler" text="Log ud" />
-      <TextArea fx:id="searchResultField" layoutX="400.0" layoutY="186.0" prefHeight="319.0" prefWidth="344.0" text="Søge resultater her." />
-      <Label layoutX="318.0" layoutY="67.0" prefHeight="45.0" prefWidth="164.0" text="TV 2 CRED IT SYSTEM" />
-      <TextField fx:id="searchField" layoutX="68.0" layoutY="186.0" />
-      <Button fx:id="searchButton" layoutX="230.0" layoutY="186.0" mnemonicParsing="false" onAction="#searchButtonHandler" text="Søg" />
-      <Label layoutX="114.0" layoutY="292.0" text="Navn på bruger her" />
-      <Button fx:id="createProgramButton" layoutX="108.0" layoutY="333.0" mnemonicParsing="false" onAction="#createProgramButtonHandler" text="Opret nyt program" />
-      <Button fx:id="editProgramButton" layoutX="103.0" layoutY="389.0" mnemonicParsing="false" onAction="#editProgramButtonHandler" text="Rediger programmer" />
-      <Button fx:id="addUserButton" layoutX="126.0" layoutY="438.0" mnemonicParsing="false" onAction="#addUserButtonHandler" text="Tilføj bruger" />
-      <Button fx:id="editUserButton" layoutX="118.0" layoutY="480.0" mnemonicParsing="false" onAction="#editUserButtonHandler" text="Rediger bruger" />
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+            prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.gruppe06.presentation.adminFrontPageController">
+   <Button fx:id="signOutButton" layoutX="68.0" layoutY="532.0" mnemonicParsing="false" onAction="#signOutButtonHandler"
+           text="Log ud"/>
+   <TextArea fx:id="searchResultField" layoutX="400.0" layoutY="186.0" prefHeight="319.0" prefWidth="344.0"
+             text="Søge resultater her."/>
+   <Label layoutX="318.0" layoutY="67.0" prefHeight="45.0" prefWidth="164.0" text="TV 2 CRED IT SYSTEM"/>
+   <TextField fx:id="searchField" layoutX="68.0" layoutY="186.0"/>
+   <Button fx:id="searchButton" layoutX="230.0" layoutY="186.0" mnemonicParsing="false" onAction="#searchButtonHandler"
+           text="Søg"/>
+   <Label layoutX="115.0" layoutY="257.0" text="Navn på bruger her"/>
+   <Button fx:id="createProgramButton" layoutX="108.0" layoutY="333.0" mnemonicParsing="false"
+           onAction="#createProgramButtonHandler" text="Opret nyt program"/>
+   <Button fx:id="editProgramButton" layoutX="103.0" layoutY="389.0" mnemonicParsing="false"
+           onAction="#editProgramButtonHandler" text="Rediger programmer"/>
+   <Button fx:id="addUserButton" layoutX="126.0" layoutY="438.0" mnemonicParsing="false"
+           onAction="#addUserButtonHandler" text="Tilføj bruger"/>
+   <Button fx:id="editUserButton" layoutX="118.0" layoutY="480.0" mnemonicParsing="false"
+           onAction="#editUserButtonHandler" text="Rediger bruger"/>
+   <Button layoutX="120.0" layoutY="288.0" mnemonicParsing="false" onAction="#goToCastMemberHandler"
+           text="Cast members"/>
 </AnchorPane>

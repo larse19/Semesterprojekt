@@ -11,12 +11,10 @@ public class CredtIT {
 
     private DatabaseConnection databaseConnection;
     private static ProgramDataHandler programDataHandler;
-    private static CastMemberDataHandler castMemberDataHandler;
 
     public CredtIT(){
         databaseConnection = DatabaseConnection.getDatabaseConnection();
         programDataHandler = new ProgramDataHandler();
-        castMemberDataHandler = new CastMemberDataHandler();
     }
 
     public static IProgram getProgram(int programID){
@@ -30,5 +28,7 @@ public class CredtIT {
     public static ArrayList<String> getAllProgramNames(){
         return programDataHandler.getAllProgramNames();
     }
+
+
 
 }
