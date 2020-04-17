@@ -21,6 +21,41 @@ public class ProgramDataHandler {
         connection = databaseConnection.getConnection();
     }
 
+    //Method to create programs and add them to the DB
+    public void createProgram (String programName, String releaseYear) {
+        try {
+            PreparedStatement createProgramPS = connection.prepareStatement("INSERT INTO programs(name, release_year) VALUES (?, ?);");
+            createProgramPS.setString(1, programName);
+            createProgramPS.setString(2, releaseYear);
+            createProgramPS.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Method to delete a program from it's program ID
+    public void deleteProgram (String programName) {
+        try {
+            PreparedStatement deleteProgramPS = connection.prepareStatement("DELETE FROM programs WHERE name = ?;");
+            deleteProgramPS.setString(1, programName);
+            deleteProgramPS.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Method to update an already existing programs information from it's ID
+    public void updateProgram (String oldName, String newProgramName, String releaseYear){
+        try{
+            PreparedStatement updateProgramPS = connection.prepareStatement("UPDATE programs SET name = ? SET release_year = ? WHERE name = oldName;");
+            updateProgramPS.setString(1, newProgramName);
+            updateProgramPS.setString(2, releaseYear);
+            updateProgramPS.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     //Private method, for getting cast members from a specific program
     private ArrayList<ICastMember> getCastMembers(int programID) {
 
@@ -97,6 +132,26 @@ public class ProgramDataHandler {
 
         return new Program(name, getCastMembers(programID), producers);
 
+    }
+
+    public IProgram getPrograms(String programName) throws NullPointerException{
+        IProgram program = null;
+
+        try {
+            PreparedStatement getProgramsPS = connection.prepareStatement("SELECT * FROM programs WHERE name like ?;");
+            getProgramsPS.setString(1, "%" + programName + "%");
+            ResultSet getProgramRS = getProgramsPS.executeQuery();
+
+            while (getProgramRS.next()){
+                program = new Program(getProgramRS.getString("name"), getProgramRS.getString("release_year"));
+                if(getProgramRS.getString("name").equals(" ")){
+                    throw new NullPointerException();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return program;
     }
 
     //Get program based on name (name doesn't have to be complete, but has to be spelled right)

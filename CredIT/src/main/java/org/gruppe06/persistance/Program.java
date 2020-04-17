@@ -11,11 +11,17 @@ public class Program implements IProgram {
     private String name;
     private ArrayList<ICastMember> cast;
     private ArrayList<IProducer> producers;
+    private String releaseYear;
 
     public Program(String name, ArrayList<ICastMember> cast, ArrayList<IProducer> producers) {
         this.name = name;
         this.cast = cast;
         this.producers = producers;
+    }
+
+    public Program(String name, String releaseYear) {
+        this.name = name;
+        this.releaseYear = releaseYear;
     }
 
     public String getName() {
