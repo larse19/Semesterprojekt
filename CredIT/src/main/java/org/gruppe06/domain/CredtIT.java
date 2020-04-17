@@ -16,17 +16,11 @@ public class CredtIT {
         programDataHandler = new ProgramDataHandler();
     }
 
-    public static IProgram getProgram(int programID){
-        return programDataHandler.getProgram(programID);
-    }
-
     public static IProgram getProgram(String programName){
         return programDataHandler.getProgram(programName);
     }
 
-    public static ArrayList<String> getAllProgramNames(){
-        return programDataHandler.getAllProgramNames();
-    }
+
 
 
 

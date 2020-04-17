@@ -32,7 +32,7 @@ public class SearchController {
             castMembers.append(castMember.toString()).append("\n");
         }
 
-        resultTextArea.setText("Tilte:\n" + name + "\n\n");
+        resultTextArea.setText("Title:\n" + name + "\n\n");
         resultTextArea.appendText("Producers:\n" + producers + "\n");
         resultTextArea.appendText("Cast:\n" + castMembers);
     }
