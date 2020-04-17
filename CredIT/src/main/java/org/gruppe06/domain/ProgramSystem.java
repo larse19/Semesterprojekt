@@ -1,5 +1,6 @@
 package org.gruppe06.domain;
 
+import org.gruppe06.interfaces.IProgram;
 import org.gruppe06.interfaces.IRole;
 import org.gruppe06.persistance.ProgramDataHandler;
 import org.gruppe06.persistance.Role;
@@ -16,7 +17,7 @@ public class ProgramSystem {
         programDataHandler = new ProgramDataHandler();
     }
 
-    public List<String> getListOfPrograms(){
+    public List<String> getListOfProgramNames(){
         return programDataHandler.getAllProgramNames();
     }
 
@@ -35,4 +36,13 @@ public class ProgramSystem {
         return programDataHandler.addCastMemberToProgram(programInfo.getID(),castName,Irole);
     }
 
+    public IProgram getProgram(String programName) throws NullPointerException {
+        IProgram program;
+        try {
+            program = programDataHandler.getProgram(programName);
+        }catch (NullPointerException e){
+            throw new NullPointerException();
+        }
+        return program;
+    }
 }

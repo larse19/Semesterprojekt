@@ -12,9 +12,9 @@ public class Program implements IProgram {
     private String name;
     private ArrayList<ICastMember> cast;
     private ArrayList<IProducer> producers;
-    private int releaseYear;
+    private String releaseYear;
 
-    public Program(String name, ArrayList<ICastMember> cast, ArrayList<IProducer> producers, int releaseYear) {
+    public Program(String name, ArrayList<ICastMember> cast, ArrayList<IProducer> producers, String releaseYear) {
         this.name = name;
         this.cast = cast;
         this.producers = producers;
@@ -22,7 +22,7 @@ public class Program implements IProgram {
     }
 
     public Program(String name, ArrayList<ICastMember> cast, ArrayList<IProducer> producers){
-        this(name, cast, producers,0);
+        this(name, cast, producers,"");
     }
 
     public String getName() {
@@ -37,7 +37,7 @@ public class Program implements IProgram {
         return producers;
     }
 
-    public int getReleaseYear() {
+    public String getReleaseYear() {
         return releaseYear;
     }
 
