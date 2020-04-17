@@ -3,6 +3,7 @@ package org.gruppe06.persistance;
 import org.gruppe06.interfaces.ICastMember;
 import org.gruppe06.interfaces.IProducer;
 import org.gruppe06.interfaces.IProgram;
+import org.gruppe06.interfaces.IRole;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ProgramDataHandler {
 
@@ -49,9 +52,9 @@ public class ProgramDataHandler {
     }
 
     //Private method for getting all program names and their ID
-    private HashMap<Integer, String> getAllProgramIdAndNames(){
+    public Map<Integer, String> getAllProgramIdAndNames(){
 
-        HashMap<Integer, String> res = new HashMap<>();
+        Map<Integer, String> res = new HashMap<>();
 
         try {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM programs");
@@ -64,9 +67,7 @@ public class ProgramDataHandler {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return res;
-
     }
 
     //Get program based on ID
@@ -127,9 +128,9 @@ public class ProgramDataHandler {
     }
 
     //Method for getting af list of all program names
-    public ArrayList<String> getAllProgramNames() {
+    public List<String> getAllProgramNames() {
 
-        ArrayList<String> programNames = new ArrayList<>();
+        List<String> programNames = new ArrayList<>();
 
         try {
             PreparedStatement ps = connection.prepareStatement("SELECT name from programs");
@@ -146,6 +147,24 @@ public class ProgramDataHandler {
 
         return programNames;
 
+    }
+
+    public boolean addCastMemberToProgram(int programID, String castMemberID, IRole role){
+        try {
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO worked_on (cast_member_ID, program_ID, role) VALUES (?,?,?)");
+            ps.setString(1, castMemberID);
+            ps.setInt(2,programID);
+            if(role instanceof Actor){
+                ps.setString(3,"{actor}"+((Actor) role).getCharacterName());
+            }else{
+                ps.setString(3,role.getRole());
+            }
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }
