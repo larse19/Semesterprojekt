@@ -35,6 +35,9 @@ public class adminFrontPageController {
     private Button editUserButton;
 
     @FXML
+    private Button newCastMemberButton;
+
+    @FXML
     void addUserButtonHandler(ActionEvent event) throws  IOException{
         App.setRoot("addUser");
     }
@@ -52,6 +55,16 @@ public class adminFrontPageController {
     @FXML
     void editUserButtonHandler(ActionEvent event) throws IOException{
         App.setRoot("editUser");
+    }
+
+    @FXML
+    void goToCastMemberHandler(ActionEvent event) throws IOException{
+        App.setRoot("createCastMember");
+    }
+
+    @FXML
+    void createNewCastMember(ActionEvent event) {
+
     }
 
     @FXML
