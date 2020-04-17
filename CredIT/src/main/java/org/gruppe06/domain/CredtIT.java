@@ -1,7 +1,6 @@
 package org.gruppe06.domain;
 
 import org.gruppe06.interfaces.IProgram;
-import org.gruppe06.persistance.CastMemberDataHandler;
 import org.gruppe06.persistance.DatabaseConnection;
 import org.gruppe06.persistance.ProgramDataHandler;
 

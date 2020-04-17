@@ -2,6 +2,7 @@ package org.gruppe06.presentation;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -11,16 +12,13 @@ import java.io.IOException;
 public class adminFrontPageController {
 
     @FXML
+    private Parent searchProgram;
+
+    @FXML
+    private SearchController searchController;
+
+    @FXML
     private Button signOutButton;
-
-    @FXML
-    private TextArea searchResultField;
-
-    @FXML
-    private TextField searchField;
-
-    @FXML
-    private Button searchButton;
 
     @FXML
     private Button createProgramButton;
@@ -60,16 +58,6 @@ public class adminFrontPageController {
     @FXML
     void goToCastMemberHandler(ActionEvent event) throws IOException{
         App.setRoot("createCastMember");
-    }
-
-    @FXML
-    void createNewCastMember(ActionEvent event) {
-
-    }
-
-    @FXML
-    void searchButtonHandler(ActionEvent event) {
-
     }
 
     @FXML
