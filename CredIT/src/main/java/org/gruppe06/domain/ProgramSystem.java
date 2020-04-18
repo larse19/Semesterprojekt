@@ -51,10 +51,6 @@ public class ProgramSystem {
         }
     }
 
-    public IProgram getProgram(String name) {
-        return programDataHandler.getProgram(name);
-    }
-
     public List<String> getListOfProgramNames(){
         return programDataHandler.getAllProgramNames();
     }
