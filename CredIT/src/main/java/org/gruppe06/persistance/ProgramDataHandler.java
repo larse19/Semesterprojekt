@@ -3,6 +3,7 @@ package org.gruppe06.persistance;
 import org.gruppe06.interfaces.ICastMember;
 import org.gruppe06.interfaces.IProducer;
 import org.gruppe06.interfaces.IProgram;
+import org.gruppe06.interfaces.IRole;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ProgramDataHandler {
 
@@ -84,28 +87,26 @@ public class ProgramDataHandler {
     }
 
     //Private method for getting all program names and their ID
-    private HashMap<Integer, String> getAllProgramIdAndNames(){
+    public Map<Integer, String> getAllProgramIdAndNames() {
 
-        HashMap<Integer, String> res = new HashMap<>();
+        Map<Integer, String> res = new HashMap<>();
 
         try {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM programs");
             ResultSet set = ps.executeQuery();
 
-            while(set.next()){
+            while (set.next()) {
                 res.put(Integer.parseInt(set.getString("ID")), set.getString("name"));
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return res;
-
     }
 
     //Get program based on ID
-    public IProgram getProgram(int programID) {
+    private IProgram getProgram(int programID) {
 
         String name = "";
         ArrayList<IProducer> producers = new ArrayList<>();
@@ -115,16 +116,15 @@ public class ProgramDataHandler {
             producersPS.setInt(1, programID);
             ResultSet producerSet = producersPS.executeQuery();
 
-            //if (producerSet.getFetchSize() != 0) {
-                while (producerSet.next()) {
-                    Producer producer = new Producer(producerSet.getString("ID"), producerSet.getString("producer_name"));
-                    producers.add(producer);
-                    name = producerSet.getString("program_name");
+            while (producerSet.next()) {
+
+                Producer producer = new Producer(producerSet.getString("ID"), producerSet.getString("producer_name"));
+                producers.add(producer);
+                name = producerSet.getString("program_name");
+                if (name == null) {
+                    System.out.println("hej");
                 }
-            /*}
-            else{
-                System.out.println("That program does not exist");
-            }*/
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -155,17 +155,17 @@ public class ProgramDataHandler {
     }
 
     //Get program based on name (name doesn't have to be complete, but has to be spelled right)
-    public IProgram getProgram(String programName){
+    public IProgram getProgram(String programName) throws NullPointerException {
 
         IProgram program = null;
 
         try {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM programs where name iLIKE ?");
-            ps.setString(1,programName+"%");
+            ps.setString(1, "%" + programName + "%");
 
             ResultSet set = ps.executeQuery();
 
-            while(set.next()){
+            while (set.next()) {
                 program = getProgram(set.getInt("ID"));
             }
 
@@ -173,18 +173,17 @@ public class ProgramDataHandler {
             e.printStackTrace();
         }
 
-        //TODO Returning an empty program is not good, need rework
-        if(program == null){
+        if (program == null) {
             System.out.println("Program not found");
-            program = new Program("", new ArrayList<>(), new ArrayList<>());
+            throw new NullPointerException();
         }
         return program;
     }
 
     //Method for getting af list of all program names
-    public ArrayList<String> getAllProgramNames() {
+    public List<String> getAllProgramNames() {
 
-        ArrayList<String> programNames = new ArrayList<>();
+        List<String> programNames = new ArrayList<>();
 
         try {
             PreparedStatement ps = connection.prepareStatement("SELECT name from programs");
@@ -201,6 +200,24 @@ public class ProgramDataHandler {
 
         return programNames;
 
+    }
+
+    public boolean addCastMemberToProgram(int programID, String castMemberID, IRole role) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO worked_on (cast_member_ID, program_ID, role) VALUES (?,?,?)");
+            ps.setString(1, castMemberID);
+            ps.setInt(2, programID);
+            if (role instanceof Actor) {
+                ps.setString(3, "{actor}" + ((Actor) role).getCharacterName());
+            } else {
+                ps.setString(3, role.getRole());
+            }
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }

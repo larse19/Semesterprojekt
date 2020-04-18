@@ -7,7 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.gruppe06.domain.CastMemberSystem;
-import org.gruppe06.persistance.CastMemberDataHandler;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,7 +18,7 @@ public class CreateCastMemberController implements Initializable {
     private Button backButton;
 
     @FXML
-    private TextField createIDTextFIeld;
+    private TextField createIDTextField;
 
     @FXML
     private TextField createNameTextField;
@@ -65,12 +64,12 @@ public class CreateCastMemberController implements Initializable {
 
     @FXML
     void createButtonHandler(ActionEvent event) {
-        if(castMemberSystem.createNewCastMember(createIDTextFIeld.getText(), createNameTextField.getText())){
+        if(castMemberSystem.createNewCastMember(createIDTextField.getText(), createNameTextField.getText())){
             createLabel.setText(createNameTextField.getText() + " added");
-            createIDTextFIeld.setText("");
+            createIDTextField.setText("");
             createNameTextField.setText("");
         }else{
-            createLabel.setText("Cast member ID: " + createIDTextFIeld.getText() + "already exists");
+            createLabel.setText("Cast member ID: " + createIDTextField.getText() + "already exists");
         }
 
     }
