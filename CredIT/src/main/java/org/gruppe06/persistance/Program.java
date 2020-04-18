@@ -25,6 +25,11 @@ public class Program implements IProgram {
         this(name, cast, producers,"");
     }
 
+    public Program(String name, String releaseYear) {
+        this.name = name;
+        this.releaseYear = releaseYear;
+    }
+
     public String getName() {
         return name;
     }

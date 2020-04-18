@@ -50,5 +50,4 @@ public class CastMemberSystem {
     public ICastMember getCastMember(String name){
         return castMemberDataHandler.getCastMember(name);
     }
-
 }
