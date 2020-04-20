@@ -126,12 +126,9 @@ public class ProgramDataHandler {
             }
 
             while (producerSet.next()) {
-                //if(!name.equals("")) {
                 Producer producer = new Producer(producerSet.getString("ID"), producerSet.getString("producer_name"));
                 producers.add(producer);
-                //}
             }
-
 
         } catch (SQLException e) {
             e.printStackTrace();
