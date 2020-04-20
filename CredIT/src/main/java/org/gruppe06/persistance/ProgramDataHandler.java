@@ -25,7 +25,7 @@ public class ProgramDataHandler {
     }
 
     //Method to create programs and add them to the DB
-    public void createProgram (String programName, String releaseYear) {
+    public void createProgram(String programName, String releaseYear) {
         try {
             PreparedStatement createProgramPS = connection.prepareStatement("INSERT INTO programs(name, release_year) VALUES (?, ?);");
             createProgramPS.setString(1, programName);
@@ -37,7 +37,7 @@ public class ProgramDataHandler {
     }
 
     //Method to delete a program from it's program ID
-    public void deleteProgram (String programName) {
+    public void deleteProgram(String programName) {
         try {
             PreparedStatement deleteProgramPS = connection.prepareStatement("DELETE FROM programs WHERE name = ?;");
             deleteProgramPS.setString(1, programName);
@@ -48,8 +48,8 @@ public class ProgramDataHandler {
     }
 
     //Method to update an already existing programs information from it's ID
-    public void updateProgram (String oldName, String newProgramName, String releaseYear){
-        try{
+    public void updateProgram(String oldName, String newProgramName, String releaseYear) {
+        try {
             PreparedStatement updateProgramPS = connection.prepareStatement("UPDATE programs SET name = ? SET release_year = ? WHERE name = oldName;");
             updateProgramPS.setString(1, newProgramName);
             updateProgramPS.setString(2, releaseYear);
@@ -112,18 +112,22 @@ public class ProgramDataHandler {
         ArrayList<IProducer> producers = new ArrayList<>();
 
         try {
-            PreparedStatement producersPS = connection.prepareStatement("select producers.ID as ID, producers.name as producer_name, programs.name as program_name from programs INNER JOIN produces_program on produces_program.program_id = programs.ID INNER JOIN producers on producers.ID = produces_program.producer_id where programs.id = ?");
+            PreparedStatement producersPS = connection.prepareStatement("select producers.ID as ID, producers.name as producer_name from producers " +
+                                                                            "INNER JOIN produces_program on produces_program.producer_id = producers.ID where program_ID = ?");
             producersPS.setInt(1, programID);
             ResultSet producerSet = producersPS.executeQuery();
 
-            while (producerSet.next()) {
+            PreparedStatement namePS = connection.prepareStatement("SELECT name from programs where id = ?");
+            namePS.setInt(1, programID);
+            ResultSet nameSet = namePS.executeQuery();
 
+            if (nameSet.next()) {
+                name = nameSet.getString("name");
+            }
+
+            while (producerSet.next()) {
                 Producer producer = new Producer(producerSet.getString("ID"), producerSet.getString("producer_name"));
                 producers.add(producer);
-                name = producerSet.getString("program_name");
-                if (name == null) {
-                    System.out.println("hej");
-                }
             }
 
         } catch (SQLException e) {
@@ -134,7 +138,7 @@ public class ProgramDataHandler {
 
     }
 
-    public IProgram getPrograms(String programName) throws NullPointerException{
+    public IProgram getPrograms(String programName) throws NullPointerException {
         IProgram program = null;
 
         try {
@@ -142,9 +146,9 @@ public class ProgramDataHandler {
             getProgramsPS.setString(1, "%" + programName + "%");
             ResultSet getProgramRS = getProgramsPS.executeQuery();
 
-            while (getProgramRS.next()){
+            while (getProgramRS.next()) {
                 program = new Program(getProgramRS.getString("name"), getProgramRS.getString("release_year"));
-                if(getProgramRS.getString("name").equals(" ")){
+                if (getProgramRS.getString("name").equals(" ")) {
                     throw new NullPointerException();
                 }
             }
@@ -165,7 +169,7 @@ public class ProgramDataHandler {
 
             ResultSet set = ps.executeQuery();
 
-            while (set.next()) {
+            if (set.next()) {
                 program = getProgram(set.getInt("ID"));
             }
 
