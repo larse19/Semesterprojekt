@@ -34,7 +34,7 @@ public class addCastMembersController implements Initializable {
     private Button doneButton;
 
     @FXML
-    private ListView<ProgramInfo> castMembersList;
+    private ListView<ProgramInfo> listOfPrograms;
 
     @FXML
     private Label roleLabel, resultLabel;
@@ -47,12 +47,12 @@ public class addCastMembersController implements Initializable {
         programSystem = new ProgramSystem();
         programsObservableList = FXCollections.observableArrayList();
         programsObservableList.addAll(programSystem.getAllProgramsInfo());
-        castMembersList.setItems(programsObservableList);
+        listOfPrograms.setItems(programsObservableList);
     }
 
     @FXML
     void addButtonHandler(ActionEvent event) {
-        ProgramInfo programInfo = castMembersList.getSelectionModel().getSelectedItem();
+        ProgramInfo programInfo = listOfPrograms.getSelectionModel().getSelectedItem();
         System.out.println(programInfo.getID());
 
         String role;

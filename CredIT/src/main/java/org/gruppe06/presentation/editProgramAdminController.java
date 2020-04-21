@@ -2,13 +2,23 @@ package org.gruppe06.presentation;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import org.gruppe06.domain.ProgramSystem;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class editProgramAdminController {
+public class editProgramAdminController implements Initializable {
+
+    @FXML
+    private Parent programsListView;
+
+    @FXML
+    private ProgramsListViewController programsListViewController;
 
     @FXML
     private ListView<?> listOfPrograms;
@@ -34,6 +44,13 @@ public class editProgramAdminController {
     @FXML
     private Button deleteProgramButton;
 
+    private ProgramSystem programSystem;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        programSystem = new ProgramSystem();
+    }
+
     @FXML
     void addMemberButtonHandler(ActionEvent event) throws IOException {
         App.setRoot("addCastMembers");
@@ -44,9 +61,25 @@ public class editProgramAdminController {
         App.setRoot("adminFrontPage");
     }
 
+    //Alert credit: https://code.makery.ch/blog/javafx-dialogs-official/
     @FXML
     void deleteProgramButtonHandler(ActionEvent event) {
+        try {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Slet program");
+            alert.setHeaderText("Du er ved at slette " + programsListViewController.getSelectedProgramInfo().getName());
+            alert.setContentText("Alle henvisninger til programmet, forsvinder hvis det bliver slettet!");
 
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                programSystem.deleteProgram(programsListViewController.getSelectedProgramInfo());
+                System.out.println(programsListViewController.getSelectedProgramInfo().getName() + " deleted");
+                programsListViewController.refreshListView();
+            }
+        }
+        catch (NullPointerException ex){
+            System.out.println("no program chosen");
+        }
     }
 
     @FXML
@@ -58,5 +91,6 @@ public class editProgramAdminController {
     void updateDescriptionButtonHandler(ActionEvent event) {
 
     }
+
 
 }

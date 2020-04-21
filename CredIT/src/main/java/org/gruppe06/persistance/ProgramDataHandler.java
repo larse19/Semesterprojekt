@@ -37,10 +37,19 @@ public class ProgramDataHandler {
     }
 
     //Method to delete a program from it's program ID
-    public void deleteProgram(String programName) {
+    public void deleteProgram(int id) {
         try {
-            PreparedStatement deleteProgramPS = connection.prepareStatement("DELETE FROM programs WHERE name = ?;");
-            deleteProgramPS.setString(1, programName);
+            PreparedStatement deleteProducesProgram = connection.prepareStatement("DELETE FROM produces_program WHERE program_id = ?");
+            deleteProducesProgram.setInt(1, id);
+
+            PreparedStatement deleteWorkedOn = connection.prepareStatement("DELETE FROM worked_on WHERE program_id = ?");
+            deleteWorkedOn.setInt(1,id);
+
+            PreparedStatement deleteProgramPS = connection.prepareStatement("DELETE FROM programs WHERE id = ?;");
+            deleteProgramPS.setInt(1, id);
+
+            deleteProducesProgram.execute();
+            deleteWorkedOn.execute();
             deleteProgramPS.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -138,7 +147,7 @@ public class ProgramDataHandler {
 
     }
 
-    public IProgram getPrograms(String programName) throws NullPointerException {
+    public IProgram getProgramNameAndYear(String programName) throws NullPointerException {
         IProgram program = null;
 
         try {
