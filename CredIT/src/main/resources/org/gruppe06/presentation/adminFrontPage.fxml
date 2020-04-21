@@ -12,8 +12,8 @@
         <Label layoutX="115.0" layoutY="139.0" text="Navn på bruger her" />
         <Button fx:id="createProgramButton" layoutX="91.0" layoutY="192.0" mnemonicParsing="false" onAction="#createProgramButtonHandler" prefWidth="150.0" text="Opret nyt program" />
         <Button fx:id="editProgramButton" layoutX="91.0" layoutY="217.0" mnemonicParsing="false" onAction="#editProgramButtonHandler" prefWidth="150.0" text="Rediger programmer" />
-        <Button fx:id="addUserButton" layoutX="91.0" layoutY="242.0" mnemonicParsing="false" onAction="#addUserButtonHandler" prefWidth="150.0" text="Tilføj bruger" />
-        <Button fx:id="editUserButton" layoutX="91.0" layoutY="267.0" mnemonicParsing="false" onAction="#editUserButtonHandler" prefWidth="150.0" text="Rediger bruger" />
+        <Button fx:id="addUserButton" disable="true" layoutX="91.0" layoutY="242.0" mnemonicParsing="false" onAction="#addUserButtonHandler" opacity="0.0" prefWidth="150.0" text="Tilføj bruger" />
+        <Button fx:id="editUserButton" disable="true" layoutX="91.0" layoutY="267.0" mnemonicParsing="false" onAction="#editUserButtonHandler" opacity="0.0" prefWidth="150.0" text="Rediger bruger" />
         <Button layoutX="91.0" layoutY="167.0" mnemonicParsing="false" onAction="#goToCastMemberHandler" prefWidth="150.0" text="Tilføj/Rediger Cast" />
     </children>
 </AnchorPane>
