@@ -15,9 +15,6 @@ import java.util.ResourceBundle;
 public class createProgramController  implements Initializable {
 
     @FXML
-    public TextField idField;
-
-    @FXML
     private TextField programNameField;
 
     @FXML
@@ -54,7 +51,6 @@ public class createProgramController  implements Initializable {
     @FXML
     void createProgramHandler(ActionEvent event){
         if (programSystem.createNewProgram(programNameField.getText(), yearField.getText())){
-            idField.setText("");
             programNameField.setText("");
             yearField.setText("");
         } else {

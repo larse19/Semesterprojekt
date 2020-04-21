@@ -22,7 +22,6 @@ public class ProgramsListViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("initialized");
         programSystem = new ProgramSystem();
         programsObservableList = FXCollections.observableArrayList();
         programsObservableList.setAll(programSystem.getAllProgramsInfo());

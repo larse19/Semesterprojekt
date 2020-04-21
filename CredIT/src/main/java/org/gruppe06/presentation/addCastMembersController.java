@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import org.gruppe06.domain.ProgramInfo;
 import org.gruppe06.domain.ProgramSystem;
@@ -14,6 +15,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class addCastMembersController implements Initializable {
+
+    @FXML
+    private Parent programsListView;
+
+    @FXML
+    private ProgramsListViewController programsListViewController;
 
     @FXML
     private RadioButton actorRadioButton;
@@ -34,40 +41,47 @@ public class addCastMembersController implements Initializable {
     private Button doneButton;
 
     @FXML
-    private ListView<ProgramInfo> listOfPrograms;
-
-    @FXML
     private Label roleLabel, resultLabel;
 
     private ProgramSystem programSystem;
-    private ObservableList<ProgramInfo> programsObservableList;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         programSystem = new ProgramSystem();
-        programsObservableList = FXCollections.observableArrayList();
-        programsObservableList.addAll(programSystem.getAllProgramsInfo());
-        listOfPrograms.setItems(programsObservableList);
     }
 
     @FXML
     void addButtonHandler(ActionEvent event) {
-        ProgramInfo programInfo = listOfPrograms.getSelectionModel().getSelectedItem();
-        System.out.println(programInfo.getID());
+        ProgramInfo programInfo = programsListViewController.getSelectedProgramInfo();
 
-        String role;
-        if(actorRadioButton.isArmed()){
-            role = "{actor}" + roleField.getText();
-        }else{
-            role = roleField.getText();
+        if (programInfo != null) {
+            if (!nameField.getText().equals("") && !roleField.getText().equals("")) {
+                String role;
+                if (actorRadioButton.isArmed()) {
+                    role = "{actor}" + roleField.getText();
+                } else {
+                    role = roleField.getText();
+                }
+                if (programSystem.addCastMemberToProgram(programInfo, nameField.getText(), role)) {
+                    resultLabel.setText(nameField.getText() + " added to cast as: " + role);
+                    nameField.setText("");
+                    roleField.setText("");
+                } else {
+                    System.out.println("Couldn't add " + nameField.getText() + " to cast");
+                }
+            } else {
+                if(nameField.getText().equals("")){
+                    System.out.println("CastID is empty");
+                }
+                else if(roleField.getText().equals("")){
+                    System.out.println("Role is empty");
+                }
+            }
+
+        } else {
+            System.out.println("No program selected");
         }
-        if(programSystem.addCastMemberToProgram(programInfo, nameField.getText(), role)){
-            resultLabel.setText(nameField.getText() + " added to cast as: " + role);
-            nameField.setText("");
-            roleField.setText("");
-        }else{
-            System.out.println("Couldn't add " + nameField.getText() + " to cast");
-        }
+
     }
 
     @FXML
@@ -77,9 +91,9 @@ public class addCastMembersController implements Initializable {
 
     @FXML
     public void actorHandler(ActionEvent actionEvent) {
-        if(roleLabel.getText().equals("Rolle")){
+        if (roleLabel.getText().equals("Rolle")) {
             roleLabel.setText("Karakter navn");
-        }else{
+        } else {
             roleLabel.setText("Rolle");
         }
     }

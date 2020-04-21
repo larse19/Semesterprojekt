@@ -61,7 +61,6 @@ public class editProgramAdminController implements Initializable {
         App.setRoot("adminFrontPage");
     }
 
-    //Alert credit: https://code.makery.ch/blog/javafx-dialogs-official/
     @FXML
     void deleteProgramButtonHandler(ActionEvent event) {
         try {
