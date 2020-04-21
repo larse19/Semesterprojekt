@@ -18,7 +18,7 @@ public class ProgramSystem {
     }
   
   private boolean checkIfProgramExists(String name) {
-        IProgram checkProgram = programDataHandler.getPrograms(name);
+        IProgram checkProgram = programDataHandler.getProgramNameAndYear(name);
         return checkProgram != null;
     }
 
@@ -32,14 +32,9 @@ public class ProgramSystem {
         }
     }
 
-    public boolean deleteProgram(String name) {
-        if(checkIfProgramExists(name)){
-            programDataHandler.deleteProgram(name);
-            return true;
-        } else {
-            System.out.println("Program does not exist!");
-            return false;
-        }
+    public boolean deleteProgram(ProgramInfo programInfo) {
+        programDataHandler.deleteProgram(programInfo.getID());
+        return true;
     }
 
     public boolean updateProgram(String oldName, String newName, String newReleaseYear) {
