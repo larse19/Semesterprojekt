@@ -13,11 +13,13 @@ public class CastMemberSystem {
         castMemberDataHandler = new CastMemberDataHandler();
     }
 
+    //Checks if a cast member exists in the database
     private boolean checkIfCastMemberExists(String ID){
         ICastMember checkCastMember = castMemberDataHandler.getCastMemberFromID(ID);
         return checkCastMember != null;
     }
 
+    //Creates new cast member, and adds them to the database
     public boolean createNewCastMember(String ID, String name){
         if(checkIfCastMemberExists(ID)){
             System.out.println("Cast member already exists");
@@ -28,6 +30,7 @@ public class CastMemberSystem {
         }
     }
 
+    //Deletes cast member from the database
     public boolean deleteCastMember(String ID){
         if(checkIfCastMemberExists(ID)){
             castMemberDataHandler.deleteCastMember(ID);
@@ -38,6 +41,7 @@ public class CastMemberSystem {
         }
     }
 
+    //Updates the name of a cast member, based on their ID
     public boolean updateCastMember(String ID, String newName){
         if(checkIfCastMemberExists(ID)){
             castMemberDataHandler.updateCastMember(ID, newName);

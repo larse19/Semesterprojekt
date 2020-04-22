@@ -29,6 +29,7 @@ public class DatabaseConnection {
         }
     }
 
+    //Instantiates instance, if not already instantiated, else, returns this instance.
     public static DatabaseConnection getDatabaseConnection(){
         if(databaseConnection == null){
             databaseConnection = new DatabaseConnection();
@@ -36,6 +37,7 @@ public class DatabaseConnection {
         return databaseConnection;
     }
 
+    //Returns the connection to the database
     public Connection getConnection(){
         return connection;
     }

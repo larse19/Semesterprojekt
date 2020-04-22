@@ -16,11 +16,10 @@ import java.util.Map;
 
 public class ProgramDataHandler {
 
-    private DatabaseConnection databaseConnection;
     private Connection connection;
 
     public ProgramDataHandler() {
-        databaseConnection = DatabaseConnection.getDatabaseConnection();
+        DatabaseConnection databaseConnection = DatabaseConnection.getDatabaseConnection();
         connection = databaseConnection.getConnection();
     }
 
@@ -147,6 +146,7 @@ public class ProgramDataHandler {
 
     }
 
+    //Get IProgram with year, but without cast
     public IProgram getProgramNameAndYear(String programName) throws NullPointerException {
         IProgram program = null;
 
@@ -215,6 +215,7 @@ public class ProgramDataHandler {
 
     }
 
+    //Adds a cast member to the database
     public boolean addCastMemberToProgram(int programID, String castMemberID, IRole role) {
         try {
             PreparedStatement ps = connection.prepareStatement("INSERT INTO worked_on (cast_member_ID, program_ID, role) VALUES (?,?,?)");
