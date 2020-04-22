@@ -53,7 +53,7 @@ public class CastMemberDataHandler {
         }
     }
 
-    //Method to get a cast member from the database
+    //Method to get a cast member from the database, based on name. Throws NullPointerException, if the cast member doesn't exist
     public ICastMember getCastMember(String castMemberName) throws NullPointerException{
         ICastMember castMember = null;
         try {
@@ -75,6 +75,7 @@ public class CastMemberDataHandler {
 
     }
 
+    //Method to get a cast member from the database, based on ID. Throws NullPointerException, if the cast member doesn't exist
     public ICastMember getCastMemberFromID(String ID) throws NullPointerException{
         ICastMember castMember = null;
 

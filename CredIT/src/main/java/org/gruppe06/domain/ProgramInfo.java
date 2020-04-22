@@ -1,5 +1,6 @@
 package org.gruppe06.domain;
 
+//Class that contains name and ID of a program
 public class ProgramInfo {
 
     private int ID;

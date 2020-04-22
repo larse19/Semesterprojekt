@@ -16,12 +16,14 @@ public class ProgramSystem {
     public ProgramSystem(){
         programDataHandler = new ProgramDataHandler();
     }
-  
-  private boolean checkIfProgramExists(String name) {
+
+    //Checks if a program exists
+    private boolean checkIfProgramExists(String name) {
         IProgram checkProgram = programDataHandler.getProgramNameAndYear(name);
         return checkProgram != null;
     }
 
+    //Creates new program
     public boolean createNewProgram(String programName, String releaseYear) {
         if(checkIfProgramExists(programName)){
             System.out.println("Program already exists!");
@@ -32,11 +34,14 @@ public class ProgramSystem {
         }
     }
 
+    //Deletes program
     public boolean deleteProgram(ProgramInfo programInfo) {
         programDataHandler.deleteProgram(programInfo.getID());
         return true;
     }
 
+    //TODO Should maybe update based on ID
+    //Updates a programs name, and year, based on it's old name
     public boolean updateProgram(String oldName, String newName, String newReleaseYear) {
         if (checkIfProgramExists(oldName)){
             programDataHandler.updateProgram(oldName, newName, newReleaseYear);
@@ -46,10 +51,12 @@ public class ProgramSystem {
         }
     }
 
+    //Returns a list of all program names
     public List<String> getListOfProgramNames(){
         return programDataHandler.getAllProgramNames();
     }
 
+    //Returns a list of all programs as ProgramInfo
     public List<ProgramInfo> getAllProgramsInfo(){
         List<ProgramInfo> programInfoList = new ArrayList<>();
         Map<Integer, String> programData = programDataHandler.getAllProgramIdAndNames();
@@ -60,11 +67,13 @@ public class ProgramSystem {
         return programInfoList;
     }
 
+    //Adds a cast member to a program
     public boolean addCastMemberToProgram(ProgramInfo programInfo, String castName, String role){
         IRole Irole = new Role(role);
         return programDataHandler.addCastMemberToProgram(programInfo.getID(),castName,Irole);
     }
 
+    //Returns an IProgram, based on the programs name. Throws NullPointerException, if the program doesn't exist
     public IProgram getProgram(String programName) throws NullPointerException {
         IProgram program;
         try {
