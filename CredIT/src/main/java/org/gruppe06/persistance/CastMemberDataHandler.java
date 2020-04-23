@@ -10,11 +10,10 @@ import java.sql.Connection;
 
 public class CastMemberDataHandler {
 
-    private DatabaseConnection databaseConnection;
     private Connection connection;
 
     public CastMemberDataHandler(){
-        databaseConnection = DatabaseConnection.getDatabaseConnection();
+        DatabaseConnection databaseConnection = DatabaseConnection.getDatabaseConnection();
         connection = databaseConnection.getConnection();
     }
 
