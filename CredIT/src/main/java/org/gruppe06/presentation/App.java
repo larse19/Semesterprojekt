@@ -19,6 +19,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("frontPage"));
         stage.setScene(scene);
+        scene.getStylesheets().add(this.getClass().getResource("/stylesheets/StyleTest.css").toExternalForm());
         stage.show();
     }
 

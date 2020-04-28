@@ -1,0 +1,73 @@
+* {
+    red-primary: #d21e1e;
+    default-primary-color: #FFFFFF;
+    tv2-brand-color: #d21e1e;
+    blue-text: #147ac2;
+    button-sign-in-color: #3ba800;
+    default-black-color: #212121;
+}
+
+.root {
+    -fx-background-color:default-primary-color;
+}
+
+.button {
+     -fx-font-size: 14px;
+     -fx-font-family: Arial;
+     -fx-background-color: red-primary;
+     -fx-text-fill: default-primary-color;
+}
+
+#loginButton{
+    -fx-font-size: 14px;
+    -fx-background-radius: 20;
+    -fx-font-family: Arial;
+    -fx-background-color: button-sign-in-color ;
+    -fx-text-fill: default-primary-color;
+    -fx-font-weight: bold;
+}
+
+.label{
+    -fx-font-family: Arial;
+    -fx-text-fill: default-black-color;
+}
+
+#loginHeader{
+    -fx-font-family: Arial;
+    -fx-text-fill: default-black-color;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+#tv2icon{
+    -fx-background-color: default-primary-color;
+}
+
+#menubuttonLogin{
+    -fx-background-color: default-primary-color;
+    -fx-text-fill: default-black-color;
+}
+
+#menubuttonLogin .label:hover{
+    -fx-text-fill: red-primary;
+    -fx-background-color: default-primary-color;
+}
+
+#frontLabel{
+    -fx-font-family: Arial;
+    -fx-text-fill: tv2-brand-color;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+#searchTextField .text-field:selected{
+    z-index: 10;
+    position: relative;
+}
+
+#adminPageLabel{
+    -fx-font-family: Arial;
+    -fx-text-fill: default-black-color;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
