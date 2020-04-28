@@ -1,19 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gruppe06.presentation.loginPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../../stylesheets/StyleTest.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gruppe06.presentation.loginPageController">
    <children>
-      <TextField fx:id="username" layoutX="326.0" layoutY="249.0" />
-      <PasswordField fx:id="password" layoutX="327.0" layoutY="308.0" />
-      <Button fx:id="loginButton" layoutX="375.0" layoutY="346.0" mnemonicParsing="false" onAction="#loginHandler" text="Login" />
-      <Label layoutX="311.0" layoutY="86.0" text="Login med din bruger til systemet" />
-      <Label layoutX="370.0" layoutY="222.0" text="Brugernavn" />
-      <Label layoutX="376.0" layoutY="283.0" text="Password" />
-      <Button fx:id="backButton" layoutX="77.0" layoutY="516.0" mnemonicParsing="false" onAction="#returnHandler" text="Back" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#afafaf" height="38.0" layoutY="562.0" opacity="0.2" stroke="#afafaf" strokeType="INSIDE" width="801.0" />
+      <TextField fx:id="username" layoutX="322.0" layoutY="242.0" promptText="Username">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></TextField>
+      <PasswordField fx:id="password" layoutX="322.0" layoutY="287.0" promptText="Password">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></PasswordField>
+      <Label fx:id="loginHeader" layoutX="361.0" layoutY="192.0" stylesheets="@../../../stylesheets/StyleTest.css" text="Log in">
+         <font>
+            <Font name="Arial Black" size="36.0" />
+         </font></Label>
+      <Button fx:id="loginButton" layoutX="378.0" layoutY="330.0" mnemonicParsing="false" onAction="#loginHandler" stylesheets="@../../../stylesheets/StyleTest.css" text="Login">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button fx:id="backButton" layoutX="14.0" layoutY="568.0" mnemonicParsing="false" onAction="#returnHandler" text="Back">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <ImageView fx:id="tv2icon" fitHeight="50.0" fitWidth="105.0" layoutX="353.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../IconsTV2CredIT/640px-Danish_TV_2_logo.png" />
+         </image></ImageView>
+      <Line endX="697.0000610351562" endY="-10.0" layoutX="103.0" layoutY="91.0" startX="-103.0" startY="-10.000015258789062" stroke="#00000040" strokeWidth="0.5" />
+      <MenuButton fx:id="menubuttonLogin" layoutX="721.0" layoutY="18.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="65.0" text="MENU">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+         <font>
+            <Font name="Arial Bold" size="11.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </MenuButton>
    </children>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
 </AnchorPane>
