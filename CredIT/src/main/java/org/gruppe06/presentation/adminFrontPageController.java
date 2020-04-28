@@ -15,7 +15,7 @@ public class adminFrontPageController {
     private Parent searchProgram;
 
     @FXML
-    private SearchController searchController;
+    private SearchController searchProgramController;
 
     @FXML
     private Button signOutButton;

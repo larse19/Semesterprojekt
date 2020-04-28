@@ -19,7 +19,7 @@ public class frontPageController {
     private Parent searchProgram;
 
     @FXML
-    private SearchController searchController;
+    private SearchController searchProgramController;
 
     @FXML
     private Button loginButton;
