@@ -5,7 +5,8 @@ import org.gruppe06.presentation.App;
 public class Main {
 
     public static void main(String[] args) {
-        CredtIT credtIT = new CredtIT();
+        LoginSystem loginSystem = new LoginSystem();
+        System.out.println(loginSystem.login("admin", "admin"));
         App.launch(args);
     }
 

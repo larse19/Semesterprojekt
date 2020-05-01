@@ -3,8 +3,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gruppe06.presentation.editProgramAdminController">
    <children>
+
       <ListView fx:id="listOfPrograms" layoutX="41.0" layoutY="175.0" prefHeight="216.0" prefWidth="200.0" />
       <Label layoutX="345.0" layoutY="76.0" text="Rediger programmer" />
       <Button fx:id="backButton" layoutX="9.0" layoutY="559.0" mnemonicParsing="false" onAction="#backButtonHandler" text="Tilbage" />
@@ -17,5 +19,6 @@
       <Label layoutX="593.0" layoutY="150.0" text="Program beskrivelse" />
       <Button fx:id="updateDescriptionButton" layoutX="617.0" layoutY="522.0" mnemonicParsing="false" onAction="#updateDescriptionButtonHandler" text="Opdater" />
       <Button fx:id="deleteProgramButton" layoutX="89.0" layoutY="400.0" mnemonicParsing="false" onAction="#deleteProgramButtonHandler" text="Slet program?" />
+
    </children>
 </AnchorPane>

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/src/main/java/org/gruppe06/persistance/CastMemberDataHandler.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/org/gruppe06/persistance/LoginDataHandler.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/gruppe06/persistance/ProgramDataHandler.java" dialect="GenericSQL" />
   </component>
 </project>

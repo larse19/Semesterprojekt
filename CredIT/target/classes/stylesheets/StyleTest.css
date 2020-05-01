@@ -60,11 +60,6 @@
     -fx-font-weight: bold;
 }
 
-#searchTextField .text-field:selected{
-    z-index: 10;
-    position: relative;
-}
-
 #adminPageLabel{
     -fx-font-family: Arial;
     -fx-text-fill: default-black-color;

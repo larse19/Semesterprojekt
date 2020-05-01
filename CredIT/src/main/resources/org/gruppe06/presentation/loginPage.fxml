@@ -51,6 +51,11 @@
             <Insets />
          </opaqueInsets>
       </MenuButton>
+      <Label fx:id="wrongCredentialsLabel" layoutX="293.0" layoutY="372.0" prefHeight="16.0" prefWidth="226.0" stylesheets="@../../../stylesheets/StyleTest.css" textAlignment="CENTER" textFill="RED">
+         <font>
+            <Font name="Arial Black" size="13.0" />
+         </font>
+      </Label>
    </children>
    <cursor>
       <Cursor fx:constant="DEFAULT" />
