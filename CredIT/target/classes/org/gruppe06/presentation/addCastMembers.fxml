@@ -17,7 +17,6 @@
       <Button fx:id="addButton" layoutX="379.0" layoutY="466.0" mnemonicParsing="false" onAction="#addButtonHandler" text="Tilføj" />
       <Button fx:id="doneButton" layoutX="378.0" layoutY="531.0" mnemonicParsing="false" onAction="#doneButtonHandler" text="Done" />
       <fx:include source="programListView.fxml" layoutX="240" layoutY="128" fx:id="programsListView"/>
-
       <RadioButton fx:id="actorRadioButton" layoutX="483.0" layoutY="397.0" mnemonicParsing="false" onAction="#actorHandler" text="Skuespiller" />
       <Label fx:id="resultLabel" layoutX="598.0" layoutY="397.0" prefHeight="17.0" prefWidth="159.0" />
    </children>

@@ -20,14 +20,14 @@ public class editProgramAdminController implements Initializable {
     @FXML
     private ProgramsListViewController programsListViewController;
 
-    @FXML
-    private ListView<?> listOfPrograms;
+    //@FXML
+    //private ListView<?> listOfPrograms;
 
     @FXML
     private Button backButton;
 
-    @FXML
-    private TextField numberOfEpisodesField;
+    //@FXML
+    //private TextField numberOfEpisodesField;
 
     @FXML
     private Button updateButton;
