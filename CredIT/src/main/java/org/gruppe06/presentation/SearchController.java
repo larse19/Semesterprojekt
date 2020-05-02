@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.gruppe06.domain.ProgramSystem;
+import org.gruppe06.domain.SearchSystem;
 import org.gruppe06.interfaces.ICastMember;
 import org.gruppe06.interfaces.IProducer;
 import org.gruppe06.interfaces.IProgram;
@@ -23,15 +24,19 @@ public class SearchController implements Initializable {
 
     private ProgramSystem programSystem;
 
+    private SearchSystem searchSystem;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         programSystem = new ProgramSystem();
+        searchSystem = new SearchSystem();
     }
 
     @FXML
     void searchHandler(ActionEvent event) {
         try {
-            IProgram program = programSystem.getProgram(searchTextField.getText());
+            IProgram program = searchSystem.getEntries().addAll();
+            //IProgram program = programSystem.getProgram(searchTextField.getText());
             String name = program.getName();
             StringBuilder producers = new StringBuilder();
             StringBuilder castMembers = new StringBuilder();
