@@ -1,10 +1,8 @@
 package org.gruppe06.persistance;
 
-import org.gruppe06.interfaces.IProducer;
+public class SystemAdministrator extends Person {
 
-public class Producer extends Person implements IProducer {
-
-    public Producer(String ID, String name) {
+    public SystemAdministrator(String ID, String name) {
         super(ID, name);
     }
 
@@ -12,4 +10,5 @@ public class Producer extends Person implements IProducer {
     public String toString(){
         return this.getName() + " - " + this.getID();
     }
+
 }
