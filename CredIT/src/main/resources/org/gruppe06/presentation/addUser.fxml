@@ -10,14 +10,13 @@
    <children>
       <Label layoutX="341.0" layoutY="76.0" text="Tilføj bruger til system" />
       <Button fx:id="createButton" layoutX="382.0" layoutY="451.0" mnemonicParsing="false" onAction="#createButtonHandler" text="Opret" />
-      <RadioButton fx:id="adminUser" layoutX="305.0" layoutY="189.0" mnemonicParsing="false" onAction="#userTypeButtonHandler" text="System Admin" />
-      <RadioButton fx:id="producerUser" layoutX="427.0" layoutY="189.0" mnemonicParsing="false" onAction="#userTypeButtonHandler" text="Producer" />
-      <TextField fx:id="usernameField" layoutX="329.0" layoutY="259.0" />
-      <Label layoutX="373.0" layoutY="235.0" text="Brugernavn" />
+      <RadioButton fx:id="adminUserRadio" layoutX="305.0" layoutY="189.0" mnemonicParsing="false" onAction="#userTypeButtonHandler" text="System Admin" />
+      <RadioButton fx:id="producerUserRadio" layoutX="427.0" layoutY="189.0" mnemonicParsing="false" onAction="#userTypeButtonHandler" text="Producer" />
+      <TextField fx:id="nameField" layoutX="329.0" layoutY="259.0" />
+      <Label layoutX="390.0" layoutY="235.0" text="Navn" />
       <TextField fx:id="passwordField" layoutX="329.0" layoutY="325.0" />
       <Label layoutX="380.0" layoutY="300.0" text="Password" />
-      <TextField fx:id="emailField" layoutX="331.0" layoutY="382.0" />
-      <Label layoutX="391.0" layoutY="358.0" text="Email" />
       <Button fx:id="backButton" layoutX="14.0" layoutY="561.0" mnemonicParsing="false" onAction="#backButtonHandler" text="Back" />
+      <Label fx:id="usernameLabel" alignment="CENTER" layoutX="292.0" layoutY="381.0" prefHeight="17.0" prefWidth="226.0" textAlignment="CENTER" />
    </children>
 </AnchorPane>
