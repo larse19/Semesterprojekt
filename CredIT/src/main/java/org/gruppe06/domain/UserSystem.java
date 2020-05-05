@@ -37,6 +37,7 @@ public class UserSystem {
 
     private String createUsername(String name){
         StringBuilder username = new StringBuilder();
+        name = name.toLowerCase();
         do {
             String[] nameArray = name.split(" ");
 
@@ -79,6 +80,18 @@ public class UserSystem {
             return producerDataHandler.deleteProducer(username);
         }
         return false;
+    }
+
+    public boolean updateUserRole(String username, int role){
+        return systemAdministratorDataHandler.updateUserRole(username, role);
+    }
+
+    public boolean updateUsersName(String username, String newName){
+        return systemAdministratorDataHandler.updateUsersName(username, newName);
+    }
+
+    public boolean updatePassword(String username, String password){
+        return systemAdministratorDataHandler.updatePassword(username, password);
     }
 
 }

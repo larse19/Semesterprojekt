@@ -25,7 +25,6 @@ public class SystemAdministratorDataHandler {
             createAdministrator.setString(3, password);
             createAdministrator.execute();
             return true;
-
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -38,7 +37,6 @@ public class SystemAdministratorDataHandler {
             deleteAdministrator.setString(1, username);
             deleteAdministrator.execute();
             return true;
-
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -82,17 +80,17 @@ public class SystemAdministratorDataHandler {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return  personList;
+        return personList;
     }
 
-    public int getUserRole(String username){
+    public int getUserRole(String username) {
         int userRole = 0;
         try {
             PreparedStatement userRolePS = connection.prepareStatement("Select role from has_user_role where user_id = ?");
-            userRolePS.setString(1,username);
+            userRolePS.setString(1, username);
             ResultSet userRoleSet = userRolePS.executeQuery();
 
-            if(userRoleSet.next()){
+            if (userRoleSet.next()) {
                 userRole = userRoleSet.getInt("role");
             }
 
@@ -100,6 +98,45 @@ public class SystemAdministratorDataHandler {
             e.printStackTrace();
         }
         return userRole;
+    }
+
+    public boolean updateUserRole(String username, int role) {
+        try {
+            PreparedStatement updateRolePS = connection.prepareStatement("call update_user_role(?,?)");
+            updateRolePS.setString(1, username);
+            updateRolePS.setInt(2, role);
+            updateRolePS.execute();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean updateUsersName(String username, String newName){
+        try {
+            PreparedStatement updateName = connection.prepareStatement("call update_users_name(?,?)");
+            updateName.setString(1,username);
+            updateName.setString(2,newName);
+            updateName.execute();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean updatePassword(String username, String password){
+        try {
+            PreparedStatement updatePasswordPS = connection.prepareStatement("update users set password = ? where user_id = ?");
+            updatePasswordPS.setString(1,password);
+            updatePasswordPS.setString(2, username);
+            updatePasswordPS.execute();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }
