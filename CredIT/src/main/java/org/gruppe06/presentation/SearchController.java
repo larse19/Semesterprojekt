@@ -12,6 +12,8 @@ import org.gruppe06.interfaces.IProducer;
 import org.gruppe06.interfaces.IProgram;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class SearchController implements Initializable {
@@ -26,17 +28,24 @@ public class SearchController implements Initializable {
 
     private SearchSystem searchSystem;
 
+    private ArrayList<String> programsList;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         programSystem = new ProgramSystem();
         searchSystem = new SearchSystem();
+        programsList = new ArrayList();
+        for (String programName : programSystem.getListOfProgramNames()){
+            programsList.add(programName);
+        }
+        System.out.println(programsList.toString());
     }
 
     @FXML
     void searchHandler(ActionEvent event) {
         try {
-            IProgram program = searchSystem.getEntries().addAll();
-            //IProgram program = programSystem.getProgram(searchTextField.getText());
+            searchSystem.getEntries().addAll(Arrays.asList(programsList.toString().split(",")));
+            IProgram program = programSystem.getProgram(searchTextField.getText());
             String name = program.getName();
             StringBuilder producers = new StringBuilder();
             StringBuilder castMembers = new StringBuilder();
@@ -52,7 +61,7 @@ public class SearchController implements Initializable {
             resultTextArea.setText("Title:\n" + name + "\n\n");
             resultTextArea.appendText("Producers:\n" + producers + "\n");
             resultTextArea.appendText("Cast:\n" + castMembers);
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             resultTextArea.setText("Program not found");
         }
 

@@ -76,7 +76,7 @@ public class editProgramAdminController implements Initializable {
                 programsListViewController.refreshListView();
             }
         }
-        catch (NullPointerException ex){
+        catch (NullPointerException ex) {
             System.out.println("no program chosen");
         }
     }
