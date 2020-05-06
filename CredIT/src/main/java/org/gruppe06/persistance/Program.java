@@ -42,7 +42,7 @@ public class Program implements IProgram {
         return producers;
     }
 
-    public String getReleaseYear() {
+    public String getYear() {
         return releaseYear;
     }
 
