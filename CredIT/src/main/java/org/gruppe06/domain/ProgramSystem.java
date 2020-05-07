@@ -24,12 +24,12 @@ public class ProgramSystem {
     }
 
     //Creates new program
-    public boolean createNewProgram(String programName, String releaseYear) {
+    public boolean createNewProgram(String programName, String releaseYear, String producerID, String producerRole) {
         if(checkIfProgramExists(programName)){
             System.out.println("Program already exists!");
             return false;
         } else {
-            programDataHandler.createProgram(programName, releaseYear);
+            programDataHandler.createProgram(programName, releaseYear, producerID, producerRole);
             return true;
         }
     }
