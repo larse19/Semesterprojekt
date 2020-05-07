@@ -14,23 +14,19 @@ public class LoginDataHandler {
         connection = databaseConnection.getConnection();
     }
 
-    public int login(String username, String password){
-        int userRole = 0;
+    public String getLogin(String username){
 
         try {
-            PreparedStatement loginStatement = connection.prepareStatement("SELECT login(?,?)");
-            loginStatement.setString(1,username);
-            loginStatement.setString(2, password);
-            ResultSet loginResult = loginStatement.executeQuery();
-
-            if(loginResult.next()){
-                userRole = loginResult.getInt("login");
+            PreparedStatement loginPS = connection.prepareStatement("select password from users where user_id = ?");
+            loginPS.setString(1,username);
+            ResultSet password = loginPS.executeQuery();
+            if(password.next()){
+                return password.getString("password");
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return userRole;
+        return "";
 
     }
 

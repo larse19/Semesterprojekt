@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.gruppe06.domain.LoginSystem;
+import org.gruppe06.domain.PasswordAuthentication;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,10 +32,12 @@ public class loginPageController implements Initializable {
     private Button backButton;
 
     private LoginSystem loginSystem;
+    private PasswordAuthentication passwordAuthentication;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loginSystem = new LoginSystem();
+        passwordAuthentication = new PasswordAuthentication();
     }
 
     @FXML

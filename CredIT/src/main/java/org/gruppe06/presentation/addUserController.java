@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import org.gruppe06.domain.PasswordAuthentication;
 import org.gruppe06.domain.UserSystem;
 
 import java.io.IOException;
@@ -39,11 +40,13 @@ public class addUserController implements Initializable {
     private ToggleGroup userRoleGroup;
 
     private UserSystem userSystem;
+    private PasswordAuthentication passwordAuthentication;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         userSystem = new UserSystem();
         userRoleGroup = new ToggleGroup();
+        passwordAuthentication = new PasswordAuthentication();
         adminUserRadio.setToggleGroup(userRoleGroup);
         producerUserRadio.setToggleGroup(userRoleGroup);
         adminUserRadio.fire();
@@ -59,11 +62,11 @@ public class addUserController implements Initializable {
         String username;
         if (!nameField.getText().equals("") && !passwordField.getText().equals("")) {
             if (userRoleGroup.getSelectedToggle() == adminUserRadio) {
-                username = userSystem.createSystemAdministrator(nameField.getText(), passwordField.getText());
+                username = userSystem.createSystemAdministrator(nameField.getText(), passwordAuthentication.hash(passwordField.getText().toCharArray()));
                 usernameLabel.setText("New System Administrator: " + username);
             }
             else if(userRoleGroup.getSelectedToggle() == producerUserRadio){
-                username = userSystem.createProducer(nameField.getText(), passwordField.getText());
+                username = userSystem.createProducer(nameField.getText(), passwordAuthentication.hash(passwordField.getText().toCharArray()));
                 usernameLabel.setText("New producer: " + username);
             }
 

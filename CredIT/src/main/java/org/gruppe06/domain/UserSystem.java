@@ -11,8 +11,10 @@ public class UserSystem {
 
     private SystemAdministratorDataHandler systemAdministratorDataHandler;
     private ProducerDataHandler producerDataHandler;
+    private PasswordAuthentication passwordAuthentication;
 
     public UserSystem(){
+        passwordAuthentication = new PasswordAuthentication();
         systemAdministratorDataHandler = new SystemAdministratorDataHandler();
         producerDataHandler = new ProducerDataHandler();
     }

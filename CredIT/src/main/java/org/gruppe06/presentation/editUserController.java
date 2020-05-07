@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import org.gruppe06.domain.PasswordAuthentication;
 import org.gruppe06.domain.UserSystem;
 import org.gruppe06.interfaces.IPerson;
 
@@ -49,10 +50,12 @@ public class editUserController implements Initializable {
 
     private UserSystem userSystem;
     private ObservableList<IPerson> usersObservableList;
+    private PasswordAuthentication passwordAuthentication;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         userSystem = new UserSystem();
+        passwordAuthentication = new PasswordAuthentication();
         usersObservableList = FXCollections.observableArrayList();
         usersObservableList.setAll(userSystem.getListOfUsers(""));
         usersList.setItems(usersObservableList);
@@ -133,7 +136,7 @@ public class editUserController implements Initializable {
                     nameField.setText("");
                 }
                 if (!passwordField.getText().equals("")) {
-                    if (!userSystem.updatePassword(user.getID(), passwordField.getText())) {
+                    if (!userSystem.updatePassword(user.getID(), passwordAuthentication.hash(passwordField.getText().toCharArray()))) {
                         Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                         errorAlert.setTitle("Brugerens password kunne ikke opdateres");
                         errorAlert.setHeaderText("Der skete en fejl under opdateringen af bruger: " + user.getID());
