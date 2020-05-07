@@ -8,7 +8,7 @@ public class SystemAdministrator extends Person {
 
     @Override
     public String toString(){
-        return this.getName() + " - " + this.getID();
+        return "Admin: " + this.getName() + " - " + this.getID();
     }
 
 }
