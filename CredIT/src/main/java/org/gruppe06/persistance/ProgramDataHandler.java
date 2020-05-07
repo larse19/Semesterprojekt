@@ -107,7 +107,6 @@ public class ProgramDataHandler {
             while (set.next()) {
                 res.put(Integer.parseInt(set.getString("ID")), set.getString("name"));
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
