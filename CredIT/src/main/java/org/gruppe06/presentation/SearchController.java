@@ -37,7 +37,7 @@ public class SearchController implements Initializable {
             StringBuilder castMembers = new StringBuilder();
 
             for(IProducer producer : program.getProducers()){
-                producers.append(producer.getName()).append(" \n");
+                producers.append(producer.getNameAndRole()).append(" \n");
             }
 
             for(ICastMember castMember : program.getCast()){
@@ -50,7 +50,6 @@ public class SearchController implements Initializable {
         }catch (NullPointerException e){
             resultTextArea.setText("Program not found");
         }
-
     }
 
 
