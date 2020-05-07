@@ -5,10 +5,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import org.gruppe06.domain.CastMemberSystem;
 import org.gruppe06.domain.ProgramSystem;
 import org.gruppe06.interfaces.ICastMember;
 import org.gruppe06.interfaces.IProducer;
 import org.gruppe06.interfaces.IProgram;
+import org.gruppe06.persistance.CastMember;
+import org.gruppe06.persistance.ProducerDataHandler;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,30 +26,47 @@ public class SearchController implements Initializable {
 
     private ProgramSystem programSystem;
 
+    private CastMemberSystem castMemberSystem;
+
+    private ProducerDataHandler producerDataHandler;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         programSystem = new ProgramSystem();
+        castMemberSystem = new CastMemberSystem();
+        producerDataHandler = new ProducerDataHandler();
     }
 
     @FXML
     void searchHandler(ActionEvent event) {
         try {
-            IProgram program = programSystem.getProgram(searchTextField.getText());
-            String name = program.getName();
-            StringBuilder producers = new StringBuilder();
-            StringBuilder castMembers = new StringBuilder();
+//            IProgram program = programSystem.getProgram(searchTextField.getText());
+//            String name = program.getName();
+//            StringBuilder producers = new StringBuilder();
+//            StringBuilder castMembers = new StringBuilder();
+//
+//            for(IProducer producer : program.getProducers()){
+//                producers.append(producer.getName()).append(" \n");
+//            }
+//
+//            for(ICastMember castMember : program.getCast()){
+//                castMembers.append(castMember.toString()).append("\n");
+//            }
+//
+//            resultTextArea.setText("Title:\n" + name + "\n\n");
+//            resultTextArea.appendText("Producers:\n" + producers + "\n");
+//            resultTextArea.appendText("Cast:\n" + castMembers);
 
-            for(IProducer producer : program.getProducers()){
-                producers.append(producer.getName()).append(" \n");
-            }
+            //Search CastMember
+//            ICastMember castMember = castMemberSystem.getCastMember(searchTextField.getText());
+//            String castMemberName = castMember.getName();
+//            resultTextArea.setText("Person:\n" + castMemberName);
 
-            for(ICastMember castMember : program.getCast()){
-                castMembers.append(castMember.toString()).append("\n");
-            }
+            //Search Producer
+            IProducer producer = producerDataHandler.getProducer(searchTextField.getText());
+            String producerName = producer.getName();
+            resultTextArea.setText("Person:\n" + producerName);
 
-            resultTextArea.setText("Title:\n" + name + "\n\n");
-            resultTextArea.appendText("Producers:\n" + producers + "\n");
-            resultTextArea.appendText("Cast:\n" + castMembers);
         }catch (NullPointerException e){
             resultTextArea.setText("Program not found");
         }

@@ -1,7 +1,10 @@
 package org.gruppe06.persistance;
 
+import org.gruppe06.interfaces.IProducer;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ProducerDataHandler {
@@ -37,6 +40,27 @@ public class ProducerDataHandler {
             e.printStackTrace();
             return false;
         }
+    }
+    //Method to get a producer from the database, based on name. Throws NullPointerException, if the producer doesn't exist
+    public IProducer getProducer(String producerName) throws NullPointerException{
+        IProducer producer = null;
+        try {
+            PreparedStatement getProducerPS = connection.prepareStatement("SELECT * FROM producers WHERE name iLIKE ?");
+            getProducerPS.setString(1, "%"+producerName+"%");
+            ResultSet getProducerRS = getProducerPS.executeQuery();
+
+            while(getProducerRS.next()) {
+                producer = new Producer(getProducerRS.getString("ID"), getProducerRS.getString("name"));
+                if(getProducerRS.getString("name").equals(" ")){
+                    throw new NullPointerException();
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return producer;
+
     }
 
 }
