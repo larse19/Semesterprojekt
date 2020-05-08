@@ -10,6 +10,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.gruppe06.domain.ProgramSystem;
 import org.gruppe06.domain.SearchSystem;
+import org.gruppe06.domain.SpellChecker;
 import org.gruppe06.interfaces.ICastMember;
 import org.gruppe06.interfaces.IProducer;
 import org.gruppe06.interfaces.IProgram;
@@ -17,6 +18,7 @@ import org.gruppe06.interfaces.IProgram;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.stream.Stream;
 
 public class SearchController implements Initializable {
     @FXML
@@ -25,12 +27,12 @@ public class SearchController implements Initializable {
     @FXML
     private TextArea resultTextArea;
 
-    private ProgramSystem programSystem;
-
     @FXML
     public SearchSystem searchTextField;
 
+    private ProgramSystem programSystem;
     private ArrayList<String> programsList;
+    private SpellChecker spellChecker;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -41,6 +43,10 @@ public class SearchController implements Initializable {
         }
         searchTextField.getEntries().addAll(programsList);
         setEvent(searchTextField);
+
+        Stream.of(spellChecker.getDICTIONARY_VALUES().toLowerCase().split(",")).forEach((word) -> {
+            spellChecker.getDictionary().compute(word, (k, v) -> v == null ? 1 : v + 1);
+        });
     }
 
     @FXML
@@ -65,7 +71,7 @@ public class SearchController implements Initializable {
             resultTextArea.appendText("Producers:\n" + producers + "\n");
             resultTextArea.appendText("Cast:\n" + castMembers);
         } catch (NullPointerException e) {
-            resultTextArea.setText("Program not found");
+            resultTextArea.setText("Mente du: " + spellChecker.correct(searchTextField.getText()));
         }
 
     }
