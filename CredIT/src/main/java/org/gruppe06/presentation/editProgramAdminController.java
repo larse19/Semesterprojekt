@@ -15,19 +15,23 @@ import java.util.ResourceBundle;
 public class editProgramAdminController implements Initializable {
 
     @FXML
+    public Label programNameLabel;
+    @FXML
+    public Button saveUpdateButton;
+    @FXML
+    public TextField updateProgramName;
+    @FXML
+    public TextField updateReleaseYear;
+    @FXML
+    public Label releaseYearLabel;
+    @FXML
     private Parent programsListView;
 
     @FXML
     private ProgramsListViewController programsListViewController;
 
     @FXML
-    private ListView<?> listOfPrograms;
-
-    @FXML
     private Button backButton;
-
-    @FXML
-    private TextField numberOfEpisodesField;
 
     @FXML
     private Button updateButton;
@@ -46,9 +50,16 @@ public class editProgramAdminController implements Initializable {
 
     private ProgramSystem programSystem;
 
+    private String oldName;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         programSystem = new ProgramSystem();
+        programNameLabel.setVisible(false);
+        saveUpdateButton.setVisible(false);
+        updateProgramName.setVisible(false);
+        updateReleaseYear.setVisible(false);
+        releaseYearLabel.setVisible(false);
     }
 
     @FXML
@@ -83,13 +94,28 @@ public class editProgramAdminController implements Initializable {
 
     @FXML
     void updateButtonHandler(ActionEvent event) {
+        programNameLabel.setVisible(true);
+        saveUpdateButton.setVisible(true);
+        updateProgramName.setVisible(true);
+        updateReleaseYear.setVisible(true);
+        releaseYearLabel.setVisible(true);
 
+        this.oldName = programsListViewController.getSelectedProgramInfo().getName();
+        updateProgramName.setText(programsListViewController.getSelectedProgramInfo().getName());
+        updateReleaseYear.setText(programsListViewController.getSelectedProgramInfo().getYear());
     }
 
-    @FXML
-    void updateDescriptionButtonHandler(ActionEvent event) {
 
+    public void saveUpdateButtonHandler(ActionEvent actionEvent) {
+        programSystem.updateProgram(this.oldName, updateProgramName.getText(), updateReleaseYear.getText());
+        programNameLabel.setVisible(false);
+        saveUpdateButton.setVisible(false);
+        updateProgramName.setVisible(false);
+        updateReleaseYear.setVisible(false);
+        releaseYearLabel.setVisible(false);
+        programsListViewController.refreshListView();
     }
 
-
+    public void updateFieldHandler(ActionEvent actionEvent) {
+    }
 }

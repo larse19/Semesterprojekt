@@ -4,12 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import org.gruppe06.interfaces.ICastMember;
-import org.gruppe06.interfaces.IProducer;
-import org.gruppe06.interfaces.IProgram;
-import org.gruppe06.domain.CredtIT;
 
 import java.io.IOException;
 

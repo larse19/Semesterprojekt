@@ -8,11 +8,13 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import org.gruppe06.domain.CastMemberSystem;
 import org.gruppe06.domain.ProgramSystem;
 import org.gruppe06.domain.SearchSystem;
 import org.gruppe06.interfaces.ICastMember;
 import org.gruppe06.interfaces.IProducer;
 import org.gruppe06.interfaces.IProgram;
+import org.gruppe06.persistance.ProducerDataHandler;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -27,20 +29,30 @@ public class SearchController implements Initializable {
 
     private ProgramSystem programSystem;
 
+
     @FXML
     public SearchSystem searchTextField;
 
     private ArrayList<String> programsList;
+  
+    private CastMemberSystem castMemberSystem;
+
+    // Der skal laves en ProducerSystem-klasse.
+    // private ProducerSystem producerSystem;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         programSystem = new ProgramSystem();
         programsList = new ArrayList();
+      
         for (String programName : programSystem.getListOfProgramNames()){
             programsList.add(programName);
         }
         searchTextField.getEntries().addAll(programsList);
         setEvent(searchTextField);
+      
+        castMemberSystem = new CastMemberSystem();
+        // producerSystem = new ProducerSystem();
     }
 
     @FXML
@@ -64,7 +76,16 @@ public class SearchController implements Initializable {
             resultTextArea.appendText("Release Year:\n" + year + "\n\n");
             resultTextArea.appendText("Producers:\n" + producers + "\n");
             resultTextArea.appendText("Cast:\n" + castMembers);
-        } catch (NullPointerException e) {
+
+//            ICastMember castMember = castMemberSystem.getCastMember(searchTextField.getText());
+//            String castMemberName = castMember.getName();
+//            resultTextArea.setText("Person:\n" + castMemberName);
+
+//            IProducer producer = producerSystem.getProducer(searchTextField.getText());
+//            String producerName = producer.getName();
+//            resultTextArea.setText("Person:\n" + producerName);
+
+        }catch (NullPointerException e){
             resultTextArea.setText("Program not found");
         }
 
