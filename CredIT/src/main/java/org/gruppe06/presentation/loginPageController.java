@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import org.gruppe06.domain.LoginSystem;
 import org.gruppe06.domain.PasswordAuthentication;
 
@@ -38,6 +40,8 @@ public class loginPageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loginSystem = new LoginSystem();
         passwordAuthentication = new PasswordAuthentication();
+        setEvent(username);
+        setEvent(password);
     }
 
     @FXML
@@ -56,6 +60,14 @@ public class loginPageController implements Initializable {
     @FXML
     void returnHandler(ActionEvent event) throws IOException {
         App.setRoot("frontPage");
+    }
+
+    private void setEvent(TextField textField){
+        textField.addEventHandler(KeyEvent.KEY_PRESSED, ev -> {
+            if (ev.getCode() == KeyCode.ENTER){
+                loginButton.fire();
+            }
+        });
     }
 
 }
