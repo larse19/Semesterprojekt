@@ -24,12 +24,17 @@ public class ProgramDataHandler {
     }
 
     //Method to create programs and add them to the DB
-    public void createProgram(String programName, String releaseYear) {
+    public void createProgram(String programName, String releaseYear, String producerID, String producerRole) {
         try {
             PreparedStatement createProgramPS = connection.prepareStatement("INSERT INTO programs(name, release_year) VALUES (?, ?);");
             createProgramPS.setString(1, programName);
             createProgramPS.setString(2, releaseYear);
             createProgramPS.execute();
+            PreparedStatement associateProducerPS = connection.prepareStatement("INSERT into produces_program (producer_id, program_id, role) values (?,?,?)");
+            associateProducerPS.setString(1,producerID);
+            associateProducerPS.setInt(2, getProgramID(programName));
+            associateProducerPS.setString(3, producerRole);
+            associateProducerPS.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -107,7 +112,6 @@ public class ProgramDataHandler {
             while (set.next()) {
                 res.put(Integer.parseInt(set.getString("ID")), set.getString("name"));
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -121,7 +125,7 @@ public class ProgramDataHandler {
         ArrayList<IProducer> producers = new ArrayList<>();
 
         try {
-            PreparedStatement producersPS = connection.prepareStatement("select producers.ID as ID, producers.name as producer_name from producers " +
+            PreparedStatement producersPS = connection.prepareStatement("select producers.ID as ID, producers.name as producer_name, produces_program.role as role from producers " +
                                                                             "INNER JOIN produces_program on produces_program.producer_id = producers.ID where program_ID = ?");
             producersPS.setInt(1, programID);
             ResultSet producerSet = producersPS.executeQuery();
@@ -135,7 +139,7 @@ public class ProgramDataHandler {
             }
 
             while (producerSet.next()) {
-                Producer producer = new Producer(producerSet.getString("ID"), producerSet.getString("producer_name"));
+                Producer producer = new Producer(producerSet.getString("ID"), producerSet.getString("producer_name"), producerSet.getString("role"));
                 producers.add(producer);
             }
 
@@ -145,6 +149,21 @@ public class ProgramDataHandler {
 
         return new Program(name, getCastMembers(programID), producers);
 
+    }
+
+    private int getProgramID(String name){
+        int id = 0;
+        try {
+            PreparedStatement idPS = connection.prepareStatement("select id from programs where name = ?");
+            idPS.setString(1, name);
+            ResultSet set = idPS.executeQuery();
+            if(set.next()){
+                id = set.getInt("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
     }
 
     //Get IProgram with year, but without cast

@@ -56,7 +56,7 @@ public class CastMemberDataHandler {
     public ICastMember getCastMember(String castMemberName) throws NullPointerException{
         ICastMember castMember = null;
         try {
-            PreparedStatement getCastMemberPS = connection.prepareStatement("SELECT * FROM cast_members WHERE name like ?;");
+            PreparedStatement getCastMemberPS = connection.prepareStatement("SELECT * FROM cast_members WHERE name iLIKE ?");
             getCastMemberPS.setString(1, "%"+castMemberName+"%");
             ResultSet getCastMemberRS = getCastMemberPS.executeQuery();
 

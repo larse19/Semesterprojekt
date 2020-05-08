@@ -5,10 +5,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import org.gruppe06.domain.CastMemberSystem;
 import org.gruppe06.domain.ProgramSystem;
 import org.gruppe06.interfaces.ICastMember;
 import org.gruppe06.interfaces.IProducer;
 import org.gruppe06.interfaces.IProgram;
+import org.gruppe06.persistance.ProducerDataHandler;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,9 +25,16 @@ public class SearchController implements Initializable {
 
     private ProgramSystem programSystem;
 
+    private CastMemberSystem castMemberSystem;
+
+    // Der skal laves en ProducerSystem-klasse.
+    // private ProducerSystem producerSystem;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         programSystem = new ProgramSystem();
+        castMemberSystem = new CastMemberSystem();
+        // producerSystem = new ProducerSystem();
     }
 
     @FXML
@@ -47,6 +56,15 @@ public class SearchController implements Initializable {
             resultTextArea.setText("Title:\n" + name + "\n\n");
             resultTextArea.appendText("Producers:\n" + producers + "\n");
             resultTextArea.appendText("Cast:\n" + castMembers);
+
+//            ICastMember castMember = castMemberSystem.getCastMember(searchTextField.getText());
+//            String castMemberName = castMember.getName();
+//            resultTextArea.setText("Person:\n" + castMemberName);
+
+//            IProducer producer = producerSystem.getProducer(searchTextField.getText());
+//            String producerName = producer.getName();
+//            resultTextArea.setText("Person:\n" + producerName);
+
         }catch (NullPointerException e){
             resultTextArea.setText("Program not found");
         }
