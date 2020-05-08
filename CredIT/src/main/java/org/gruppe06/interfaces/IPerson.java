@@ -6,4 +6,8 @@ public interface IPerson {
 
     String getID();
 
+    void setName(String name);
+
+    void setID(String ID);
+
 }

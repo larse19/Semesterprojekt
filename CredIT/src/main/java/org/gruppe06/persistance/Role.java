@@ -10,7 +10,13 @@ public class Role implements IRole {
         this.role = role;
     }
 
+    @Override
     public String getRole() {
         return role;
+    }
+
+    @Override
+    public void setRole(String role) {
+        this.role = role;
     }
 }
