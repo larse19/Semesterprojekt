@@ -17,9 +17,7 @@ public class ProgramInfo {
         this.name = name;
         this.year = year;
     }
-
-    public String getYear() { return year; }
-
+  
     public int getID() {
         return ID;
     }
@@ -27,6 +25,8 @@ public class ProgramInfo {
     public String getName() {
         return name;
     }
+
+    public String getYear() { return year; }
 
     @Override
     public String toString(){

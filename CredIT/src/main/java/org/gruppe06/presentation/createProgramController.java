@@ -41,6 +41,12 @@ public class createProgramController  implements Initializable {
     @FXML
     private Button backButton;
 
+    @FXML
+    private TextField producerID;
+
+    @FXML
+    private TextField producerRole;
+
     private ProgramSystem programSystem;
 
     @Override
@@ -50,7 +56,7 @@ public class createProgramController  implements Initializable {
 
     @FXML
     void createProgramHandler(ActionEvent event){
-        if (programSystem.createNewProgram(programNameField.getText(), yearField.getText())){
+        if (programSystem.createNewProgram(programNameField.getText(), yearField.getText(), producerID.getText(), producerRole.getText())){
             programNameField.setText("");
             yearField.setText("");
         } else {

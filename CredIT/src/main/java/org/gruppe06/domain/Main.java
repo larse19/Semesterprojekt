@@ -2,10 +2,11 @@ package org.gruppe06.domain;
 
 import org.gruppe06.presentation.App;
 
+import java.util.Arrays;
+
 public class Main {
 
     public static void main(String[] args) {
-        CredtIT credtIT = new CredtIT();
         App.launch(args);
     }
 
