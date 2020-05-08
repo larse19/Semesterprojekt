@@ -35,6 +35,7 @@ public class SearchController implements Initializable {
     private ProgramSystem programSystem;
     private ArrayList<String> programsList;
     private SpellChecker spellChecker;
+    private CastMemberSystem castMemberSystem;
 
     // Der skal laves en ProducerSystem-klasse.
     // private ProducerSystem producerSystem;
