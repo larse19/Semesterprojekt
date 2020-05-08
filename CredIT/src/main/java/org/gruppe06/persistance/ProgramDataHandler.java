@@ -119,6 +119,7 @@ public class ProgramDataHandler {
     private IProgram getProgram(int programID) {
 
         String name = "";
+        String year = "";
         ArrayList<IProducer> producers = new ArrayList<>();
 
         try {
@@ -127,12 +128,13 @@ public class ProgramDataHandler {
             producersPS.setInt(1, programID);
             ResultSet producerSet = producersPS.executeQuery();
 
-            PreparedStatement namePS = connection.prepareStatement("SELECT name from programs where id = ?");
+            PreparedStatement namePS = connection.prepareStatement("SELECT * from programs where id = ?");
             namePS.setInt(1, programID);
             ResultSet nameSet = namePS.executeQuery();
 
             if (nameSet.next()) {
                 name = nameSet.getString("name");
+                year = nameSet.getString("release_year");
             }
 
             while (producerSet.next()) {
@@ -144,7 +146,7 @@ public class ProgramDataHandler {
             e.printStackTrace();
         }
 
-        return new Program(name, getCastMembers(programID), producers);
+        return new Program(name, getCastMembers(programID), producers, year);
 
     }
 

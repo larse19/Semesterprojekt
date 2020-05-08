@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.gruppe06.domain.CastMemberSystem;
+import org.gruppe06.domain.ProducerSystem;
 import org.gruppe06.domain.ProgramSystem;
 import org.gruppe06.domain.SearchSystem;
 import org.gruppe06.interfaces.ICastMember;
@@ -37,8 +38,7 @@ public class SearchController implements Initializable {
   
     private CastMemberSystem castMemberSystem;
 
-    // Der skal laves en ProducerSystem-klasse.
-    // private ProducerSystem producerSystem;
+    private ProducerSystem producerSystem;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -52,43 +52,51 @@ public class SearchController implements Initializable {
         setEvent(searchTextField);
       
         castMemberSystem = new CastMemberSystem();
-        // producerSystem = new ProducerSystem();
+        producerSystem = new ProducerSystem();
     }
 
     @FXML
     void searchHandler(ActionEvent event) {
         try {
+            resultTextArea.setText("");
+
+            //Search program
             IProgram program = programSystem.getProgram(searchTextField.getText());
             String name = program.getName();
+            System.out.println(name);
             String year = program.getYear();
+            System.out.println(year);
             StringBuilder producers = new StringBuilder();
             StringBuilder castMembers = new StringBuilder();
 
             for(IProducer producer : program.getProducers()){
                 producers.append(producer.getName()).append(" \n");
             }
+            System.out.println(producers);
 
             for(ICastMember castMember : program.getCast()){
                 castMembers.append(castMember.toString()).append("\n");
             }
+            System.out.println(castMembers);
 
             resultTextArea.setText("Title:\n" + name + "\n\n");
             resultTextArea.appendText("Release Year:\n" + year + "\n\n");
             resultTextArea.appendText("Producers:\n" + producers + "\n");
             resultTextArea.appendText("Cast:\n" + castMembers);
 
-//            ICastMember castMember = castMemberSystem.getCastMember(searchTextField.getText());
-//            String castMemberName = castMember.getName();
-//            resultTextArea.setText("Person:\n" + castMemberName);
+//            if(resultTextArea.getText().equals("")){
+//                ICastMember castMember = castMemberSystem.getCastMember(searchTextField.getText());
+//                resultTextArea.setText(castMember.toString());
+//            }
 
-//            IProducer producer = producerSystem.getProducer(searchTextField.getText());
-//            String producerName = producer.getName();
-//            resultTextArea.setText("Person:\n" + producerName);
+//            if(resultTextArea.getText().equals("")){
+//                IProducer producer = producerSystem.getProducer(searchTextField.getText());
+//                resultTextArea.setText(producer.toString());
+//            }
 
         }catch (NullPointerException e){
-            resultTextArea.setText("Program not found");
+            System.out.println("Nothing was found");
         }
-
     }
 
     private void setEvent(SearchSystem searchField){

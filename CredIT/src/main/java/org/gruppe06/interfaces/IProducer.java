@@ -1,8 +1,8 @@
 package org.gruppe06.interfaces;
 
-public interface IProducer extends IPerson {
+public interface IProducer extends ICast {
 
-    String getNameAndRole();
+    String getRole();
 
     @Override
     String toString();

@@ -1,7 +1,11 @@
 package org.gruppe06.interfaces;
 
-public interface ICastMember extends IPerson {
+import org.gruppe06.persistance.ProgramRole;
 
-    IRole getRoleOnProgram();
+import java.util.ArrayList;
+
+public interface ICastMember extends ICast {
+
+    IRole getRoles();
 
 }

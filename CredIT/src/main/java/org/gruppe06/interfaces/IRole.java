@@ -4,4 +4,6 @@ public interface IRole {
 
      String getRole();
 
+     void setRole(String role);
+
 }

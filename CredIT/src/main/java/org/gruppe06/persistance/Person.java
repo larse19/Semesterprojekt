@@ -1,7 +1,6 @@
 package org.gruppe06.persistance;
 
 import org.gruppe06.interfaces.IPerson;
-import org.gruppe06.interfaces.IProgram;
 
 public class Person implements IPerson {
 
@@ -13,11 +12,26 @@ public class Person implements IPerson {
         this.ID = ID;
     }
 
+    public Person() {
+    }
+
+    @Override
     public String getID() {
         return ID;
     }
 
+    @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public void setID(String ID) {
+         this.ID = ID;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
     }
 }
