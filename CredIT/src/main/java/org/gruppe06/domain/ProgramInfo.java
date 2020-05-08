@@ -17,7 +17,7 @@ public class ProgramInfo {
         this.name = name;
         this.year = year;
     }
-
+  
     public int getID() {
         return ID;
     }

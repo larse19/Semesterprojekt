@@ -5,7 +5,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../../stylesheets/StyleTest.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gruppe06.presentation.editProgramAdminController">
     <Label layoutX="345.0" layoutY="76.0" text="Rediger programmer" />
     <Button fx:id="backButton" layoutX="9.0" layoutY="559.0" mnemonicParsing="false" onAction="#backButtonHandler" text="Tilbage" />

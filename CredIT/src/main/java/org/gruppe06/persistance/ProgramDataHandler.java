@@ -66,7 +66,7 @@ public class ProgramDataHandler {
             PreparedStatement updateProgramPS = connection.prepareStatement("UPDATE programs SET name = ?, release_year = ? WHERE name = ?");
             updateProgramPS.setString(1, newProgramName);
             updateProgramPS.setString(2, releaseYear);
-            updateProgramPS.setString(3,oldName);
+            updateProgramPS.setString(3, oldName);
             updateProgramPS.execute();
         } catch (SQLException e) {
             e.printStackTrace();
