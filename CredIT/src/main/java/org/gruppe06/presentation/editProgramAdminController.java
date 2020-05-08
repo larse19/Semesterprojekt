@@ -14,19 +14,21 @@ import java.util.ResourceBundle;
 
 public class editProgramAdminController implements Initializable {
 
+    @FXML
     public Label programNameLabel;
+    @FXML
     public Button saveUpdateButton;
+    @FXML
     public TextField updateProgramName;
+    @FXML
     public TextField updateReleaseYear;
+    @FXML
     public Label releaseYearLabel;
     @FXML
     private Parent programsListView;
 
     @FXML
     private ProgramsListViewController programsListViewController;
-
-    //@FXML
-    //private ListView<?> listOfPrograms;
 
     @FXML
     private Button backButton;
