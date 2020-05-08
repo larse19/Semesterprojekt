@@ -19,7 +19,7 @@ public class ProgramInfo implements IProgramInfo {
         this.name = name;
         this.year = year;
     }
-
+  
     public int getID() {
         return ID;
     }
