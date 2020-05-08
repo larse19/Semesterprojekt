@@ -18,6 +18,7 @@ import org.gruppe06.interfaces.IProgram;
 import org.gruppe06.persistance.ProducerDataHandler;
 
 import java.net.URL;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -34,8 +35,6 @@ public class SearchController implements Initializable {
     @FXML
     public SearchSystem searchTextField;
 
-    private ArrayList<String> programsList;
-  
     private CastMemberSystem castMemberSystem;
 
     private ProducerSystem producerSystem;
@@ -43,11 +42,8 @@ public class SearchController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         programSystem = new ProgramSystem();
-        programsList = new ArrayList();
-      
-        for (String programName : programSystem.getListOfProgramNames()){
-            programsList.add(programName);
-        }
+
+        ArrayList<String> programsList = new ArrayList<>(programSystem.getListOfProgramNames());
         searchTextField.getEntries().addAll(programsList);
         setEvent(searchTextField);
       
@@ -57,45 +53,43 @@ public class SearchController implements Initializable {
 
     @FXML
     void searchHandler(ActionEvent event) {
-        try {
-            resultTextArea.setText("");
+        if (!searchTextField.getText().equals("")) {
+            try {
+                resultTextArea.setText("");
 
-            //Search program
-            IProgram program = programSystem.getProgram(searchTextField.getText());
-            String name = program.getName();
-            System.out.println(name);
-            String year = program.getYear();
-            System.out.println(year);
-            StringBuilder producers = new StringBuilder();
-            StringBuilder castMembers = new StringBuilder();
+                //Search program
+                IProgram program = programSystem.getProgram(searchTextField.getText());
+                String name = program.getName();
+                String year = program.getYear();
+                StringBuilder producers = new StringBuilder();
+                StringBuilder castMembers = new StringBuilder();
 
-            for(IProducer producer : program.getProducers()){
-                producers.append(producer.getName()).append(" \n");
+                for (IProducer producer : program.getProducers()) {
+                    producers.append(producer.getName()).append(" \n");
+                }
+
+                for (ICastMember castMember : program.getCast()) {
+                    castMembers.append(castMember.toString()).append("\n");
+                }
+
+                resultTextArea.setText("Title:\n" + name + "\n\n");
+                resultTextArea.appendText("Release Year:\n" + year + "\n\n");
+                resultTextArea.appendText("Producers:\n" + producers + "\n");
+                resultTextArea.appendText("Cast:\n" + castMembers);
+
+            } catch (NullPointerException e) {
+                try {
+                    ICastMember castMember = castMemberSystem.getCastMember(searchTextField.getText());
+                    resultTextArea.setText(castMember.toString());
+                } catch (NullPointerException e2) {
+                    try {
+                        IProducer producer = producerSystem.getProducer(searchTextField.getText());
+                        resultTextArea.setText(producer.toString());
+                    } catch (NullPointerException nullPointerException) {
+                        resultTextArea.setText("No search result");
+                    }
+                }
             }
-            System.out.println(producers);
-
-            for(ICastMember castMember : program.getCast()){
-                castMembers.append(castMember.toString()).append("\n");
-            }
-            System.out.println(castMembers);
-
-            resultTextArea.setText("Title:\n" + name + "\n\n");
-            resultTextArea.appendText("Release Year:\n" + year + "\n\n");
-            resultTextArea.appendText("Producers:\n" + producers + "\n");
-            resultTextArea.appendText("Cast:\n" + castMembers);
-
-//            if(resultTextArea.getText().equals("")){
-//                ICastMember castMember = castMemberSystem.getCastMember(searchTextField.getText());
-//                resultTextArea.setText(castMember.toString());
-//            }
-
-//            if(resultTextArea.getText().equals("")){
-//                IProducer producer = producerSystem.getProducer(searchTextField.getText());
-//                resultTextArea.setText(producer.toString());
-//            }
-
-        }catch (NullPointerException e){
-            System.out.println("Nothing was found");
         }
     }
 

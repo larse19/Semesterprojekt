@@ -46,16 +46,18 @@ public class ProducerDataHandler {
     public IProducer getProducer(String producerName) throws NullPointerException{
         IProducer producer = new Producer();
         try {
-            PreparedStatement getProducerPS = connection.prepareStatement("SELECT * FROM producers WHERE name iLIKE ?");
+            PreparedStatement getProducerPS = connection.prepareStatement("SELECT * FROM producers WHERE name iLIKE ? OR ID iLIKE ?");
             getProducerPS.setString(1, "%"+producerName+"%");
+            getProducerPS.setString(2, "%"+producerName+"%");
             ResultSet getProducerRS = getProducerPS.executeQuery();
 
-            while(getProducerRS.next()) {
+            if(getProducerRS.next()) {
                 producer = new Producer(getProducerRS.getString("ID"), getProducerRS.getString("name"));
-                if(getProducerRS.getString("name").equals(" ")){
-                    throw new NullPointerException();
-                }
             }
+            if(producer.getName() == null) {
+                throw new NullPointerException();
+            }
+
             //Gets programs and roles where producer is involved
             PreparedStatement programRolesPS = connection.prepareStatement(
                     "SELECT * FROM programs INNER JOIN produces_program ON produces_program.program_ID = programs.ID WHERE produces_program.producer_ID = ?");

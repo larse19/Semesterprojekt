@@ -58,17 +58,19 @@ public class CastMemberDataHandler {
         ICastMember castMember = new CastMember();
         try {
             //Gets ID and Name from cast_members
-            PreparedStatement getCastMemberPS = connection.prepareStatement("SELECT * FROM cast_members WHERE name iLIKE ?");
+            PreparedStatement getCastMemberPS = connection.prepareStatement("SELECT * FROM cast_members WHERE name iLIKE ? OR ID iLIKE ?");
             getCastMemberPS.setString(1, "%"+castMemberName+"%");
+            getCastMemberPS.setString(2, "%"+castMemberName+"%");
             ResultSet getCastMemberRS = getCastMemberPS.executeQuery();
 
-            while(getCastMemberRS.next()) {
+            if(getCastMemberRS.next()) {
                 castMember.setID(getCastMemberRS.getString("ID"));
                 castMember.setName(getCastMemberRS.getString("name"));
-                if(getCastMemberRS.getString("name").equals(" ")){
-                    throw new NullPointerException();
-                }
             }
+            if(castMember.getName() == null){
+                throw new NullPointerException();
+            }
+
             //Gets programs and roles where cast_member is involved
             PreparedStatement programRolesPS = connection.prepareStatement(
                     "SELECT * FROM programs INNER JOIN worked_on ON worked_on.program_ID = programs.ID WHERE worked_on.cast_member_ID = ?");

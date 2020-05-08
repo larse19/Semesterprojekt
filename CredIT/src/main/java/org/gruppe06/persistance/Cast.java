@@ -1,10 +1,11 @@
 package org.gruppe06.persistance;
 
 import org.gruppe06.interfaces.ICast;
+import org.gruppe06.interfaces.IPerson;
 
 import java.util.ArrayList;
 
-public class Cast extends Person implements ICast {
+public class Cast extends Person implements ICast, IPerson {
 
     private ArrayList<ProgramRole> programRoles;
 

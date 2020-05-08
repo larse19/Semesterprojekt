@@ -51,7 +51,11 @@ public class CastMemberSystem {
         }
     }
 
-    public ICastMember getCastMember(String name){
-        return castMemberDataHandler.getCastMember(name);
+    public ICastMember getCastMember(String name) throws NullPointerException{
+        if(castMemberDataHandler.getCastMember(name) != null){
+            return castMemberDataHandler.getCastMember(name);
+        }else{
+            throw new NullPointerException();
+        }
     }
 }
