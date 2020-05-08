@@ -62,6 +62,10 @@ public class ProgramSystem {
         return programDataHandler.getAllProgramInfo();
     }
 
+    public List<IProgramInfo> getAllProgramsInfo(String searchString){
+        return programDataHandler.getAllProgramInfo(searchString);
+    }
+
     //Adds a cast member to a program
     public boolean addCastMemberToProgram(IProgramInfo programInfo, String castName, String role){
         IRole Irole = new Role(role);

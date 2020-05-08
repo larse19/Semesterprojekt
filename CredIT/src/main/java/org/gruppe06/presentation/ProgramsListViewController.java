@@ -32,7 +32,7 @@ public class ProgramsListViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         programSystem = new ProgramSystem();
         programsObservableList = FXCollections.observableArrayList();
-        programsObservableList.setAll(programSystem.getAllProgramsInfo());
+        programsObservableList.setAll(programSystem.getAllProgramsInfo(""));
         listOfPrograms.setItems(programsObservableList);
     }
 
@@ -41,11 +41,11 @@ public class ProgramsListViewController implements Initializable {
     }
 
     public void refreshListView(){
-        programsObservableList.setAll(programSystem.getAllProgramsInfo());
+        programsObservableList.setAll(programSystem.getAllProgramsInfo(searchBar.getText()));
     }
 
     @FXML
     void SearchProgram(ActionEvent event) {
-
+        programsObservableList.setAll(programSystem.getAllProgramsInfo(searchBar.getText()));
     }
 }
