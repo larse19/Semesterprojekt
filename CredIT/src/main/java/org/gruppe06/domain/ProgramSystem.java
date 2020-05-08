@@ -62,7 +62,7 @@ public class ProgramSystem {
         Map<Integer, String> programData = programDataHandler.getAllProgramIdAndNames();
 
         for(Integer program : programData.keySet()){
-            programInfoList.add(new ProgramInfo(program, programData.get(program)));
+            programInfoList.add(new ProgramInfo(program, programData.get(program), programDataHandler.getProgramNameAndYear(programData.get(program)).getYear()));
         }
         return programInfoList;
     }

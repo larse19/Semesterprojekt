@@ -13,4 +13,6 @@ public interface IProgram {
 
     ArrayList<IProducer> getProducers();
 
+    String getYear();
+
 }

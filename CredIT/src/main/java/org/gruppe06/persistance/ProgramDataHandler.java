@@ -63,7 +63,7 @@ public class ProgramDataHandler {
     //Method to update an already existing programs information from it's ID
     public void updateProgram(String oldName, String newProgramName, String releaseYear) {
         try {
-            PreparedStatement updateProgramPS = connection.prepareStatement("UPDATE programs SET name = ? SET release_year = ? WHERE name = ?");
+            PreparedStatement updateProgramPS = connection.prepareStatement("UPDATE programs SET name = ?, release_year = ? WHERE name = ?");
             updateProgramPS.setString(1, newProgramName);
             updateProgramPS.setString(2, releaseYear);
             updateProgramPS.setString(3,oldName);
