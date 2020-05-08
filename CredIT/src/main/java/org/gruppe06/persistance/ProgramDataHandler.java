@@ -115,6 +115,24 @@ public class ProgramDataHandler {
         return res;
     }
 
+    public List<IProgramInfo> getAllProgramInfo(String searchString) {
+
+        List<IProgramInfo> res = new ArrayList<>();
+
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM programs where name ilike ?");
+            ps.setString(1,"%" + searchString + "%");
+            ResultSet set = ps.executeQuery();
+
+            while (set.next()) {
+                res.add(new ProgramInfo(set.getInt("id"),set.getString("name"), set.getString("release_year")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
     //Get program based on ID
     private IProgram getProgram(int programID) {
 
