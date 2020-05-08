@@ -1,13 +1,11 @@
 package org.gruppe06.presentation;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import org.gruppe06.domain.ProgramInfo;
+import org.gruppe06.interfaces.IProgramInfo;
 import org.gruppe06.domain.ProgramSystem;
 
 import java.io.IOException;
@@ -52,7 +50,7 @@ public class addCastMembersController implements Initializable {
 
     @FXML
     void addButtonHandler(ActionEvent event) {
-        ProgramInfo programInfo = programsListViewController.getSelectedProgramInfo();
+        IProgramInfo programInfo = programsListViewController.getSelectedProgramInfo();
 
         if (programInfo != null) {
             if (!nameField.getText().equals("") && !roleField.getText().equals("")) {

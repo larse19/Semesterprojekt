@@ -1,6 +1,5 @@
 package org.gruppe06.presentation;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,7 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import org.gruppe06.domain.ProgramInfo;
+import org.gruppe06.interfaces.IProgramInfo;
 import org.gruppe06.domain.ProgramSystem;
 
 import java.net.URL;
@@ -18,7 +17,7 @@ import java.util.ResourceBundle;
 public class ProgramsListViewController implements Initializable {
 
     @FXML
-    private ListView<ProgramInfo> listOfPrograms;
+    private ListView<IProgramInfo> listOfPrograms;
 
     @FXML
     private TextField searchBar;
@@ -27,7 +26,7 @@ public class ProgramsListViewController implements Initializable {
     private Button searchButton;
 
     private ProgramSystem programSystem;
-    private ObservableList<ProgramInfo> programsObservableList;
+    private ObservableList<IProgramInfo> programsObservableList;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -37,7 +36,7 @@ public class ProgramsListViewController implements Initializable {
         listOfPrograms.setItems(programsObservableList);
     }
 
-    public ProgramInfo getSelectedProgramInfo(){
+    public IProgramInfo getSelectedProgramInfo(){
         return listOfPrograms.getSelectionModel().getSelectedItem();
     }
 
