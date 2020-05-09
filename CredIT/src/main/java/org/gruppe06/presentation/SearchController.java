@@ -45,11 +45,12 @@ public class SearchController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         programSystem = new ProgramSystem();
 
-        ArrayList<String> programsList = new ArrayList<>(programSystem.getListOfProgramNames());
+        programsList = new ArrayList<>(programSystem.getListOfProgramNames());
         searchTextField.getEntries().addAll(programsList);
         setEvent(searchTextField);
       
         castMemberSystem = new CastMemberSystem();
+        //producerSystem = new ProducerSystem();
 
         spellChecker = new SpellChecker();
 
@@ -57,7 +58,6 @@ public class SearchController implements Initializable {
             spellChecker.getDictionary().compute(word, (k, v) -> v == null ? 1 : v + 1);
         });
 
-        producerSystem = new ProducerSystem();
     }
 
     @FXML
@@ -86,7 +86,7 @@ public class SearchController implements Initializable {
                 resultTextArea.appendText("Producers:\n" + producers + "\n");
                 resultTextArea.appendText("Cast:\n" + castMembers);
 
-            } catch (NullPointerException e) {
+            } catch (NullPointerException e1) {
                 try {
                     ICastMember castMember = castMemberSystem.getCastMember(searchTextField.getText());
                     resultTextArea.setText(castMember.toString());
@@ -94,8 +94,11 @@ public class SearchController implements Initializable {
                     try {
                         IProducer producer = producerSystem.getProducer(searchTextField.getText());
                         resultTextArea.setText(producer.toString());
-        } catch (NullPointerException e) {
-            resultTextArea.setText("Mente du: " + spellChecker.correct(searchTextField.getText().replaceAll("\\s+", "")));
+                    } finally {
+                        resultTextArea.setText("Mente du: " + spellChecker.correct(searchTextField.getText().replaceAll("\\s+", "")));
+                    }
+                }
+            }
         }
     }
 
