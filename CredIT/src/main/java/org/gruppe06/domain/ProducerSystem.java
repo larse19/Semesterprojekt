@@ -14,12 +14,10 @@ public class ProducerSystem {
     }
 
     public IProducer getProducer(String producerName) throws NullPointerException {
-        IProducer producer;
-        try {
-            producer = producerDataHandler.getProducer(producerName);
-        }catch (NullPointerException e){
+        if(producerDataHandler.getProducer(producerName) != null){
+            return producerDataHandler.getProducer(producerName);
+        }else{
             throw new NullPointerException();
         }
-        return producer;
     }
 }

@@ -52,10 +52,12 @@ public class ProducerDataHandler {
             ResultSet getProducerRS = getProducerPS.executeQuery();
 
             if(getProducerRS.next()) {
-                producer = new Producer(getProducerRS.getString("ID"), getProducerRS.getString("name"));
+                producer.setID(getProducerRS.getString("ID"));
+                producer.setName(getProducerRS.getString("name"));
             }
             if(producer.getName() == null) {
                 throw new NullPointerException();
+
             }
 
             //Gets programs and roles where producer is involved

@@ -38,7 +38,6 @@ public class SearchController implements Initializable {
     private ArrayList<String> programsList;
     private SpellChecker spellChecker;
     private CastMemberSystem castMemberSystem;
-
     private ProducerSystem producerSystem;
 
     @Override
@@ -50,7 +49,8 @@ public class SearchController implements Initializable {
         setEvent(searchTextField);
       
         castMemberSystem = new CastMemberSystem();
-        //producerSystem = new ProducerSystem();
+
+        producerSystem = new ProducerSystem();
 
         spellChecker = new SpellChecker();
 
@@ -94,8 +94,13 @@ public class SearchController implements Initializable {
                     try {
                         IProducer producer = producerSystem.getProducer(searchTextField.getText());
                         resultTextArea.setText(producer.toString());
-                    } finally {
-                        resultTextArea.setText("Mente du: " + spellChecker.correct(searchTextField.getText().replaceAll("\\s+", "")));
+                    } catch(NullPointerException e3){
+                        resultTextArea.setText("No search result");
+                        try{
+                                resultTextArea.setText("Mente du: " + spellChecker.correct(searchTextField.getText().replaceAll("\\s+", "")));
+                        } catch (NullPointerException e4) {
+                            resultTextArea.setText("No search result");
+                        }
                     }
                 }
             }

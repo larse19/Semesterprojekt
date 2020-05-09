@@ -218,14 +218,11 @@ public class ProgramDataHandler {
             if (set.next()) {
                 program = getProgram(set.getInt("ID"));
             }
-
+            if (program == null) {
+                throw new NullPointerException();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-
-        if (program == null) {
-            System.out.println("Program not found");
-            throw new NullPointerException();
         }
         return program;
     }
