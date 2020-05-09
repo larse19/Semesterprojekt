@@ -12,6 +12,7 @@ import org.gruppe06.domain.CastMemberSystem;
 import org.gruppe06.domain.ProducerSystem;
 import org.gruppe06.domain.ProgramSystem;
 import org.gruppe06.domain.SearchSystem;
+import org.gruppe06.domain.SpellChecker;
 import org.gruppe06.interfaces.ICastMember;
 import org.gruppe06.interfaces.IProducer;
 import org.gruppe06.interfaces.IProgram;
@@ -21,6 +22,7 @@ import java.net.URL;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.stream.Stream;
 
 public class SearchController implements Initializable {
     @FXML
@@ -29,12 +31,12 @@ public class SearchController implements Initializable {
     @FXML
     private TextArea resultTextArea;
 
-    private ProgramSystem programSystem;
-
-
     @FXML
     public SearchSystem searchTextField;
 
+    private ProgramSystem programSystem;
+    private ArrayList<String> programsList;
+    private SpellChecker spellChecker;
     private CastMemberSystem castMemberSystem;
 
     private ProducerSystem producerSystem;
@@ -48,6 +50,13 @@ public class SearchController implements Initializable {
         setEvent(searchTextField);
       
         castMemberSystem = new CastMemberSystem();
+
+        spellChecker = new SpellChecker();
+
+        Stream.of(spellChecker.getDICTIONARY_VALUES().toLowerCase().split(",")).forEach((word) -> {
+            spellChecker.getDictionary().compute(word, (k, v) -> v == null ? 1 : v + 1);
+        });
+
         producerSystem = new ProducerSystem();
     }
 
@@ -85,11 +94,8 @@ public class SearchController implements Initializable {
                     try {
                         IProducer producer = producerSystem.getProducer(searchTextField.getText());
                         resultTextArea.setText(producer.toString());
-                    } catch (NullPointerException nullPointerException) {
-                        resultTextArea.setText("No search result");
-                    }
-                }
-            }
+        } catch (NullPointerException e) {
+            resultTextArea.setText("Mente du: " + spellChecker.correct(searchTextField.getText().replaceAll("\\s+", "")));
         }
     }
 
