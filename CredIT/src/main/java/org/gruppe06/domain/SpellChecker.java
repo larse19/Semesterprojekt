@@ -8,14 +8,14 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class SpellChecker {
-    private ProgramSystem programSystem;
+    private ProgramSystem programSystem = new ProgramSystem();
 
-    private final String ABC = "abcdefghijklmnopqrstuvwxyzæøå";
+    private final String ABC = "abcdefghijklmnopqrstuvwxyzæøå1234567890";
     private Map<String, Integer> dictionary = new HashMap<>();
-    private String DICTIONARY_VALUES = programSystem.getListOfProgramNames().toString();
+    private String DICTIONARY_VALUES = programSystem.getListOfProgramNames().toString().replaceAll("\\s+","")
+            .replaceAll("\\[","").replaceAll("]", "");
 
     public SpellChecker(){
-
     }
 
     public Map<String, Integer> getDictionary() {

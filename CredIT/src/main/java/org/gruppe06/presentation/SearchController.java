@@ -54,6 +54,8 @@ public class SearchController implements Initializable {
         castMemberSystem = new CastMemberSystem();
         // producerSystem = new ProducerSystem();
 
+        spellChecker = new SpellChecker();
+
         Stream.of(spellChecker.getDICTIONARY_VALUES().toLowerCase().split(",")).forEach((word) -> {
             spellChecker.getDictionary().compute(word, (k, v) -> v == null ? 1 : v + 1);
         });
@@ -90,9 +92,8 @@ public class SearchController implements Initializable {
 //            resultTextArea.setText("Person:\n" + producerName);
 
         } catch (NullPointerException e) {
-            resultTextArea.setText("Mente du: " + spellChecker.correct(searchTextField.getText()));
+            resultTextArea.setText("Mente du: " + spellChecker.correct(searchTextField.getText().replaceAll("\\s+", "")));
         }
-
     }
 
     private void setEvent(SearchSystem searchField){
