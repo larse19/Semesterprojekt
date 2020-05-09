@@ -1,6 +1,7 @@
 package org.gruppe06.domain;
 
 import org.gruppe06.interfaces.IProgram;
+import org.gruppe06.interfaces.IProgramInfo;
 import org.gruppe06.interfaces.IRole;
 import org.gruppe06.persistance.ProgramDataHandler;
 import org.gruppe06.persistance.Role;
@@ -19,7 +20,7 @@ public class ProgramSystem {
 
     //Checks if a program exists
     private boolean checkIfProgramExists(String name) {
-        IProgram checkProgram = programDataHandler.getProgramNameAndYear(name);
+        IProgramInfo checkProgram = programDataHandler.getProgramInfo(name);
         return checkProgram != null;
     }
 
@@ -35,7 +36,7 @@ public class ProgramSystem {
     }
 
     //Deletes program
-    public boolean deleteProgram(ProgramInfo programInfo) {
+    public boolean deleteProgram(IProgramInfo programInfo) {
         programDataHandler.deleteProgram(programInfo.getID());
         return true;
     }
@@ -57,18 +58,16 @@ public class ProgramSystem {
     }
 
     //Returns a list of all programs as ProgramInfo
-    public List<ProgramInfo> getAllProgramsInfo(){
-        List<ProgramInfo> programInfoList = new ArrayList<>();
-        Map<Integer, String> programData = programDataHandler.getAllProgramIdAndNames();
+    public List<IProgramInfo> getAllProgramsInfo(){
+        return programDataHandler.getAllProgramInfo();
+    }
 
-        for(Integer program : programData.keySet()){
-            programInfoList.add(new ProgramInfo(program, programData.get(program), programDataHandler.getProgramNameAndYear(programData.get(program)).getYear()));
-        }
-        return programInfoList;
+    public List<IProgramInfo> getAllProgramsInfo(String searchString){
+        return programDataHandler.getAllProgramInfo(searchString);
     }
 
     //Adds a cast member to a program
-    public boolean addCastMemberToProgram(ProgramInfo programInfo, String castName, String role){
+    public boolean addCastMemberToProgram(IProgramInfo programInfo, String castName, String role){
         IRole Irole = new Role(role);
         return programDataHandler.addCastMemberToProgram(programInfo.getID(),castName,Irole);
     }

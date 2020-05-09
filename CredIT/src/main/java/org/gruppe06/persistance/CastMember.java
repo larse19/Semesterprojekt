@@ -3,27 +3,43 @@ package org.gruppe06.persistance;
 import org.gruppe06.interfaces.ICastMember;
 import org.gruppe06.interfaces.IRole;
 
-public class CastMember extends Person implements ICastMember {
+import java.util.ArrayList;
+
+public class CastMember extends Cast implements ICastMember {
 
     private IRole roleOnProgram;
 
-    public CastMember(String ID, String name, Role roleOnProgram) {
-        super(ID, name);
-        this.roleOnProgram = roleOnProgram;
+    public CastMember(String ID, String name, ArrayList<ProgramRole> programRoles) {
+        super(ID, name, programRoles);
     }
 
-    public CastMember(String ID, String name){
+    public CastMember(String ID, String name, IRole role) {
         super(ID, name);
-        this.roleOnProgram = null;
+        this.roleOnProgram = role;
     }
 
-    public IRole getRoleOnProgram() {
+    public CastMember(String ID, String name) {
+        super(ID, name);
+    }
+
+    public CastMember() {
+    }
+
+    @Override
+    public IRole getRoles() {
         return roleOnProgram;
     }
 
     @Override
     public String toString(){
-        return "Name: " + super.getName() + " Role: " + roleOnProgram.getRole();
+        try {
+            return "Name: " + super.getName() + "\nCastMember ID: " + super.getID() + "\n\nPrograms: " + super.printProgramRoles();
+        }catch (NullPointerException e){
+            if(roleOnProgram != null){
+                return "Name: " + super.getName() + " Role: " + roleOnProgram.getRole();
+            }else{
+                return super.getName();
+            }
+        }
     }
-
 }

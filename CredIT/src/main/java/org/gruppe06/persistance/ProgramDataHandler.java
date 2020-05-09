@@ -1,9 +1,6 @@
 package org.gruppe06.persistance;
 
-import org.gruppe06.interfaces.ICastMember;
-import org.gruppe06.interfaces.IProducer;
-import org.gruppe06.interfaces.IProgram;
-import org.gruppe06.interfaces.IRole;
+import org.gruppe06.interfaces.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -101,16 +98,34 @@ public class ProgramDataHandler {
     }
 
     //Private method for getting all program names and their ID
-    public Map<Integer, String> getAllProgramIdAndNames() {
+    public List<IProgramInfo> getAllProgramInfo() {
 
-        Map<Integer, String> res = new HashMap<>();
+        List<IProgramInfo> res = new ArrayList<>();
 
         try {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM programs");
             ResultSet set = ps.executeQuery();
 
             while (set.next()) {
-                res.put(Integer.parseInt(set.getString("ID")), set.getString("name"));
+                res.add(new ProgramInfo(set.getInt("id"),set.getString("name"), set.getString("release_year")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    public List<IProgramInfo> getAllProgramInfo(String searchString) {
+
+        List<IProgramInfo> res = new ArrayList<>();
+
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM programs where name ilike ?");
+            ps.setString(1,"%" + searchString + "%");
+            ResultSet set = ps.executeQuery();
+
+            while (set.next()) {
+                res.add(new ProgramInfo(set.getInt("id"),set.getString("name"), set.getString("release_year")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -122,6 +137,7 @@ public class ProgramDataHandler {
     private IProgram getProgram(int programID) {
 
         String name = "";
+        String year = "";
         ArrayList<IProducer> producers = new ArrayList<>();
 
         try {
@@ -130,12 +146,13 @@ public class ProgramDataHandler {
             producersPS.setInt(1, programID);
             ResultSet producerSet = producersPS.executeQuery();
 
-            PreparedStatement namePS = connection.prepareStatement("SELECT name from programs where id = ?");
+            PreparedStatement namePS = connection.prepareStatement("SELECT * from programs where id = ?");
             namePS.setInt(1, programID);
             ResultSet nameSet = namePS.executeQuery();
 
             if (nameSet.next()) {
                 name = nameSet.getString("name");
+                year = nameSet.getString("release_year");
             }
 
             while (producerSet.next()) {
@@ -147,7 +164,7 @@ public class ProgramDataHandler {
             e.printStackTrace();
         }
 
-        return new Program(name, getCastMembers(programID), producers);
+        return new Program(name, getCastMembers(programID), producers, year);
 
     }
 
@@ -166,17 +183,17 @@ public class ProgramDataHandler {
         return id;
     }
 
-    //Get IProgram with year, but without cast
-    public IProgram getProgramNameAndYear(String programName) throws NullPointerException {
-        IProgram program = null;
+    //Get IProgramInfo with year, but without cast
+    public IProgramInfo getProgramInfo(String programName) throws NullPointerException {
+        IProgramInfo program = null;
 
         try {
             PreparedStatement getProgramsPS = connection.prepareStatement("SELECT * FROM programs WHERE name like ?;");
             getProgramsPS.setString(1, "%" + programName + "%");
             ResultSet getProgramRS = getProgramsPS.executeQuery();
 
-            while (getProgramRS.next()) {
-                program = new Program(getProgramRS.getString("name"), getProgramRS.getString("release_year"));
+            if (getProgramRS.next()) {
+                program = new ProgramInfo(getProgramRS.getInt("id"),getProgramRS.getString("name"), getProgramRS.getString("release_year"));
                 if (getProgramRS.getString("name").equals(" ")) {
                     throw new NullPointerException();
                 }

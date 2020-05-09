@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Connection;
+import java.util.ArrayList;
 
 
 public class CastMemberDataHandler {
@@ -54,32 +55,50 @@ public class CastMemberDataHandler {
 
     //Method to get a cast member from the database, based on name. Throws NullPointerException, if the cast member doesn't exist
     public ICastMember getCastMember(String castMemberName) throws NullPointerException{
-        ICastMember castMember = null;
+        ICastMember castMember = new CastMember();
         try {
-            PreparedStatement getCastMemberPS = connection.prepareStatement("SELECT * FROM cast_members WHERE name iLIKE ?");
+            //Gets ID and Name from cast_members
+            PreparedStatement getCastMemberPS = connection.prepareStatement("SELECT * FROM cast_members WHERE name iLIKE ? OR ID iLIKE ?");
             getCastMemberPS.setString(1, "%"+castMemberName+"%");
+            getCastMemberPS.setString(2, "%"+castMemberName+"%");
             ResultSet getCastMemberRS = getCastMemberPS.executeQuery();
 
-            while(getCastMemberRS.next()) {
-                castMember = new CastMember(getCastMemberRS.getString("ID"), getCastMemberRS.getString("name"));
-                if(getCastMemberRS.getString("name").equals(" ")){
-                    throw new NullPointerException();
-                }
+            if(getCastMemberRS.next()) {
+                castMember.setID(getCastMemberRS.getString("ID"));
+                castMember.setName(getCastMemberRS.getString("name"));
             }
+            if(castMember.getName() == null){
+                throw new NullPointerException();
+            }
+
+            //Gets programs and roles where cast_member is involved
+            PreparedStatement programRolesPS = connection.prepareStatement(
+                    "SELECT * FROM programs INNER JOIN worked_on ON worked_on.program_ID = programs.ID WHERE worked_on.cast_member_ID = ?");
+            programRolesPS.setString(1,castMember.getID());
+            ResultSet programRolesRS = programRolesPS.executeQuery();
+
+            ArrayList<ProgramRole> programRoles = new ArrayList<>();
+            while(programRolesRS.next()){
+                ProgramInfo programInfo = new ProgramInfo(programRolesRS.getInt("ID"),programRolesRS.getString("name"),programRolesRS.getString("release_year"));
+                Role role = new Role(programRolesRS.getString("role"));
+                ProgramRole programRole = new ProgramRole(programInfo,role);
+                programRoles.add(programRole);
+            }
+            castMember.setProgramRoles(programRoles);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return castMember;
-
     }
 
     //Method to get a cast member from the database, based on ID. Throws NullPointerException, if the cast member doesn't exist
+    //TODO This method should implement new code as in the previous method
     public ICastMember getCastMemberFromID(String ID) throws NullPointerException{
         ICastMember castMember = null;
 
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM cast_members WHERE id = ?");
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM cast_members WHERE ID = ?");
             ps.setString(1,ID);
             ResultSet set = ps.executeQuery();
 

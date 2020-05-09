@@ -2,9 +2,14 @@ package org.gruppe06.persistance;
 
 import org.gruppe06.interfaces.IProducer;
 
-public class Producer extends Person implements IProducer {
+import java.util.ArrayList;
+
+public class Producer extends Cast implements IProducer {
 
     private String producerRole;
+
+    public Producer(){
+    }
 
     public Producer(String ID, String name) {
         super(ID, name);
@@ -15,20 +20,25 @@ public class Producer extends Person implements IProducer {
         this.producerRole = producerRole;
     }
 
-    public String getProducerRole() {
+    public String getRole() {
         return producerRole;
     }
 
-    public void setProducerRole(String producerRole) {
+    public void setRole(String producerRole) {
         this.producerRole = producerRole;
-    }
-
-    public String getNameAndRole(){
-        return this.getName() + ": " + this.producerRole;
     }
 
     @Override
     public String toString(){
-        return this.getName() + " - " + this.getID();
+        try {
+            return "Name: " + super.getName() + "\nProducer ID: " + super.getID() + "\n\nPrograms: " + super.printProgramRoles();
+        }catch (NullPointerException e){
+            if(producerRole != null){
+                return "Name: " + super.getName() + " Role: " + producerRole;
+            }else{
+                return super.getName();
+            }
+        }
     }
+
 }

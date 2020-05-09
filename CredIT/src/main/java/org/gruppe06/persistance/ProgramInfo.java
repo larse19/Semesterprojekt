@@ -1,7 +1,9 @@
-package org.gruppe06.domain;
+package org.gruppe06.persistance;
+
+import org.gruppe06.interfaces.IProgramInfo;
 
 //Class that contains name and ID of a program
-public class ProgramInfo {
+public class ProgramInfo implements IProgramInfo {
 
     private int ID;
     private String name;
