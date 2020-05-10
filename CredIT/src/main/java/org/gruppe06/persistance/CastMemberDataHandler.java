@@ -2,11 +2,9 @@ package org.gruppe06.persistance;
 
 import org.gruppe06.interfaces.ICastMember;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Connection;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class CastMemberDataHandler {
@@ -33,7 +31,7 @@ public class CastMemberDataHandler {
     //This method deletes a cast member from the cast_members table.
     public void deleteCastMember(String castID){
         try {
-            PreparedStatement createCastMemberPS = connection.prepareStatement("DELETE FROM cast_members WHERE id = ?;");
+            PreparedStatement createCastMemberPS = connection.prepareStatement("call delete_cast_member(?)");
             createCastMemberPS.setString(1, castID);
             createCastMemberPS.execute();
         } catch (SQLException e) {
@@ -93,26 +91,25 @@ public class CastMemberDataHandler {
     }
 
     //Method to get a cast member from the database, based on ID. Throws NullPointerException, if the cast member doesn't exist
-    //TODO This method should implement new code as in the previous method
     public ICastMember getCastMemberFromID(String ID) throws NullPointerException{
-        ICastMember castMember = null;
+        return getCastMember(ID);
+    }
+
+    public List<ICastMember> getAllCastMembers(){
+        List<ICastMember> res = new ArrayList<>();
 
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM cast_members WHERE ID = ?");
-            ps.setString(1,ID);
-            ResultSet set = ps.executeQuery();
+            PreparedStatement castMembersPS = connection.prepareStatement("SELECT * from cast_members");
+            ResultSet castMembersRS = castMembersPS.executeQuery();
 
-            while(set.next()){
-                castMember = new CastMember(set.getString("ID"), set.getString("name"));
-                if(set.getString("name").equals("")){
-                    throw new NullPointerException();
-                }
+            while(castMembersRS.next()){
+                res.add(new CastMember(castMembersRS.getString("id"), castMembersRS.getString("name")));
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return castMember;
+        return res;
     }
 
 }

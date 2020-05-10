@@ -35,7 +35,6 @@ public class SearchController implements Initializable {
     public SearchSystem searchTextField;
 
     private ProgramSystem programSystem;
-    private ArrayList<String> programsList;
     private SpellChecker spellChecker;
     private CastMemberSystem castMemberSystem;
     private ProducerSystem producerSystem;
@@ -44,7 +43,7 @@ public class SearchController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         programSystem = new ProgramSystem();
 
-        programsList = new ArrayList<>(programSystem.getListOfProgramNames());
+        ArrayList<String> programsList = new ArrayList<>(programSystem.getListOfProgramNames());
         searchTextField.getEntries().addAll(programsList);
         setEvent(searchTextField);
       

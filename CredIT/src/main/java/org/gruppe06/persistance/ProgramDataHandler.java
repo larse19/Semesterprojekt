@@ -115,6 +115,28 @@ public class ProgramDataHandler {
         return res;
     }
 
+    public List<IProgramInfo> getAllProducerProgramInfo(String userName, String searchString){
+        List<IProgramInfo> res = new ArrayList<>();
+
+        try {
+            PreparedStatement programsPS = connection.prepareStatement("select * from programs inner join produces_program on programs.ID = produces_program.program_ID where producer_id = ? and programs.name ilike ?");
+            programsPS.setString(1, userName);
+            programsPS.setString(2, "%" + searchString + "%");
+
+            ResultSet programsRS = programsPS.executeQuery();
+
+            while(programsRS.next()){
+                res.add(new ProgramInfo(programsRS.getInt("id"), programsRS.getString("name"), programsRS.getString("release_year")));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return res;
+
+    }
+
     public List<IProgramInfo> getAllProgramInfo(String searchString) {
 
         List<IProgramInfo> res = new ArrayList<>();
@@ -250,15 +272,15 @@ public class ProgramDataHandler {
     }
 
     //Adds a cast member to the database
-    public boolean addCastMemberToProgram(int programID, String castMemberID, IRole role) {
+    public boolean addCastMemberToProgram(int programID, ICastMember castMember) {
         try {
             PreparedStatement ps = connection.prepareStatement("INSERT INTO worked_on (cast_member_ID, program_ID, role) VALUES (?,?,?)");
-            ps.setString(1, castMemberID);
+            ps.setString(1, castMember.getID());
             ps.setInt(2, programID);
-            if (role instanceof Actor) {
-                ps.setString(3, "{actor}" + ((Actor) role).getCharacterName());
-            } else {
-                ps.setString(3, role.getRole());
+            if(castMember.getRole() instanceof Actor){
+                ps.setString(3, "{actor}" + castMember.getRole().toString());
+            }else{
+                ps.setString(3, castMember.getRole().toString());
             }
             ps.execute();
             return true;
@@ -266,6 +288,55 @@ public class ProgramDataHandler {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public boolean updateCastMembersRoleOnProgram(int programID, ICastMember castMember, IRole newRole){
+        try {
+
+            PreparedStatement updateRolePS = connection.prepareStatement("update worked_on set role = ? where cast_member_id = ? and program_id = ? and role = ?");
+
+            if(newRole instanceof Actor){
+                updateRolePS.setString(1, "{actor}" + newRole.toString());
+            }else{
+                updateRolePS.setString(1, newRole.toString());
+            }
+
+            updateRolePS.setString(2, castMember.getID());
+            updateRolePS.setInt(3, programID);
+
+            if(castMember.getRole() instanceof Actor){
+                updateRolePS.setString(4, "{actor}"+castMember.getRole().toString());
+            }else{
+                updateRolePS.setString(4, castMember.getRole().toString());
+            }
+
+            updateRolePS.execute();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean removeCastMemberFromProgram(int programID, ICastMember castMember){
+        try {
+            PreparedStatement removeCastMemberPS = connection.prepareStatement("delete from worked_on where program_id = ? and cast_member_id = ? and role = ?");
+
+            removeCastMemberPS.setInt(1, programID);
+            removeCastMemberPS.setString(2, castMember.getID());
+
+            if(castMember.getRole() instanceof Actor){
+                removeCastMemberPS.setString(3, "{actor}" + castMember.getRole().toString());
+            }else {
+                removeCastMemberPS.setString(3, castMember.getRole().toString());
+            }
+
+            removeCastMemberPS.execute();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 }

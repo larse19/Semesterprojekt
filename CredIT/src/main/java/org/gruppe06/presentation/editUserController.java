@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import org.gruppe06.domain.CredIT;
 import org.gruppe06.domain.PasswordAuthentication;
 import org.gruppe06.domain.UserSystem;
 import org.gruppe06.interfaces.IPerson;
@@ -66,7 +67,12 @@ public class editUserController implements Initializable {
 
     @FXML
     void backButtonHandler(ActionEvent event) throws IOException {
-        App.setRoot("adminFrontPage");
+        if(CredIT.getCredITInstance().getUserRole() == 1) {
+            App.setRoot("adminFrontPage");
+        }
+        else{
+            App.setRoot("producerFrontPage");
+        }
     }
 
     @FXML

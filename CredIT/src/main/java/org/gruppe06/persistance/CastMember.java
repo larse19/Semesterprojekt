@@ -26,8 +26,13 @@ public class CastMember extends Cast implements ICastMember {
     }
 
     @Override
-    public IRole getRoles() {
+    public IRole getRole() {
         return roleOnProgram;
+    }
+
+    @Override
+    public void setRole(IRole role) {
+        this.roleOnProgram = role;
     }
 
     @Override
@@ -36,7 +41,7 @@ public class CastMember extends Cast implements ICastMember {
             return "Name: " + super.getName() + "\nCastMember ID: " + super.getID() + "\n\nPrograms: " + super.printProgramRoles();
         }catch (NullPointerException e){
             if(roleOnProgram != null){
-                return "Name: " + super.getName() + " Role: " + roleOnProgram.getRole();
+                return "Name: " + super.getName() + " Role: " + roleOnProgram.toString();
             }else{
                 return super.getName();
             }

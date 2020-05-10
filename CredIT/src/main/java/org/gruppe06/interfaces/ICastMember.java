@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 public interface ICastMember extends ICast {
 
-    IRole getRoles();
+    IRole getRole();
+
+    void setRole(IRole role);
 
 }

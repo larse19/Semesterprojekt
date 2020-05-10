@@ -1,8 +1,7 @@
 package org.gruppe06.domain;
 
-import org.gruppe06.interfaces.IProgram;
-import org.gruppe06.interfaces.IProgramInfo;
-import org.gruppe06.interfaces.IRole;
+import org.gruppe06.interfaces.*;
+import org.gruppe06.persistance.Actor;
 import org.gruppe06.persistance.ProgramDataHandler;
 import org.gruppe06.persistance.Role;
 
@@ -66,11 +65,16 @@ public class ProgramSystem {
         return programDataHandler.getAllProgramInfo(searchString);
     }
 
-    //Adds a cast member to a program
-    public boolean addCastMemberToProgram(IProgramInfo programInfo, String castName, String role){
-        IRole Irole = new Role(role);
-        return programDataHandler.addCastMemberToProgram(programInfo.getID(),castName,Irole);
+    public List<IProgramInfo> getAllProducersProgramInfo(String userName, String searchString){
+        return programDataHandler.getAllProducerProgramInfo(userName, searchString);
     }
+
+    //Adds a cast member to a program
+    public boolean addCastMemberToProgram(IProgramInfo programInfo, ICastMember castMember){
+        return programDataHandler.addCastMemberToProgram(programInfo.getID(), castMember);
+    }
+
+
 
     //Returns an IProgram, based on the programs name. Throws NullPointerException, if the program doesn't exist
     public IProgram getProgram(String programName) throws NullPointerException {
@@ -81,5 +85,13 @@ public class ProgramSystem {
             throw new NullPointerException();
         }
         return program;
+    }
+
+    public boolean updateCastMembersRoleOnProgram(int programID, ICastMember castMember, IRole newRole){
+        return programDataHandler.updateCastMembersRoleOnProgram(programID, castMember, newRole);
+    }
+
+    public boolean removeCastMemberFromProgram(int programID, ICastMember castMember){
+        return programDataHandler.removeCastMemberFromProgram(programID, castMember);
     }
 }

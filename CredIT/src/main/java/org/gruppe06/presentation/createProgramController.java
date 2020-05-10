@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import org.gruppe06.domain.CredIT;
 import org.gruppe06.domain.ProgramSystem;
 
 import java.io.IOException;
@@ -52,6 +53,9 @@ public class createProgramController  implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         programSystem = new ProgramSystem();
+        if(CredIT.getCredITInstance().getUserRole() == 2){
+            producerID.setText(CredIT.getCredITInstance().getUsername());
+        }
     }
 
     @FXML
@@ -65,10 +69,14 @@ public class createProgramController  implements Initializable {
         //App.setRoot("addCastMembers");
     }
 
-
     @FXML
     void returnHandler(ActionEvent event) throws IOException {
-        App.setRoot("adminFrontPage");
+        if(CredIT.getCredITInstance().getUserRole() == 1) {
+            App.setRoot("adminFrontPage");
+        }
+        else{
+            App.setRoot("producerFrontPage");
+        }
     }
 
 }
