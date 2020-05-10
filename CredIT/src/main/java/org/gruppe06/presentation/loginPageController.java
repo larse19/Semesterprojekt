@@ -9,6 +9,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import org.gruppe06.domain.CredIT;
 import org.gruppe06.domain.LoginSystem;
 import org.gruppe06.domain.PasswordAuthentication;
 
@@ -49,8 +50,10 @@ public class loginPageController implements Initializable {
         int loginResult = loginSystem.login(username.getText(), password.getText());
 
         if (loginResult == 1) {
+            CredIT.getCredITInstance().setUserRole(1);
             App.setRoot("adminFrontPage");
         }else if(loginResult == 2){
+            CredIT.getCredITInstance().setUserRole(2);
             App.setRoot("producerFrontPage");
         }else if(loginResult == 0){
             wrongCredentialsLabel.setText("Wrong username or password");

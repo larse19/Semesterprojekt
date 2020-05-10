@@ -11,12 +11,12 @@ public class Actor extends Role implements IActor {
         this.characterName = characterName;
     }
 
-    public String getCharacterName() {
-        return characterName;
+    public void setCharacterName(String characterName) {
+        this.characterName = characterName;
     }
 
     @Override
-    public String getRole(){
+    public String toString(){
         return characterName;
     }
 }

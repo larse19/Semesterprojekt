@@ -63,7 +63,7 @@ public class adminFrontPageController implements Initializable {
 
     @FXML
     void editProgramButtonHandler(ActionEvent event) throws IOException{
-        App.setRoot("editProgramAdmin");
+        App.setRoot("editProgram");
     }
 
     @FXML

@@ -19,4 +19,9 @@ public class Role implements IRole {
     public void setRole(String role) {
         this.role = role;
     }
+
+    @Override
+    public String toString(){
+        return role;
+    }
 }

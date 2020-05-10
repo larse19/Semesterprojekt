@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import org.gruppe06.domain.CredIT;
 import org.gruppe06.interfaces.IProgramInfo;
 import org.gruppe06.domain.ProgramSystem;
 
@@ -32,7 +33,11 @@ public class ProgramsListViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         programSystem = new ProgramSystem();
         programsObservableList = FXCollections.observableArrayList();
-        programsObservableList.setAll(programSystem.getAllProgramsInfo(""));
+        if(CredIT.getCredITInstance().getUserRole() == 1) {
+            programsObservableList.setAll(programSystem.getAllProgramsInfo(""));
+        }else{
+            programsObservableList.setAll(programSystem.getAllProducersProgramInfo(CredIT.getCredITInstance().getUsername(), ""));
+        }
         listOfPrograms.setItems(programsObservableList);
     }
 
@@ -41,7 +46,11 @@ public class ProgramsListViewController implements Initializable {
     }
 
     public void refreshListView(){
-        programsObservableList.setAll(programSystem.getAllProgramsInfo(searchBar.getText()));
+        if(CredIT.getCredITInstance().getUserRole() == 1) {
+            programsObservableList.setAll(programSystem.getAllProgramsInfo(searchBar.getText()));
+        }else{
+            programsObservableList.setAll(programSystem.getAllProducersProgramInfo(CredIT.getCredITInstance().getUsername(), searchBar.getText()));
+        }
     }
 
     @FXML

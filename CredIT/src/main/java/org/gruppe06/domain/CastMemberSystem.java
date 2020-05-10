@@ -1,9 +1,14 @@
 package org.gruppe06.domain;
 
 import jdk.jshell.spi.ExecutionControl;
+import org.gruppe06.interfaces.IActor;
 import org.gruppe06.interfaces.ICastMember;
 import org.gruppe06.interfaces.IRole;
+import org.gruppe06.persistance.Actor;
 import org.gruppe06.persistance.CastMemberDataHandler;
+import org.gruppe06.persistance.Role;
+
+import java.util.List;
 
 public class CastMemberSystem {
 
@@ -11,6 +16,14 @@ public class CastMemberSystem {
 
     public CastMemberSystem(){
         castMemberDataHandler = new CastMemberDataHandler();
+    }
+
+    public IActor createActor(String characterName){
+        return new Actor(characterName);
+    }
+
+    public IRole createRole(String role){
+        return new Role(role);
     }
 
     //Checks if a cast member exists in the database
@@ -57,5 +70,9 @@ public class CastMemberSystem {
         }else{
             throw new NullPointerException();
         }
+    }
+
+    public List<ICastMember> getAllCastMembers(){
+        return castMemberDataHandler.getAllCastMembers();
     }
 }

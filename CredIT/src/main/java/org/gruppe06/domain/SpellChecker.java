@@ -12,7 +12,7 @@ public class SpellChecker {
 
     private final String ABC = "abcdefghijklmnopqrstuvwxyzæøå1234567890";
     private Map<String, Integer> dictionary = new HashMap<>();
-    private String DICTIONARY_VALUES = programSystem.getListOfProgramNames().toString().replaceAll("\\s+","")
+    private String DICTIONARY_VALUES = programSystem.getListOfProgramNames().toString().replaceAll("\\s+",",")
             .replaceAll("\\[","").replaceAll("]", "");
 
     public SpellChecker(){

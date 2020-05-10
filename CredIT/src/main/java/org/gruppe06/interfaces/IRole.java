@@ -6,4 +6,7 @@ public interface IRole {
 
      void setRole(String role);
 
+     @Override
+     String toString();
+
 }

@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.gruppe06.domain.CastMemberSystem;
+import org.gruppe06.domain.CredIT;
 
 import java.io.IOException;
 import java.net.URL;
@@ -59,7 +60,12 @@ public class CreateCastMemberController implements Initializable {
 
     @FXML
     void backButtonHandler(ActionEvent event) throws IOException {
-        App.setRoot("adminFrontPage");
+        if(CredIT.getCredITInstance().getUserRole() == 1) {
+            App.setRoot("adminFrontPage");
+        }
+        else{
+            App.setRoot("producerFrontPage");
+        }
     }
 
     @FXML
