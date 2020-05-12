@@ -41,7 +41,7 @@ public class CastMember extends Cast implements ICastMember {
             return "Name: " + super.getName() + "\nCastMember ID: " + super.getID() + "\n\nPrograms: " + super.printProgramRoles();
         }catch (NullPointerException e){
             if(roleOnProgram != null){
-                return "Name: " + super.getName() + " Role: " + roleOnProgram.toString();
+                return "Name: " + super.getName() + "   Role: " + roleOnProgram.toString();
             }else{
                 return super.getName();
             }

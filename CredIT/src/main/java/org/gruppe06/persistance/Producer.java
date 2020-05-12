@@ -34,7 +34,7 @@ public class Producer extends Cast implements IProducer {
             return "Name: " + super.getName() + "\nProducer ID: " + super.getID() + "\n\nPrograms: " + super.printProgramRoles();
         }catch (NullPointerException e){
             if(producerRole != null){
-                return "Name: " + super.getName() + " Role: " + producerRole;
+                return "Name: " + super.getName() + "   Role: " + producerRole;
             }else{
                 return super.getName();
             }

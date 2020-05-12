@@ -1,6 +1,8 @@
 package org.gruppe06.persistance;
 
-public class ProgramRole {
+import org.gruppe06.interfaces.IProgramRole;
+
+public class ProgramRole implements IProgramRole {
     private ProgramInfo programInfo;
     private Role role;
 
@@ -27,6 +29,6 @@ public class ProgramRole {
 
     @Override
     public String toString() {
-        return "Program: " + programInfo.getName() + " Role: " + role.getRole();
+        return "Program: " + programInfo.getName() + "   Role: " + role.getRole();
     }
 }
