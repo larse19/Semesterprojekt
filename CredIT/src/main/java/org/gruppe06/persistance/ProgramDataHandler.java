@@ -272,11 +272,11 @@ public class ProgramDataHandler {
     }
 
     //Adds a cast member to the database
-    public boolean addCastMemberToProgram(int programID, ICastMember castMember) {
+    public boolean addCastMemberToProgram(IProgramInfo programInfo, ICastMember castMember) {
         try {
             PreparedStatement ps = connection.prepareStatement("INSERT INTO worked_on (cast_member_ID, program_ID, role) VALUES (?,?,?)");
             ps.setString(1, castMember.getID());
-            ps.setInt(2, programID);
+            ps.setInt(2, programInfo.getID());
             if(castMember.getRole() instanceof Actor){
                 ps.setString(3, "{actor}" + castMember.getRole().toString());
             }else{
@@ -290,7 +290,7 @@ public class ProgramDataHandler {
         }
     }
 
-    public boolean updateCastMembersRoleOnProgram(int programID, ICastMember castMember, IRole newRole){
+    public boolean updateCastMembersRoleOnProgram(IProgramInfo programInfo, ICastMember castMember, IRole newRole){
         try {
 
             PreparedStatement updateRolePS = connection.prepareStatement("update worked_on set role = ? where cast_member_id = ? and program_id = ? and role = ?");
@@ -302,7 +302,7 @@ public class ProgramDataHandler {
             }
 
             updateRolePS.setString(2, castMember.getID());
-            updateRolePS.setInt(3, programID);
+            updateRolePS.setInt(3, programInfo.getID());
 
             if(castMember.getRole() instanceof Actor){
                 updateRolePS.setString(4, "{actor}"+castMember.getRole().toString());
@@ -318,11 +318,11 @@ public class ProgramDataHandler {
         return false;
     }
 
-    public boolean removeCastMemberFromProgram(int programID, ICastMember castMember){
+    public boolean removeCastMemberFromProgram(IProgramInfo programInfo, ICastMember castMember){
         try {
             PreparedStatement removeCastMemberPS = connection.prepareStatement("delete from worked_on where program_id = ? and cast_member_id = ? and role = ?");
 
-            removeCastMemberPS.setInt(1, programID);
+            removeCastMemberPS.setInt(1, programInfo.getID());
             removeCastMemberPS.setString(2, castMember.getID());
 
             if(castMember.getRole() instanceof Actor){
@@ -332,6 +332,49 @@ public class ProgramDataHandler {
             }
 
             removeCastMemberPS.execute();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean addProducerToProgram(IProgramInfo programInfo, IProducer producer){
+        try {
+            PreparedStatement addProducerPS = connection.prepareStatement("INSERT INTO produces_program (producer_id, program_id,role) values (?, ?,?)");
+            addProducerPS.setString(1,producer.getID());
+            addProducerPS.setInt(2, programInfo.getID());
+            addProducerPS.setString(3, producer.getRole());
+            addProducerPS.execute();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateProducersRoleOnProgram(IProgramInfo programInfo, IProducer producer, String newRole){
+        try {
+            PreparedStatement updateProducerRolePS = connection.prepareStatement("update produces_program set role = ? where program_id = ? and producer_id = ? and role = ?");
+            updateProducerRolePS.setString(1, newRole);
+            updateProducerRolePS.setInt(2, programInfo.getID());
+            updateProducerRolePS.setString(3, producer.getID());
+            updateProducerRolePS.setString(4, producer.getRole());
+            updateProducerRolePS.execute();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean removeProducerFromProgram(IProgramInfo programInfo, IProducer producer){
+        try {
+            PreparedStatement removeProducerPS = connection.prepareStatement("delete from produces_program where program_id = ? and producer_id = ? and role = ?");
+            removeProducerPS.setInt(1, programInfo.getID());
+            removeProducerPS.setString(2, producer.getID());
+            removeProducerPS.setString(3, producer.getRole());
+            removeProducerPS.execute();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();

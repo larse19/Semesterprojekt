@@ -111,7 +111,6 @@ public class SearchController implements Initializable {
                 addProgramRoles(programRole);
             }
         }
-
     }
 
     private Label getProducersLabel(IProducer producer) {
@@ -154,7 +153,12 @@ public class SearchController implements Initializable {
                         producerSearchResult(producer);
                     } catch (NullPointerException e3) {
                         try {
-                            resultVBox.getChildren().add(new Label("Mente du: " + spellChecker.correct(searchTextField.getText().replaceAll("\\s+", ""))));
+                            Label didYouMeanLabel = new Label ("Mente du: " + spellChecker.correct(searchTextField.getText().replaceAll("\\s+", "")));
+                            didYouMeanLabel.setOnMouseClicked(mouseEvent -> {
+                                searchTextField.setText(spellChecker.correct(searchTextField.getText().replaceAll("\\s+", "")));
+                                searchButton.fire();
+                            });
+                            resultVBox.getChildren().add(didYouMeanLabel);
                         } catch (NullPointerException e4) {
                             resultVBox.getChildren().add(new Label("No search result"));
                         }

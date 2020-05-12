@@ -3,6 +3,8 @@ package org.gruppe06.presentation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -12,12 +14,12 @@ import org.gruppe06.domain.CredIT;
 import org.gruppe06.domain.ProgramSystem;
 import org.gruppe06.interfaces.ICast;
 import org.gruppe06.interfaces.ICastMember;
+import org.gruppe06.interfaces.IProducer;
 import org.gruppe06.interfaces.IRole;
-import org.gruppe06.persistance.CastMember;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -33,20 +35,25 @@ public class editProgramController implements Initializable {
     public TextField updateReleaseYear;
     @FXML
     public Label releaseYearLabel;
+
     @FXML
     private Parent programsListView;
-
     @FXML
     private ProgramsListViewController programsListViewController;
 
     @FXML
+    private Parent addCastMember;
+    @FXML
+    private addCastMembersController addCastMemberController;
+
+    @FXML
     private Button editCastButton, updateCastButton, deleteCastButton;
     @FXML
-    private ListView<ICastMember> editCastListView;
+    private ListView<ICast> editCastListView;
     @FXML
     private Label editCastLabel, roleLabel;
     @FXML
-    private RadioButton actorRadioButton;
+    private CheckBox actorCheckBox;
 
     private ProgramSystem programSystem;
     private CastMemberSystem castMemberSystem;
@@ -57,9 +64,26 @@ public class editProgramController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         programSystem = new ProgramSystem();
         castMemberSystem = new CastMemberSystem();
+        addCastMemberController.setEditProgramController(this);
+        addCastMemberController.setProgramsListViewController(programsListViewController);
 
+        editCastListView.setOnMouseClicked((EventHandler<Event>) arg0 -> {
+            if(editCastListView.getSelectionModel().getSelectedItem() instanceof IProducer){
+                actorCheckBox.setSelected(false);
+                actorCheckBox.setVisible(false);
+            }
+            else{
+                actorCheckBox.setVisible(true);
+            }
+        });
+
+        addCastMember.setVisible(false);
         setUpdateProgramVisible(false);
         setEditCastVisible(false);
+    }
+
+    public ProgramsListViewController getProgramsListViewController() {
+        return programsListViewController;
     }
 
     private void setUpdateProgramVisible(boolean state){
@@ -77,12 +101,22 @@ public class editProgramController implements Initializable {
         editCastLabel.setVisible(state);
         roleLabel.setVisible(state);
         editRoleField.setVisible(state);
-        actorRadioButton.setVisible(state);
+        actorCheckBox.setVisible(state);
     }
 
     @FXML
-    void addMemberButtonHandler(ActionEvent event) throws IOException {
-        App.setRoot("addCastMembers");
+    void toggleActorCheckBox(MouseEvent event)  {
+        if(editCastListView.getSelectionModel().getSelectedItem() instanceof IProducer){
+            actorCheckBox.disarm();
+        }
+    }
+
+    @FXML
+    void addMemberButtonHandler(ActionEvent event)  {
+        addCastMember.setVisible(true);
+        setUpdateProgramVisible(false);
+        setEditCastVisible(false);
+
     }
 
     @FXML
@@ -108,6 +142,7 @@ public class editProgramController implements Initializable {
                 programSystem.deleteProgram(programsListViewController.getSelectedProgramInfo());
                 System.out.println(programsListViewController.getSelectedProgramInfo().getName() + " deleted");
                 programsListViewController.refreshListView();
+
             }
         }
         catch (NullPointerException ex) {
@@ -119,6 +154,7 @@ public class editProgramController implements Initializable {
     void updateButtonHandler(ActionEvent event) {
         setEditCastVisible(false);
         setUpdateProgramVisible(true);
+        addCastMember.setVisible(false);
 
         this.oldName = programsListViewController.getSelectedProgramInfo().getName();
         updateProgramName.setText(programsListViewController.getSelectedProgramInfo().getName());
@@ -137,8 +173,9 @@ public class editProgramController implements Initializable {
 
     private void refreshEditListView(){
         String programName = programsListViewController.getSelectedProgramInfo().getName();
-        ObservableList<ICastMember> programCast = FXCollections.observableArrayList();
+        ObservableList<ICast> programCast = FXCollections.observableArrayList();
         programCast.setAll(programSystem.getProgram(programName).getCast());
+        programCast.addAll(programSystem.getProgram(programName).getProducers());
         editCastListView.setItems(programCast);
     }
 
@@ -146,6 +183,7 @@ public class editProgramController implements Initializable {
     void editCastButtonHandler(ActionEvent event) {
         setEditCastVisible(true);
         setUpdateProgramVisible(false);
+        addCastMember.setVisible(false);
 
         refreshEditListView();
     }
@@ -153,19 +191,30 @@ public class editProgramController implements Initializable {
     @FXML
     void updateCastHandler(ActionEvent event) {
         try{
-            ICastMember castMember = editCastListView.getSelectionModel().getSelectedItem();
-            IRole irole;
-            if(actorRadioButton.isSelected()){
-                irole = castMemberSystem.createActor(editRoleField.getText());
+            ICast cast = editCastListView.getSelectionModel().getSelectedItem();
+            if(cast instanceof ICastMember) {
+                ICastMember castMember = (ICastMember) cast;
+                IRole irole;
+                if(actorCheckBox.isSelected()){
+                    irole = castMemberSystem.createActor(editRoleField.getText());
+                }else{
+                    irole = castMemberSystem.createRole(editRoleField.getText());
+                }
+                if (programSystem.updateCastMembersRoleOnProgram(programsListViewController.getSelectedProgramInfo(), castMember, irole)) {
+                    System.out.println("Cast member updated");
+                    refreshEditListView();
+                } else {
+                    System.out.println("Cast member not updated");
+                }
             }else{
-                irole = castMemberSystem.createRole(editRoleField.getText());
-            }
-
-            if(programSystem.updateCastMembersRoleOnProgram(programsListViewController.getSelectedProgramInfo().getID(), editCastListView.getSelectionModel().getSelectedItem(), irole)){
-                System.out.println("Cast member updated");
-                refreshEditListView();
-            }else{
-                System.out.println("Cast member not updated");
+                IProducer producer = (IProducer) cast;
+                if(programSystem.updateProducersRoleOnProgram(programsListViewController.getSelectedProgramInfo(), producer, editRoleField.getText())){
+                    System.out.println(producer.getRole());
+                    refreshEditListView();
+                    System.out.println("Producer updated");
+                }else{
+                    System.out.println("Producer couldn't be updated");
+                }
             }
 
         }catch (NullPointerException e){
@@ -175,19 +224,33 @@ public class editProgramController implements Initializable {
 
     @FXML
     void deleteCastHandler(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Slet medvirkende");
-        alert.setHeaderText("Du er ved at fjerne " + editCastListView.getSelectionModel().getSelectedItem().getName() + " fra " + programsListViewController.getSelectedProgramInfo().getName());
-        alert.setContentText("Personen vil ikke længere stå som medvirkende på programmet!");
+        try {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Slet medvirkende");
+            alert.setHeaderText("Du er ved at fjerne " + editCastListView.getSelectionModel().getSelectedItem().getName() + " fra " + programsListViewController.getSelectedProgramInfo().getName());
+            alert.setContentText("Personen vil ikke længere stå som medvirkende på programmet!");
 
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-            if (programSystem.removeCastMemberFromProgram(programsListViewController.getSelectedProgramInfo().getID(), editCastListView.getSelectionModel().getSelectedItem())) {
-                System.out.println("Cast member removed");
-                refreshEditListView();
-            } else {
-                System.out.println("Cast member not removed");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                if (editCastListView.getSelectionModel().getSelectedItem() instanceof ICastMember) {
+                    if (programSystem.removeCastMemberFromProgram(programsListViewController.getSelectedProgramInfo(), (ICastMember) editCastListView.getSelectionModel().getSelectedItem())) {
+                        System.out.println("Cast member removed");
+                        refreshEditListView();
+                    } else {
+                        System.out.println("Cast member not removed");
+                    }
+                }
+                else{
+                    if(programSystem.removeProducerFromProgram(programsListViewController.getSelectedProgramInfo(), (IProducer) editCastListView.getSelectionModel().getSelectedItem())){
+                        System.out.println("Producer removed");
+                        refreshEditListView();
+                    }else{
+                        System.out.println("Producer couldn't be removed");
+                    }
+                }
             }
+        }catch (NullPointerException e){
+            System.out.println("No cast member chosen");
         }
     }
 }

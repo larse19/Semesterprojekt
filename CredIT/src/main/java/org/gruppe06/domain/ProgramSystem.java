@@ -71,10 +71,8 @@ public class ProgramSystem {
 
     //Adds a cast member to a program
     public boolean addCastMemberToProgram(IProgramInfo programInfo, ICastMember castMember){
-        return programDataHandler.addCastMemberToProgram(programInfo.getID(), castMember);
+        return programDataHandler.addCastMemberToProgram(programInfo, castMember);
     }
-
-
 
     //Returns an IProgram, based on the programs name. Throws NullPointerException, if the program doesn't exist
     public IProgram getProgram(String programName) throws NullPointerException {
@@ -87,11 +85,23 @@ public class ProgramSystem {
         return program;
     }
 
-    public boolean updateCastMembersRoleOnProgram(int programID, ICastMember castMember, IRole newRole){
-        return programDataHandler.updateCastMembersRoleOnProgram(programID, castMember, newRole);
+    public boolean updateCastMembersRoleOnProgram(IProgramInfo programInfo, ICastMember castMember, IRole newRole){
+        return programDataHandler.updateCastMembersRoleOnProgram(programInfo, castMember, newRole);
     }
 
-    public boolean removeCastMemberFromProgram(int programID, ICastMember castMember){
-        return programDataHandler.removeCastMemberFromProgram(programID, castMember);
+    public boolean removeCastMemberFromProgram(IProgramInfo programInfo, ICastMember castMember){
+        return programDataHandler.removeCastMemberFromProgram(programInfo, castMember);
+    }
+
+    public boolean addProducerToProgram(IProgramInfo programInfo, IProducer producer){
+        return programDataHandler.addProducerToProgram(programInfo, producer);
+    }
+
+    public boolean updateProducersRoleOnProgram(IProgramInfo programInfo, IProducer producer, String newRole){
+        return programDataHandler.updateProducersRoleOnProgram(programInfo, producer, newRole);
+    }
+
+    public boolean removeProducerFromProgram(IProgramInfo programInfo, IProducer producer){
+        return programDataHandler.removeProducerFromProgram(programInfo, producer);
     }
 }
