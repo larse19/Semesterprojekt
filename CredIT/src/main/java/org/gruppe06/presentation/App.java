@@ -4,8 +4,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 /**
@@ -20,6 +20,8 @@ public class App extends Application {
         scene = new Scene(loadFXML("frontPage"));
         stage.setScene(scene);
         scene.getStylesheets().add(this.getClass().getResource("/stylesheets/StyleTest.css").toExternalForm());
+        stage.setTitle("CredIT");
+        stage.getIcons().add(new Image(App.class.getResourceAsStream("/IconsTV2CredIT/TV2_.png")));
         stage.show();
     }
 

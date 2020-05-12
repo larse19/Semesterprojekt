@@ -9,13 +9,23 @@ import java.util.stream.Stream;
 
 public class SpellChecker {
     private ProgramSystem programSystem = new ProgramSystem();
+    private CastMemberSystem castMemberSystem = new CastMemberSystem();
+    private ProducerSystem producerSystem = new ProducerSystem();
 
     private final String ABC = "abcdefghijklmnopqrstuvwxyzæøå1234567890";
     private Map<String, Integer> dictionary = new HashMap<>();
-    private String DICTIONARY_VALUES = programSystem.getListOfProgramNames().toString().replaceAll("\\s+",",")
-            .replaceAll("\\[","").replaceAll("]", "");
+    private String DICTIONARY_VALUES;
+
 
     public SpellChecker(){
+        DICTIONARY_VALUES = programSystem.getListOfProgramNames().toString().replaceAll("\\s+",",")
+                .replaceAll("\\[","").replaceAll("]", "");
+        DICTIONARY_VALUES += castMemberSystem.getListOfCastMembers().toString().replaceAll("\\s+",",")
+               .replaceAll("\\[","").replaceAll("]", "");
+        DICTIONARY_VALUES += producerSystem.getListOfProducers().toString().replaceAll("\\s+",",")
+                .replaceAll("\\[","").replaceAll("]", "");
+
+        System.out.println(DICTIONARY_VALUES);
     }
 
     public Map<String, Integer> getDictionary() {

@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProducerDataHandler {
 
@@ -42,6 +43,7 @@ public class ProducerDataHandler {
             return false;
         }
     }
+
     //Method to get a producer from the database, based on name. Throws NullPointerException, if the producer doesn't exist
     public IProducer getProducer(String producerName) throws NullPointerException{
         IProducer producer = new Producer();
@@ -80,6 +82,26 @@ public class ProducerDataHandler {
         }
         return producer;
 
+    }
+
+    //Method to get a list at producer names
+    public List<String> getAllProducerNames(){
+        List<String> producerNames = new ArrayList<>();
+
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT name from producers");
+
+            ResultSet set = ps.executeQuery();
+
+            while (set.next()) {
+                producerNames.add(set.getString("name"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return producerNames;
     }
 
 }

@@ -42,14 +42,14 @@ public class SearchController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         programSystem = new ProgramSystem();
-
-        ArrayList<String> programsList = new ArrayList<>(programSystem.getListOfProgramNames());
-        searchTextField.getEntries().addAll(programsList);
-        setEvent(searchTextField);
-      
         castMemberSystem = new CastMemberSystem();
-
         producerSystem = new ProducerSystem();
+
+        ArrayList<String> databaseList = new ArrayList<>(programSystem.getListOfProgramNames());
+        databaseList.addAll(castMemberSystem.getListOfCastMembers());
+        databaseList.addAll(producerSystem.getListOfProducers());
+        searchTextField.getEntries().addAll(databaseList);
+        setEvent(searchTextField);
 
         spellChecker = new SpellChecker();
 
