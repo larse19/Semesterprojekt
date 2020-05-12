@@ -75,4 +75,8 @@ public class CastMemberSystem {
     public List<ICastMember> getAllCastMembers(){
         return castMemberDataHandler.getAllCastMembers();
     }
+
+    public List<String> getListOfCastMembers(){
+        return castMemberDataHandler.getAllCastMemberNames();
+    }
 }

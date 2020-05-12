@@ -112,4 +112,24 @@ public class CastMemberDataHandler {
         return res;
     }
 
+    //Method to get all castmember names
+    public List<String> getAllCastMemberNames(){
+        List<String> castNames = new ArrayList<>();
+
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT name from cast_members");
+
+            ResultSet set = ps.executeQuery();
+
+            while (set.next()) {
+                castNames.add(set.getString("name"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return castNames;
+    }
+
 }
