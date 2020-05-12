@@ -85,20 +85,30 @@ public class ProducerDataHandler {
     }
 
     //Method to get a list at producer names
-    public List<String> getAllProducerNames(){
-        List<String> producerNames = new ArrayList<>();
+    public List<IProducer> getAllProducers(){
+        List<IProducer> producerNames = new ArrayList<>();
 
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT name from producers");
+            PreparedStatement ps = connection.prepareStatement("SELECT * from producers");
 
             ResultSet set = ps.executeQuery();
 
             while (set.next()) {
-                producerNames.add(set.getString("name"));
+                producerNames.add(new Producer(set.getString("id"), set.getString("name")));
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+
+        return producerNames;
+    }
+
+    public List<String> getAllProducerNames(){
+        List<String> producerNames = new ArrayList<>();
+
+        for(IProducer producer : getAllProducers()){
+            producerNames.add(producer.getName());
         }
 
         return producerNames;

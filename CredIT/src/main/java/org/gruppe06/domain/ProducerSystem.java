@@ -26,4 +26,8 @@ public class ProducerSystem {
     public List<String> getListOfProducers(){
         return producerDataHandler.getAllProducerNames();
     }
+
+    public List<IProducer> getAllProducers(){
+        return producerDataHandler.getAllProducers();
+    }
 }
