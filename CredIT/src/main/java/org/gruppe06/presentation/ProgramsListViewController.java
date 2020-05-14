@@ -55,6 +55,10 @@ public class ProgramsListViewController implements Initializable {
 
     @FXML
     void SearchProgram(ActionEvent event) {
-        programsObservableList.setAll(programSystem.getAllProgramsInfo(searchBar.getText()));
+        if(CredIT.getCredITInstance().getUserRole() == 1) {
+            programsObservableList.setAll(programSystem.getAllProgramsInfo(searchBar.getText()));
+        }else{
+            programsObservableList.setAll(programSystem.getAllProducersProgramInfo(CredIT.getCredITInstance().getUsername(), searchBar.getText()));
+        }
     }
 }
