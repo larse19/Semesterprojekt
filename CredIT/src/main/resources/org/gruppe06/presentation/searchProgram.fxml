@@ -6,9 +6,9 @@
 <?import org.gruppe06.domain.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="457.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gruppe06.presentation.SearchController">
-   <SearchSystem fx:id="searchTextField" layoutX="75.0" layoutY="1.0" prefHeight="27.0" prefWidth="384.0" stylesheets="@../../../stylesheets/StyleTest.css" />
+   <SearchSystem fx:id="searchTextField" focusTraversable="false" layoutX="75.0" layoutY="1.0" prefHeight="27.0" prefWidth="381.0" promptText="Castmember, producer or program" stylesheets="@../../../stylesheets/StyleTest.css" />
    <Button fx:id="searchButton" layoutY="1.0" mnemonicParsing="false" onAction="#searchHandler" prefHeight="27.0" prefWidth="75.0" text="Search" />
-   <Circle fill="#ffffff80" layoutX="85.0" layoutY="14.0" radius="6.0" stroke="#00000080" strokeType="INSIDE" strokeWidth="2.0" />
+   <Circle fx:id="circleIcon" fill="#ffffff80" layoutX="443.0" layoutY="12.0" radius="6.0" stroke="#00000080" strokeType="INSIDE" strokeWidth="2.0" />
+   <Rectangle fx:id="rectangleIcon" arcHeight="5.0" arcWidth="5.0" fill="#00000080" height="9.0" layoutX="448.0" layoutY="14.0" rotate="-45.0" stroke="TRANSPARENT" strokeType="INSIDE" width="2.0" />
    <VBox fx:id="resultVBox" layoutY="28.0" prefHeight="378.0" prefWidth="457.0" />
-   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00000080" height="9.0" layoutX="90.0" layoutY="16.0" rotate="-45.0" stroke="TRANSPARENT" strokeType="INSIDE" width="2.0" />
 </AnchorPane>
