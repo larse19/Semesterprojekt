@@ -18,6 +18,11 @@
      -fx-text-fill: default-primary-color;
 }
 
+.button:hover {
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
 #loginButton{
     -fx-font-size: 14px;
     -fx-background-radius: 20;
@@ -30,11 +35,19 @@
 .label{
     -fx-font-family: Arial;
     -fx-text-fill: default-black-color;
+    -fx-font-size: 18px;
 }
 
 #loginHeader{
     -fx-font-family: Arial;
     -fx-text-fill: default-black-color;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+#credITLabel{
+    -fx-font-family: Arial;
+    -fx-text-fill: tv2-brand-color;
     -fx-font-size: 28px;
     -fx-font-weight: bold;
 }

@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 import java.io.IOException;
 
@@ -17,6 +18,9 @@ public class frontPageController {
 
     @FXML
     private Button loginButton;
+
+    @FXML
+    private Label credITLabel;
 
     @FXML
     public void loginHandler(ActionEvent actionEvent) throws IOException {

@@ -1,15 +1,20 @@
 package org.gruppe06.presentation;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import org.gruppe06.domain.CastMemberSystem;
 import org.gruppe06.domain.ProducerSystem;
@@ -20,11 +25,9 @@ import org.gruppe06.interfaces.ICastMember;
 import org.gruppe06.interfaces.IProducer;
 import org.gruppe06.interfaces.IProgram;
 import org.gruppe06.interfaces.IProgramRole;
-import org.gruppe06.persistance.ProducerDataHandler;
-import org.gruppe06.persistance.ProgramRole;
+import org.gruppe06.persistance.CastMember;
 
 import java.net.URL;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.stream.Stream;
@@ -38,6 +41,15 @@ public class SearchController implements Initializable {
 
     @FXML
     public SearchSystem searchTextField;
+
+
+    //The two shapes makes the search glass
+    @FXML
+    public Rectangle rectangleIcon;
+
+    @FXML
+    public Circle circleIcon;
+
 
     private ProgramSystem programSystem;
     private SpellChecker spellChecker;
@@ -62,14 +74,25 @@ public class SearchController implements Initializable {
             spellChecker.getDictionary().compute(word, (k, v) -> v == null ? 1 : v + 1);
         });
 
+        changeIcon();
+
     }
 
     private Label programInformationLabel(IProgram program) {
         Label programLabel = new Label();
-        programLabel.setText("Title:\n" + program.getName() + "\n\n" + "Release Year:\n" + program.getYear());
+        programLabel.setText("\n" + "Title:\n" + program.getName() + "\n\n" + "Release Year:\n" + program.getYear());
         programLabel.setOnMouseClicked(mouseEvent -> {
             searchTextField.setText(program.getName());
             searchButton.fire();
+        });
+        programLabel.hoverProperty().addListener((observable, oldValue, newValue) -> {
+            if (programLabel.isHover())
+            {
+                programLabel.setStyle("-fx-underline: true; " + "-fx-font-weight: normal;" + "-fx-cursor: hand;");
+            }
+            else if (!programLabel.isHover()){
+                programLabel.setStyle("-fx-underline: false;" + "-fx-font-weight: normal;");
+            }
         });
         return programLabel;
     }
@@ -81,6 +104,16 @@ public class SearchController implements Initializable {
             searchTextField.setText(castMember.getName());
             searchButton.fire();
         });
+        castMemberLabel.hoverProperty().addListener((observable, oldValue, newValue) -> {
+            if (castMemberLabel.isHover())
+            {
+                castMemberLabel.setStyle("-fx-underline: true; " + "-fx-font-weight: normal;" + "-fx-cursor: hand;");
+            }
+            else if (!castMemberLabel.isHover()){
+                castMemberLabel.setStyle("-fx-underline: false;" + "-fx-font-weight: normal;");
+            }
+        });
+
         return castMemberLabel;
     }
 
@@ -90,11 +123,20 @@ public class SearchController implements Initializable {
             searchTextField.setText(programRole.getProgramInfo().getName());
             searchButton.fire();
         });
+        label.hoverProperty().addListener((observable, oldValue, newValue) -> {
+            if (label.isHover())
+            {
+                label.setStyle("-fx-underline: true; " + "-fx-font-weight: normal;" + "-fx-cursor: hand;");
+            }
+            else if (!label.isHover()){
+                label.setStyle("-fx-underline: false;" + "-fx-font-weight: normal;");
+            }
+        });
         resultVBox.getChildren().add(label);
     }
 
     private void producerSearchResult(IProducer producer) {
-        resultVBox.getChildren().add(new Label(producer.getName()));
+        resultVBox.getChildren().add(new Label("\n" + producer.getName()));
         resultVBox.getChildren().add(new Text("\nProgrammer:"));
         if (producer.getProgramRoles() != null) {
             for (IProgramRole programRole : producer.getProgramRoles()) {
@@ -104,7 +146,7 @@ public class SearchController implements Initializable {
     }
 
     private void castMemberSearchResult(ICastMember castMember) {
-        resultVBox.getChildren().add(new Label(castMember.getName()));
+        resultVBox.getChildren().add(new Label("\n" + castMember.getName()));
         resultVBox.getChildren().add(new Text("\nProgrammer:"));
         if (castMember.getProgramRoles() != null) {
             for (IProgramRole programRole : castMember.getProgramRoles()) {
@@ -120,7 +162,31 @@ public class SearchController implements Initializable {
             searchTextField.setText(producer.getName());
             searchButton.fire();
         });
+        producerLabel.hoverProperty().addListener((observable, oldValue, newValue) -> {
+            if (producerLabel.isHover())
+            {
+                producerLabel.setStyle("-fx-underline: true; " + "-fx-font-weight: normal;" + "-fx-cursor: hand;");
+            }
+            else if (!producerLabel.isHover()){
+                producerLabel.setStyle("-fx-underline: false;" + "-fx-font-weight: normal;");
+            }
+        });
         return producerLabel;
+    }
+
+    private void changeIcon(){
+        searchTextField.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
+            if (searchTextField.isFocused())
+            {
+                rectangleIcon.setStyle("-fx-opacity: 0");
+                circleIcon.setStyle("-fx-opacity: 0");
+            }
+            else if(searchTextField.getText().isEmpty())
+            {
+                rectangleIcon.setStyle("-fx-opacity: 1");
+                circleIcon.setStyle("-fx-opacity: 1");
+            }
+        });
     }
 
     @FXML
