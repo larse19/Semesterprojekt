@@ -45,7 +45,7 @@
     -fx-font-weight: bold;
 }
 
-#credITHeader{
+#credITLabel{
     -fx-font-family: Arial;
     -fx-text-fill: tv2-brand-color;
     -fx-font-size: 28px;

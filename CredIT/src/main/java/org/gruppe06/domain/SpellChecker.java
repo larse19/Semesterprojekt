@@ -24,8 +24,6 @@ public class SpellChecker {
                .replaceAll("\\[","").replaceAll("]", "");
         DICTIONARY_VALUES += producerSystem.getListOfProducers().toString().replaceAll("\\s+",",")
                 .replaceAll("\\[","").replaceAll("]", "");
-
-        System.out.println(DICTIONARY_VALUES);
     }
 
     public Map<String, Integer> getDictionary() {
