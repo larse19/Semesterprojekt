@@ -68,6 +68,7 @@ public class SearchController implements Initializable {
 
     }
 
+    //Adds labels to the VBox about the programs information (Used when a program is being searched)
     private void programInformationLabel(IProgram program) {
         Label titleText = new Label("\nTitel");
         titleText.setStyle("-fx-font-size: 14px; " + "-fx-font-weight: bold;");
@@ -94,6 +95,7 @@ public class SearchController implements Initializable {
         resultVBox.getChildren().addAll(titleText, titleLabel, yearText, yearLabel);
     }
 
+    //Returns a label with information on a cast member (Used when a program is being searched)
     private Label getCastMembersLabel(ICastMember castMember) {
         Label castMemberLabel = new Label();
         castMemberLabel.setText(castMember.toString());
@@ -114,6 +116,7 @@ public class SearchController implements Initializable {
         return castMemberLabel;
     }
 
+    //Adds programRoles to the VBox (Used when a cast member is being searched)
     private void addProgramRoles(IProgramRole programRole) {
         Label label = new Label(programRole.toString());
         label.setOnMouseClicked(mouseEvent -> {
@@ -132,6 +135,7 @@ public class SearchController implements Initializable {
         resultVBox.getChildren().add(label);
     }
 
+    //Adds the search results the the VBox, when a producers is being searched
     private void producerSearchResult(IProducer producer) {
         Label nameLabel = new Label("\n" + producer.getName());
         Label programText = new Label("\nProgrammer:");
@@ -148,6 +152,7 @@ public class SearchController implements Initializable {
         }
     }
 
+    //Adds the search results the the VBox, when a cast member is being searched
     private void castMemberSearchResult(ICastMember castMember) {
         Label nameLabel = new Label("\n" + castMember.getName());
         Label programText = new Label("\nProgrammer:");
@@ -164,6 +169,7 @@ public class SearchController implements Initializable {
         }
     }
 
+    //Returns a label with information on a producer (Used when a program is being searched)
     private Label getProducersLabel(IProducer producer) {
         Label producerLabel = new Label();
         producerLabel.setText(producer.toString());
@@ -183,6 +189,7 @@ public class SearchController implements Initializable {
         return producerLabel;
     }
 
+    //Toggles the search icon, when the search field is focused
     private void changeIcon(){
         searchTextField.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
             if (searchTextField.isFocused())
@@ -198,16 +205,18 @@ public class SearchController implements Initializable {
         });
     }
 
+    //Searches for a program, cast member or producer
     @FXML
     void searchHandler(ActionEvent event) {
         if (!searchTextField.getText().equals("")) {
             resultVBox.getChildren().clear();
             try {
 
-                //Search program
+                //Search programs, if none are found, a null pointer exception is thrown by getProgram()
                 IProgram program = programSystem.getProgram(searchTextField.getText());
                 programInformationLabel(program);
 
+                //Adds producers to search result
                 Label producerText = new Label("\nProducere:");
                 producerText.setStyle("-fx-font-size: 14px; " + "-fx-font-weight: bold;");
                 resultVBox.getChildren().add(producerText);
@@ -215,6 +224,7 @@ public class SearchController implements Initializable {
                     resultVBox.getChildren().add(getProducersLabel(producer));
                 }
 
+                //Adds cast members to search result
                 Label castMemberText = new Label("\nMedvirkende:");
                 castMemberText.setStyle("-fx-font-size: 14px; " + "-fx-font-weight: bold;");
                 resultVBox.getChildren().add(castMemberText);
@@ -224,14 +234,17 @@ public class SearchController implements Initializable {
 
             } catch (NullPointerException e1) {
                 try {
+                    //Searches for cast member, throws null pointer exception, if none are found
                     ICastMember castMember = castMemberSystem.getCastMember(searchTextField.getText());
                     castMemberSearchResult(castMember);
                 } catch (NullPointerException e2) {
                     try {
+                        //Searches for producer, throws null pointer exception, if none are found
                         IProducer producer = producerSystem.getProducer(searchTextField.getText());
                         producerSearchResult(producer);
                     } catch (NullPointerException e3) {
                         try {
+                            //Tries to spellcheck the search keyword, if no search results are found, and makes a suggestion
                             Label didYouMeanLabel = new Label ("Mente du: " + spellChecker.correct(searchTextField.getText().replaceAll("\\s+", "")));
                             didYouMeanLabel.setOnMouseClicked(mouseEvent -> {
                                 searchTextField.setText(spellChecker.correct(searchTextField.getText().replaceAll("\\s+", "")));
@@ -247,6 +260,7 @@ public class SearchController implements Initializable {
         }
     }
 
+    //Eventlistener that pressed the search butten, when Enter is pressed
     private void setEvent(SearchSystem searchField) {
         searchField.addEventHandler(KeyEvent.KEY_PRESSED, ev -> {
             if (ev.getCode() == KeyCode.ENTER) {

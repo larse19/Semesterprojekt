@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import org.gruppe06.domain.CredIT;
@@ -23,9 +22,6 @@ public class ProgramsListViewController implements Initializable {
     @FXML
     private TextField searchBar;
 
-    @FXML
-    private Button searchButton;
-
     private ProgramSystem programSystem;
     private ObservableList<IProgramInfo> programsObservableList;
 
@@ -41,10 +37,12 @@ public class ProgramsListViewController implements Initializable {
         listOfPrograms.setItems(programsObservableList);
     }
 
+    //Returns the selected program
     public IProgramInfo getSelectedProgramInfo(){
         return listOfPrograms.getSelectionModel().getSelectedItem();
     }
 
+    //Refreshes list view
     public void refreshListView(){
         if(CredIT.getCredITInstance().getUserRole() == 1) {
             programsObservableList.setAll(programSystem.getAllProgramsInfo(searchBar.getText()));
@@ -53,6 +51,7 @@ public class ProgramsListViewController implements Initializable {
         }
     }
 
+    //Searches for a program, and adds result to the list view
     @FXML
     void SearchProgram(ActionEvent event) {
         programsObservableList.setAll(programSystem.getAllProgramsInfo(searchBar.getText()));

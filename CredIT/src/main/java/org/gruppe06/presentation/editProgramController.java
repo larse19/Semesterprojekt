@@ -12,13 +12,10 @@ import javafx.scene.control.*;
 import org.gruppe06.domain.CastMemberSystem;
 import org.gruppe06.domain.CredIT;
 import org.gruppe06.domain.ProgramSystem;
-import org.gruppe06.domain.UserSystem;
 import org.gruppe06.interfaces.ICast;
 import org.gruppe06.interfaces.ICastMember;
 import org.gruppe06.interfaces.IProducer;
 import org.gruppe06.interfaces.IRole;
-
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
@@ -37,18 +34,20 @@ public class editProgramController implements Initializable {
     @FXML
     public Label releaseYearLabel;
 
+    //Loads the nested controller; ProgramsListViewController;
     @FXML
     private Parent programsListView;
     @FXML
     private ProgramsListViewController programsListViewController;
 
+    //Loads the nested controller; CastMemberController
     @FXML
     private Parent addCastMember;
     @FXML
     private addCastMembersController addCastMemberController;
 
     @FXML
-    private Button editCastButton, updateCastButton, deleteCastButton;
+    private Button updateCastButton, deleteCastButton;
     @FXML
     private ListView<ICast> editCastListView;
     @FXML
@@ -65,7 +64,6 @@ public class editProgramController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         programSystem = new ProgramSystem();
         castMemberSystem = new CastMemberSystem();
-        addCastMemberController.setEditProgramController(this);
         addCastMemberController.setProgramsListViewController(programsListViewController);
 
         editCastListView.setOnMouseClicked((EventHandler<Event>) arg0 -> {
@@ -83,10 +81,7 @@ public class editProgramController implements Initializable {
         setEditCastVisible(false);
     }
 
-    public ProgramsListViewController getProgramsListViewController() {
-        return programsListViewController;
-    }
-
+    //Toggles visibility for update program functionality
     private void setUpdateProgramVisible(boolean state){
         programNameLabel.setVisible(state);
         saveUpdateButton.setVisible(state);
@@ -95,6 +90,7 @@ public class editProgramController implements Initializable {
         releaseYearLabel.setVisible(state);
     }
 
+    //Toggles visibility for edit cast functionality
     private void setEditCastVisible(boolean state){
         updateCastButton.setVisible(state);
         deleteCastButton.setVisible(state);
@@ -105,19 +101,12 @@ public class editProgramController implements Initializable {
         actorCheckBox.setVisible(state);
     }
 
-    @FXML
-    void toggleActorCheckBox(MouseEvent event)  {
-        if(editCastListView.getSelectionModel().getSelectedItem() instanceof IProducer){
-            actorCheckBox.disarm();
-        }
-    }
-
+    //Makes add member functionality visible
     @FXML
     void addMemberButtonHandler(ActionEvent event)  {
         addCastMember.setVisible(true);
         setUpdateProgramVisible(false);
         setEditCastVisible(false);
-
     }
 
     @FXML
@@ -130,6 +119,7 @@ public class editProgramController implements Initializable {
         }
     }
 
+    //Deletes a program
     @FXML
     void deleteProgramButtonHandler(ActionEvent event) {
         try {
@@ -151,6 +141,7 @@ public class editProgramController implements Initializable {
         }
     }
 
+    //Shows update program functionality
     @FXML
     void updateButtonHandler(ActionEvent event) {
         if(programsListViewController.getSelectedProgramInfo() != null) {
@@ -164,6 +155,7 @@ public class editProgramController implements Initializable {
         }
     }
 
+    //Updates program
     public void saveUpdateButtonHandler(ActionEvent actionEvent) {
         programSystem.updateProgram(this.oldName, updateProgramName.getText(), updateReleaseYear.getText());
         programNameLabel.setVisible(false);
@@ -174,6 +166,7 @@ public class editProgramController implements Initializable {
         programsListViewController.refreshListView();
     }
 
+    //Refreshes List view of cast members from selected program (for update cast functionality)
     private void refreshEditListView(){
         if(programsListViewController.getSelectedProgramInfo() != null) {
             String programName = programsListViewController.getSelectedProgramInfo().getName();
@@ -184,6 +177,7 @@ public class editProgramController implements Initializable {
         }
     }
 
+    //Shows edit cast functionality
     @FXML
     void editCastButtonHandler(ActionEvent event) {
         setEditCastVisible(true);
@@ -193,6 +187,7 @@ public class editProgramController implements Initializable {
         refreshEditListView();
     }
 
+    //Updates cast members role on program
     @FXML
     void updateCastHandler(ActionEvent event) {
         try{
@@ -227,6 +222,7 @@ public class editProgramController implements Initializable {
         }
     }
 
+    //Removes a cast member from the program
     @FXML
     void deleteCastHandler(ActionEvent event) {
         try {

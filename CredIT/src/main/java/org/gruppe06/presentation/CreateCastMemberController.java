@@ -3,7 +3,6 @@ package org.gruppe06.presentation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.gruppe06.domain.CastMemberSystem;
@@ -70,6 +69,7 @@ public class CreateCastMemberController implements Initializable {
         }
     }
 
+    //Creates a cast member
     @FXML
     void createButtonHandler(ActionEvent event) {
         if (!createNameTextField.getText().equals("")) {
@@ -85,6 +85,7 @@ public class CreateCastMemberController implements Initializable {
         }
     }
 
+    //Deletes a cast member
     @FXML
     void deleteButtonHandler(ActionEvent event) {
         if (castMemberSystem.deleteCastMember(deleteIDTextField.getText())) {
@@ -96,6 +97,7 @@ public class CreateCastMemberController implements Initializable {
         }
     }
 
+    //Updates a cast members name
     @FXML
     void updateButtonHandler(ActionEvent event) {
         if (castMemberSystem.updateCastMember(updateIDTextField.getText(), updateNameTextField.getText())) {

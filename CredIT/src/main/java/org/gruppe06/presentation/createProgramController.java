@@ -3,8 +3,6 @@ package org.gruppe06.presentation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import org.gruppe06.domain.CredIT;
 import org.gruppe06.domain.ProgramSystem;
@@ -19,28 +17,7 @@ public class createProgramController  implements Initializable {
     private TextField programNameField;
 
     @FXML
-    private RadioButton seriesButton;
-
-    @FXML
-    private RadioButton movieButton;
-
-    @FXML
-    private TextField numberOfSeasonsField;
-
-    @FXML
-    private TextField numberOfEpisodesField;
-
-    @FXML
     private TextField yearField;
-
-    @FXML
-    private TextField descriptionField;
-
-    @FXML
-    private Button createProgramButton;
-
-    @FXML
-    private Button backButton;
 
     @FXML
     private TextField producerID;
@@ -58,6 +35,7 @@ public class createProgramController  implements Initializable {
         }
     }
 
+    //Creates a program
     @FXML
     void createProgramHandler(ActionEvent event){
         if (programSystem.createNewProgram(programNameField.getText(), yearField.getText(), producerID.getText(), producerRole.getText())){
@@ -66,9 +44,9 @@ public class createProgramController  implements Initializable {
         } else {
             System.out.println("Program with ID: " + programNameField.getText() + " already exists!");
         }
-        //App.setRoot("addCastMembers");
     }
 
+    //Returns to the front page
     @FXML
     void returnHandler(ActionEvent event) throws IOException {
         if(CredIT.getCredITInstance().getUserRole() == 1) {

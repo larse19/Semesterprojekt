@@ -10,10 +10,8 @@ import org.gruppe06.domain.CredIT;
 import org.gruppe06.domain.PasswordAuthentication;
 import org.gruppe06.domain.UserSystem;
 import org.gruppe06.interfaces.IPerson;
-
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collection;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -29,19 +27,10 @@ public class editUserController implements Initializable {
     private Label errorLabel;
 
     @FXML
-    private Button backButton;
-
-    @FXML
-    private Button updateButton;
-
-    @FXML
     private TextField nameField;
 
     @FXML
     private TextField passwordField;
-
-    @FXML
-    private Button deleteUserButton;
 
     @FXML
     private TextField userSearchField;
@@ -75,6 +64,7 @@ public class editUserController implements Initializable {
         }
     }
 
+    //Deletes a user from the system
     @FXML
     void deleteUserButtonHandler(ActionEvent event) {
         errorLabel.setText("");
@@ -103,11 +93,13 @@ public class editUserController implements Initializable {
         searchButton.fire();
     }
 
+    //Searches for a user, and shows result in list view
     @FXML
     void searchButtonHandler(ActionEvent event) {
         usersObservableList.setAll(userSystem.getListOfUsers(userSearchField.getText()));
     }
 
+    //Updates user
     @FXML
     void updateButtonHandler(ActionEvent event) {
         if (usersList.getSelectionModel().getSelectedItem() != null) {

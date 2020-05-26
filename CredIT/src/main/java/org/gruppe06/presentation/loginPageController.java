@@ -11,8 +11,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.gruppe06.domain.CredIT;
 import org.gruppe06.domain.LoginSystem;
-import org.gruppe06.domain.PasswordAuthentication;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,20 +29,16 @@ public class loginPageController implements Initializable {
     @FXML
     private Button loginButton;
 
-    @FXML
-    private Button backButton;
-
     private LoginSystem loginSystem;
-    private PasswordAuthentication passwordAuthentication;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loginSystem = new LoginSystem();
-        passwordAuthentication = new PasswordAuthentication();
         setEvent(username);
         setEvent(password);
     }
 
+    //Attempts to login the user
     @FXML
     void loginHandler(ActionEvent event) throws IOException{
         int loginResult = loginSystem.login(username.getText(), password.getText());
@@ -65,6 +59,7 @@ public class loginPageController implements Initializable {
         App.setRoot("frontPage");
     }
 
+    //Eventlistener that presses the login button, when Enter is pressed
     private void setEvent(TextField textField){
         textField.addEventHandler(KeyEvent.KEY_PRESSED, ev -> {
             if (ev.getCode() == KeyCode.ENTER){
