@@ -29,13 +29,12 @@
     -fx-font-family: Arial;
     -fx-background-color: button-sign-in-color ;
     -fx-text-fill: default-primary-color;
-    -fx-font-weight: bold;
 }
 
 .label{
     -fx-font-family: Arial;
     -fx-text-fill: default-black-color;
-    -fx-font-size: 18px;
+    -fx-font-size: 14px;
 }
 
 #loginHeader{
@@ -66,6 +65,17 @@
     -fx-background-color: default-primary-color;
 }
 
+#backCMButton{
+    -fx-background-color: red-primary;
+    -fx-text-fill: default-primary-color;
+    -fx-border-color: #FFFFFF;
+}
+
+#backCMButton:hover {
+    -fx-text-fill: red-primary;
+    -fx-background-color: default-primary-color;
+}
+
 #frontLabel{
     -fx-font-family: Arial;
     -fx-text-fill: tv2-brand-color;
@@ -73,9 +83,62 @@
     -fx-font-weight: bold;
 }
 
-#adminPageLabel{
+#userPageLabel{
     -fx-font-family: Arial;
     -fx-text-fill: default-black-color;
     -fx-font-size: 28px;
     -fx-font-weight: bold;
+}
+
+#nameLabel{
+    -fx-font-family: Arial;
+    -fx-text-fill: default-primary-color;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+#usernameLabel{
+    -fx-font-family: Arial;
+    -fx-text-fill: default-primary-color;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+#signOutButton:hover {
+    -fx-text-fill: red-primary;
+    -fx-background-color: default-primary-color;
+}
+
+#pageLabel{
+    -fx-text-fill: default-black-color;
+    -fx-font-weight: bold;
+    -fx-font-size: 28px;
+}
+
+#backButton:hover {
+    -fx-text-fill: red-primary;
+    -fx-background-color: default-primary-color;
+    -fx-border-color: default-primary-color;
+}
+
+#backButton {
+    -fx-background-color: red-primary;
+    -fx-text-fill: default-primary-color;
+    -fx-border-color: default-primary-color;
+}
+
+#redBackButton {
+    -fx-background-color: red-primary;
+    -fx-text-fill: default-primary-color;
+    -fx-border-color: red-primary;
+}
+
+#addProgramPageLabel{
+    -fx-text-fill: default-black-color;
+    -fx-font-weight: bold;
+    -fx-font-size: 28px;
+}
+
+#createProgramButton{
+
 }

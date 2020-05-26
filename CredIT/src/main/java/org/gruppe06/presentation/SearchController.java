@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -80,7 +81,7 @@ public class SearchController implements Initializable {
 
     private Label programInformationLabel(IProgram program) {
         Label programLabel = new Label();
-        programLabel.setText("\n" + "Title:\n" + program.getName() + "\n\n" + "Release Year:\n" + program.getYear());
+        programLabel.setText("\n" + "Title: " + "\n" + program.getName() + "\n\n" + "Release Year:\n" + program.getYear());
         programLabel.setOnMouseClicked(mouseEvent -> {
             searchTextField.setText(program.getName());
             searchButton.fire();
@@ -136,8 +137,14 @@ public class SearchController implements Initializable {
     }
 
     private void producerSearchResult(IProducer producer) {
-        resultVBox.getChildren().add(new Label("\n" + producer.getName()));
-        resultVBox.getChildren().add(new Text("\nProgrammer:"));
+        Label nameLabel = new Label("\n" + producer.getName());
+        Label programText = new Label("\nProgrammer:");
+        resultVBox.getChildren().add(nameLabel);
+        resultVBox.getChildren().add(programText);
+
+        nameLabel.setStyle("-fx-font-size: 16px; " + "-fx-font-weight: bold;");
+        programText.setStyle("-fx-font-size: 14px; " + "-fx-font-weight: bold;");
+
         if (producer.getProgramRoles() != null) {
             for (IProgramRole programRole : producer.getProgramRoles()) {
                 addProgramRoles(programRole);
@@ -146,8 +153,14 @@ public class SearchController implements Initializable {
     }
 
     private void castMemberSearchResult(ICastMember castMember) {
-        resultVBox.getChildren().add(new Label("\n" + castMember.getName()));
-        resultVBox.getChildren().add(new Text("\nProgrammer:"));
+        Label nameLabel = new Label("\n" + castMember.getName());
+        Label programText = new Label("\nProgrammer:");
+        resultVBox.getChildren().add(nameLabel);
+        resultVBox.getChildren().add(programText);
+
+        nameLabel.setStyle("-fx-font-size: 16px; " + "-fx-font-weight: bold;");
+        programText.setStyle("-fx-font-size: 14px; " + "-fx-font-weight: bold;");
+
         if (castMember.getProgramRoles() != null) {
             for (IProgramRole programRole : castMember.getProgramRoles()) {
                 addProgramRoles(programRole);
