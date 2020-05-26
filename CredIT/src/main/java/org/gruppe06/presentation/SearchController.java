@@ -42,7 +42,6 @@ public class SearchController implements Initializable {
     @FXML
     public Circle circleIcon;
 
-
     private ProgramSystem programSystem;
     private SpellChecker spellChecker;
     private CastMemberSystem castMemberSystem;

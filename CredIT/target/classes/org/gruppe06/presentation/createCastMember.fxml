@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import org.gruppe06.domain.SearchSystem?>
-<?import javafx.scene.text.Text?>
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gruppe06.presentation.CreateCastMemberController">
    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d21e1e" height="610.0" layoutX="-10.0" layoutY="-10.0" stroke="#d21e1e" strokeType="INSIDE" width="120.0" />
    <Button layoutX="14.0" layoutY="568.0" mnemonicParsing="false" onAction="#backButtonHandler" prefHeight="25.0" stylesheets="@../../../stylesheets/StyleTest.css" text="Tilbage" />

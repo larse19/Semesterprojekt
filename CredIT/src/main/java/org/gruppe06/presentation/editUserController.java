@@ -112,10 +112,16 @@ public class editUserController implements Initializable {
                 IPerson user = usersList.getSelectionModel().getSelectedItem();
                 if (roleComboBox.getSelectionModel().getSelectedItem() != null) {
                     if (roleComboBox.getSelectionModel().getSelectedItem().equals("Administrator")) {
-                        if (!userSystem.updateUserRole(user.getID(), 1)) {
-                            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-                            errorAlert.setTitle("Brugerens rolle kunne ikke opdateres");
-                            errorAlert.setHeaderText("Der skete en fejl under opdateringen af bruger: " + user.getID());
+                        alert.setTitle("Opdatater bruger");
+                        alert.setHeaderText("Du er ved at konvertere " + usersList.getSelectionModel().getSelectedItem().getID() + " til administrator");
+                        alert.setContentText("Dette fjerner du alle brugerens referencer til programmer, produceret af brugeren!");
+                        Optional<ButtonType> producerResult = alert.showAndWait();
+                        if(producerResult.get() == ButtonType.OK) {
+                            if (!userSystem.updateUserRole(user.getID(), 1)) {
+                                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                                errorAlert.setTitle("Brugerens rolle kunne ikke opdateres");
+                                errorAlert.setHeaderText("Der skete en fejl under opdateringen af bruger: " + user.getID());
+                            }
                         }
                     } else if (roleComboBox.getSelectionModel().getSelectedItem().equals("Producer")) {
                         if (!userSystem.updateUserRole(user.getID(), 2)) {

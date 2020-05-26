@@ -38,7 +38,7 @@ public class Producer extends Cast implements IProducer {
             if(producerRole != null){
                 return "Navn: " + super.getName() + "     Rolle: " + producerRole;
             }else{
-                return super.getName();
+                return super.getName() + " - " + super.getID();
             }
         }
     }
