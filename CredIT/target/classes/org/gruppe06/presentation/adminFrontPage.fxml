@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gruppe06.presentation.adminFrontPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gruppe06.presentation.adminFrontPageController">
     <children>
         <fx:include fx:id="searchProgram" layoutX="200" layoutY="100.0" source="searchProgram.fxml" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d21e1e" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="150.0" />
-        <Button fx:id="signOutButton" layoutX="14.0" layoutY="559.0" mnemonicParsing="false" onAction="#signOutButtonHandler" text="Log ud" />
-        <Label fx:id="adminPageLabel" layoutX="200.0" layoutY="15.0" prefHeight="45.0" prefWidth="350.0" stylesheets="@../../../stylesheets/StyleTest.css" text="TV 2 CRED IT SYSTEM" />
-        <Label fx:id="nameLabel" layoutX="14.0" layoutY="14.0" stylesheets="@../../../stylesheets/StyleTest.css" text="Navn på bruger" />
-        <Button fx:id="createProgramButton" layoutX="-1.0" layoutY="143.0" mnemonicParsing="false" onAction="#createProgramButtonHandler" prefHeight="45.0" prefWidth="150.0" text="Opret nyt program" />
-        <Button fx:id="editProgramButton" layoutX="-1.0" layoutY="188.0" mnemonicParsing="false" onAction="#editProgramButtonHandler" prefHeight="45.0" prefWidth="150.0" text="Rediger programmer" />
-        <Button fx:id="addUserButton" layoutX="-1.0" layoutY="233.0" mnemonicParsing="false" onAction="#addUserButtonHandler" prefHeight="45.0" prefWidth="150.0" text="Tilføj bruger" />
-        <Button fx:id="editUserButton" layoutX="-1.0" layoutY="278.0" mnemonicParsing="false" onAction="#editUserButtonHandler" prefHeight="45.0" prefWidth="150.0" text="Rediger bruger" />
-        <Button layoutX="-1.0" layoutY="98.0" mnemonicParsing="false" onAction="#goToCastMemberHandler" prefHeight="45.0" prefWidth="150.0" text="Tilføj/Rediger Cast" />
-      <Label fx:id="usernameLabel" layoutX="14.0" layoutY="35.0" stylesheets="@../../../stylesheets/StyleTest.css" text="Brugernavn" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d21e1e" height="600.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="160.0" />
+        <Button fx:id="signOutButton" layoutX="14.0" layoutY="565.0" mnemonicParsing="false" onAction="#signOutButtonHandler" text="Log ud" />
+        <Label fx:id="userPageLabel" layoutX="200.0" layoutY="18.0" prefHeight="45.0" prefWidth="350.0" stylesheets="@../../../stylesheets/StyleTest.css" text="TV 2 CRED IT SYSTEM" />
+        <Label fx:id="nameLabel" layoutX="12.0" layoutY="25.0" stylesheets="@../../../stylesheets/StyleTest.css" text="Navn på bruger" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+        <Button fx:id="createProgramButton" alignment="BASELINE_LEFT" layoutX="-1.0" layoutY="143.0" mnemonicParsing="false" onAction="#createProgramButtonHandler" prefHeight="45.0" prefWidth="160.0" text="Opret nyt program" />
+        <Button fx:id="editProgramButton" alignment="BASELINE_LEFT" layoutX="-1.0" layoutY="188.0" mnemonicParsing="false" onAction="#editProgramButtonHandler" prefHeight="45.0" prefWidth="160.0" text="Rediger programmer" />
+        <Button fx:id="addUserButton" alignment="BASELINE_LEFT" layoutX="-1.0" layoutY="233.0" mnemonicParsing="false" onAction="#addUserButtonHandler" prefHeight="45.0" prefWidth="160.0" text="Tilføj bruger" />
+        <Button fx:id="editUserButton" alignment="BASELINE_LEFT" layoutX="-1.0" layoutY="278.0" mnemonicParsing="false" onAction="#editUserButtonHandler" prefHeight="45.0" prefWidth="160.0" text="Rediger bruger" />
+        <Button alignment="BASELINE_LEFT" layoutX="-1.0" layoutY="98.0" mnemonicParsing="false" onAction="#goToCastMemberHandler" prefHeight="45.0" prefWidth="160.0" text="Tilføj/Rediger Cast" />
+      <Label fx:id="usernameLabel" layoutX="12.0" layoutY="45.0" stylesheets="@../../../stylesheets/StyleTest.css" text="Brugernavn" textFill="WHITE" />
     </children>
 </AnchorPane>
