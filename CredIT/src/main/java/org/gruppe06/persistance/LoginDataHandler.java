@@ -14,6 +14,7 @@ public class LoginDataHandler {
         connection = databaseConnection.getConnection();
     }
 
+    //Pulls a users hashed password from the database
     public String getLogin(String username){
 
         try {
@@ -30,6 +31,7 @@ public class LoginDataHandler {
 
     }
 
+    //Pulls a users name, based on their username (Works for both producers and administrators)
     public String getUsersName(String username){
         String name = "";
 

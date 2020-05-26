@@ -19,6 +19,7 @@ public class UserSystem {
         producerDataHandler = new ProducerDataHandler();
     }
 
+    //Creates a system administrator, adn returns their created username
     public String createSystemAdministrator(String name, String password){
         String username = checkedUsername(name);
         if(systemAdministratorDataHandler.createSystemAdministrator(username, name, password)){
@@ -28,6 +29,7 @@ public class UserSystem {
         return username;
     }
 
+    //Creates a producer, and returns their created username
     public String createProducer(String name, String password){
         String username = checkedUsername(name);
         if(producerDataHandler.createProducer(username, name, password)){
@@ -37,6 +39,7 @@ public class UserSystem {
         return username;
     }
 
+    //Generates a username, based on the users name
     public String createUsername(String name){
         StringBuilder username = new StringBuilder();
         String[] nameArray = name.split(" ");
@@ -65,6 +68,7 @@ public class UserSystem {
         return username.toString();
     }
 
+    //Checks if a newly generated username, and continuously creates a new, until there are no matches, and returns it
     private String checkedUsername(String name){
         String username;
         name = name.toLowerCase();

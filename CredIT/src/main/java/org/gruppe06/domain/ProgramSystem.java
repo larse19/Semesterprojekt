@@ -1,13 +1,8 @@
 package org.gruppe06.domain;
 
 import org.gruppe06.interfaces.*;
-import org.gruppe06.persistance.Actor;
 import org.gruppe06.persistance.ProgramDataHandler;
-import org.gruppe06.persistance.Role;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class ProgramSystem {
 
@@ -40,7 +35,6 @@ public class ProgramSystem {
         return true;
     }
 
-    //TODO Should maybe update based on ID
     //Updates a programs name, and year, based on it's old name
     public boolean updateProgram(String oldName, String newName, String newReleaseYear) {
         if (checkIfProgramExists(oldName)){
@@ -85,22 +79,27 @@ public class ProgramSystem {
         return program;
     }
 
+    //Updates a cast members role on a program
     public boolean updateCastMembersRoleOnProgram(IProgramInfo programInfo, ICastMember castMember, IRole newRole){
         return programDataHandler.updateCastMembersRoleOnProgram(programInfo, castMember, newRole);
     }
 
+    //Removes a cast member from a program
     public boolean removeCastMemberFromProgram(IProgramInfo programInfo, ICastMember castMember){
         return programDataHandler.removeCastMemberFromProgram(programInfo, castMember);
     }
 
+    //Adds a producer to a program
     public boolean addProducerToProgram(IProgramInfo programInfo, IProducer producer){
         return programDataHandler.addProducerToProgram(programInfo, producer);
     }
 
+    //Updates a producers role on a program
     public boolean updateProducersRoleOnProgram(IProgramInfo programInfo, IProducer producer, String newRole){
         return programDataHandler.updateProducersRoleOnProgram(programInfo, producer, newRole);
     }
 
+    //Removes a producer from a program
     public boolean removeProducerFromProgram(IProgramInfo programInfo, IProducer producer){
         return programDataHandler.removeProducerFromProgram(programInfo, producer);
     }

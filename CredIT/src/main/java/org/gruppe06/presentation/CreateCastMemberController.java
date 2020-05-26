@@ -21,13 +21,7 @@ import java.util.ResourceBundle;
 public class CreateCastMemberController implements Initializable {
 
     @FXML
-    private Button backButton;
-
-    @FXML
     private TextField createNameTextField;
-
-    @FXML
-    private Button addButton;
 
     @FXML
     private SearchSystem updateIDTextField;
@@ -36,13 +30,7 @@ public class CreateCastMemberController implements Initializable {
     private TextField updateNameTextField;
 
     @FXML
-    private Button updateButton;
-
-    @FXML
     private SearchSystem deleteIDTextField;
-
-    @FXML
-    private Button addButton11;
 
     @FXML
     private Label createLabel;
@@ -85,7 +73,7 @@ public class CreateCastMemberController implements Initializable {
     @FXML
     void createButtonHandler(ActionEvent event) {
         if (!createNameTextField.getText().equals("")) {
-            String username = "";
+            String username;
             do {
                 username = userSystem.createUsername(createNameTextField.getText());
             }

@@ -3,15 +3,9 @@ package org.gruppe06.persistance;
 import org.gruppe06.interfaces.ICastMember;
 import org.gruppe06.interfaces.IRole;
 
-import java.util.ArrayList;
-
 public class CastMember extends Cast implements ICastMember {
 
     private IRole roleOnProgram;
-
-    public CastMember(String ID, String name, ArrayList<ProgramRole> programRoles) {
-        super(ID, name, programRoles);
-    }
 
     public CastMember(String ID, String name, IRole role) {
         super(ID, name);
@@ -35,6 +29,8 @@ public class CastMember extends Cast implements ICastMember {
         this.roleOnProgram = role;
     }
 
+    //Returns the information about the cast member. The "try" statement returns if the objekt has an instance of ProgramRole
+    //the catch statement is called, if it doesn't
     @Override
     public String toString(){
         try {

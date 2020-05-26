@@ -3,14 +3,6 @@ package org.gruppe06.domain;
 import org.gruppe06.persistance.LoginDataHandler;
 import org.gruppe06.persistance.SystemAdministratorDataHandler;
 
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
-import java.util.Base64;
-
 public class LoginSystem {
 
     private CredIT credITInstance;
@@ -25,6 +17,7 @@ public class LoginSystem {
         loginDataHandler = new LoginDataHandler();
     }
 
+    //Attempts to login the user, and returns their user role. Returns 0 if login failed
     public int login(String username, String password)
     {
         String token = loginDataHandler.getLogin(username);

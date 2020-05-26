@@ -28,6 +28,8 @@ public class Producer extends Cast implements IProducer {
         this.producerRole = producerRole;
     }
 
+    //Returns the information about the producer. The "try" statement returns if the object has an instance of ProgramRole
+    //the catch statement is called, if it doesn't
     @Override
     public String toString(){
         try {

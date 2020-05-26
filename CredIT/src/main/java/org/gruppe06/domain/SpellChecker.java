@@ -20,9 +20,9 @@ public class SpellChecker {
     public SpellChecker(){
         DICTIONARY_VALUES = programSystem.getListOfProgramNames().toString().replaceAll("\\s+",",")
                 .replaceAll("\\[","").replaceAll("]", "");
-        DICTIONARY_VALUES += castMemberSystem.getListOfCastMembers().toString().replaceAll("\\s+",",")
+        DICTIONARY_VALUES += castMemberSystem.getListOfCastMemberNames().toString().replaceAll("\\s+",",")
                .replaceAll("\\[","").replaceAll("]", "");
-        DICTIONARY_VALUES += producerSystem.getListOfProducers().toString().replaceAll("\\s+",",")
+        DICTIONARY_VALUES += producerSystem.getListOfProducerNames().toString().replaceAll("\\s+",",")
                 .replaceAll("\\[","").replaceAll("]", "");
     }
 

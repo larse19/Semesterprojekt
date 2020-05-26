@@ -1,22 +1,15 @@
 package org.gruppe06.presentation;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import org.gruppe06.domain.CastMemberSystem;
 import org.gruppe06.domain.ProducerSystem;
 import org.gruppe06.domain.ProgramSystem;
@@ -26,7 +19,6 @@ import org.gruppe06.interfaces.ICastMember;
 import org.gruppe06.interfaces.IProducer;
 import org.gruppe06.interfaces.IProgram;
 import org.gruppe06.interfaces.IProgramRole;
-import org.gruppe06.persistance.CastMember;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -63,16 +55,14 @@ public class SearchController implements Initializable {
         producerSystem = new ProducerSystem();
 
         ArrayList<String> databaseList = new ArrayList<>(programSystem.getListOfProgramNames());
-        databaseList.addAll(castMemberSystem.getListOfCastMembers());
-        databaseList.addAll(producerSystem.getListOfProducers());
+        databaseList.addAll(castMemberSystem.getListOfCastMemberNames());
+        databaseList.addAll(producerSystem.getListOfProducerNames());
         searchTextField.getEntries().addAll(databaseList);
         setEvent(searchTextField);
 
         spellChecker = new SpellChecker();
 
-        Stream.of(spellChecker.getDICTIONARY_VALUES().toLowerCase().split(",")).forEach((word) -> {
-            spellChecker.getDictionary().compute(word, (k, v) -> v == null ? 1 : v + 1);
-        });
+        Stream.of(spellChecker.getDICTIONARY_VALUES().toLowerCase().split(",")).forEach((word) -> spellChecker.getDictionary().compute(word, (k, v) -> v == null ? 1 : v + 1));
 
         changeIcon();
 

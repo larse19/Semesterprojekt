@@ -5,12 +5,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import org.gruppe06.domain.*;
 import org.gruppe06.interfaces.*;
-
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -27,15 +24,11 @@ public class addCastMembersController implements Initializable {
     private TextField roleField;
 
     @FXML
-    private Button addButton;
-
-    @FXML
-    private Label roleLabel, resultLabel;
+    private Label resultLabel;
 
     private ProgramSystem programSystem;
     private CastMemberSystem castMemberSystem;
     private ProducerSystem producerSystem;
-    private editProgramController editProgramController;
     private ProgramsListViewController programsListViewController;
 
     @Override
@@ -52,6 +45,7 @@ public class addCastMembersController implements Initializable {
         castTypeCombobox.setItems(castTypesObs);
     }
 
+    //Adds a list of all cast members to the namefield SearchSystem
     private void addCastMembersToNameField(){
         nameField.getEntries().clear();
         ArrayList<String> castMemberNames = new ArrayList<>();
@@ -61,6 +55,7 @@ public class addCastMembersController implements Initializable {
         nameField.getEntries().addAll(castMemberNames);
     }
 
+    //Adds a list of all producers to the nameField SearchSystem
     private void addProducersToNameField(){
         nameField.getEntries().clear();
         ArrayList<String> castMemberNames = new ArrayList<>();
@@ -74,10 +69,7 @@ public class addCastMembersController implements Initializable {
         this.programsListViewController = programsListViewController;
     }
 
-    public void setEditProgramController(editProgramController editProgramController) {
-        this.editProgramController = editProgramController;
-    }
-
+    //Updates the contents of the namefield SearchSystem drop down, based on cast type chosen in castTypeCombobox
     @FXML
     void updateNameField(ActionEvent event){
         if(castTypeCombobox.getSelectionModel().getSelectedItem().equals("Producer")){
@@ -87,6 +79,7 @@ public class addCastMembersController implements Initializable {
         }
     }
 
+    //Adds cast member to the chosen program
     @FXML
     void addButtonHandler(ActionEvent event) {
         IProgramInfo programInfo = programsListViewController.getSelectedProgramInfo();
@@ -137,20 +130,4 @@ public class addCastMembersController implements Initializable {
         }
 
     }
-
-    @FXML
-    void doneButtonHandler(ActionEvent event) throws IOException {
-        App.setRoot("editProgram");
-    }
-
-    @FXML
-    public void actorHandler(ActionEvent actionEvent) {
-        if (roleLabel.getText().equals("Rolle")) {
-            roleLabel.setText("Karakter navn");
-        } else {
-            roleLabel.setText("Rolle");
-        }
-    }
-
-
 }

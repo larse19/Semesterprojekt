@@ -32,6 +32,7 @@ public class Cast extends Person implements ICast, IPerson {
 
     }
 
+    //Returns a string with all programRoles (with toString()), separated by a new line
     public String printProgramRoles(){
         StringBuilder result = new StringBuilder();
         for (ProgramRole programRole:this.getProgramRoles()) {

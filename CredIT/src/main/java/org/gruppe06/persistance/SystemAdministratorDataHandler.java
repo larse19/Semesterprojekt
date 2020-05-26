@@ -57,6 +57,7 @@ public class SystemAdministratorDataHandler {
         }
     }
 
+    //Returns a list of all users (Producers and Administrators)
     public List<IPerson> getListOfUsers(String searchString) {
         List<IPerson> personList = new ArrayList<>();
 
@@ -83,6 +84,7 @@ public class SystemAdministratorDataHandler {
         return personList;
     }
 
+    //Returns a users role
     public int getUserRole(String username) {
         int userRole = 0;
         try {

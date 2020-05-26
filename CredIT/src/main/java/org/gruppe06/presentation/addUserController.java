@@ -54,6 +54,7 @@ public class addUserController implements Initializable {
         }
     }
 
+    //Creates a new user
     @FXML
     void createButtonHandler(ActionEvent event) {
         String username;

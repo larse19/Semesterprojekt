@@ -6,8 +6,6 @@ public class Role implements IRole {
 
     private String role;
 
-    public Role(){}
-
     public Role(String role) {
         this.role = role;
     }

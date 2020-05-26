@@ -15,10 +15,6 @@ public class ProgramRole implements IProgramRole {
         return programInfo;
     }
 
-    public void setProgramInfo(ProgramInfo programInfo) {
-        this.programInfo = programInfo;
-    }
-
     public Role getRole() {
         return role;
     }

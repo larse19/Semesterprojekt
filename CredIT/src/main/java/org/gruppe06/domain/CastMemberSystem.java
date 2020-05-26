@@ -1,6 +1,5 @@
 package org.gruppe06.domain;
 
-import jdk.jshell.spi.ExecutionControl;
 import org.gruppe06.interfaces.IActor;
 import org.gruppe06.interfaces.ICastMember;
 import org.gruppe06.interfaces.IRole;
@@ -18,10 +17,12 @@ public class CastMemberSystem {
         castMemberDataHandler = new CastMemberDataHandler();
     }
 
+    //Creates an instance of an Actor
     public IActor createActor(String characterName){
         return new Actor(characterName);
     }
 
+    //Creates an instance of a Role
     public IRole createRole(String role){
         return new Role(role);
     }
@@ -69,6 +70,7 @@ public class CastMemberSystem {
         }
     }
 
+    //Get a cast member based on their name (With multiple cast members with same name, it returns the first added cast member)
     public ICastMember getCastMember(String name) throws NullPointerException{
         if(castMemberDataHandler.getCastMember(name) != null){
             return castMemberDataHandler.getCastMember(name);
@@ -77,11 +79,13 @@ public class CastMemberSystem {
         }
     }
 
+    //Returns a list of all cast members in the database
     public List<ICastMember> getAllCastMembers(){
         return castMemberDataHandler.getAllCastMembers();
     }
 
-    public List<String> getListOfCastMembers(){
+    //Returns list of all cast members name
+    public List<String> getListOfCastMemberNames(){
         return castMemberDataHandler.getAllCastMemberNames();
     }
 }

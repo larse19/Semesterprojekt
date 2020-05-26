@@ -7,9 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ProgramDataHandler {
 
@@ -115,6 +113,7 @@ public class ProgramDataHandler {
         return res;
     }
 
+    //Returns a list of all programs, a producer has worked on, as IProgramInfo
     public List<IProgramInfo> getAllProducerProgramInfo(String userName, String searchString){
         List<IProgramInfo> res = new ArrayList<>();
 
@@ -137,6 +136,7 @@ public class ProgramDataHandler {
 
     }
 
+    //Returns a list of all programs, as programInfo
     public List<IProgramInfo> getAllProgramInfo(String searchString) {
 
         List<IProgramInfo> res = new ArrayList<>();
@@ -190,6 +190,7 @@ public class ProgramDataHandler {
 
     }
 
+    //Get program based on name
     private int getProgramID(String name){
         int id = 0;
         try {
