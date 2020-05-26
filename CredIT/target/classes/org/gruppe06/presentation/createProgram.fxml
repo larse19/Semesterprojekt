@@ -18,7 +18,7 @@
       <font>
          <Font size="18.0" />
       </font></Button>
-   <Button fx:id="backButton" layoutX="14.0" layoutY="565.0" mnemonicParsing="false" onAction="#returnHandler" prefHeight="25.0" prefWidth="60.0" stylesheets="@../../../stylesheets/StyleTest.css" text="Back" />
+   <Button fx:id="backButton" layoutX="14.0" layoutY="565.0" mnemonicParsing="false" onAction="#returnHandler" prefHeight="25.0" stylesheets="@../../../stylesheets/StyleTest.css" text="Tilbage" />
    <Label layoutX="150.0" layoutY="300.0" text="Producer" />
    <TextField fx:id="producerID" layoutX="150.0" layoutY="327.0" promptText="ID" />
    <TextField fx:id="producerRole" layoutX="150.0" layoutY="363.0" promptText="Rolle" />

@@ -31,10 +31,10 @@ public class Producer extends Cast implements IProducer {
     @Override
     public String toString(){
         try {
-            return "Name: " + super.getName() + "\nProducer ID: " + super.getID() + "\n\nPrograms: " + super.printProgramRoles();
+            return "Navn: " + super.getName() + "\nProducer ID: " + super.getID() + "\n\nProgrammer: " + super.printProgramRoles();
         }catch (NullPointerException e){
             if(producerRole != null){
-                return "Name: " + super.getName() + "   Role: " + producerRole;
+                return "Navn: " + super.getName() + "     Rolle: " + producerRole;
             }else{
                 return super.getName();
             }

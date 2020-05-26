@@ -15,9 +15,6 @@ import java.util.ResourceBundle;
 public class addUserController implements Initializable {
 
     @FXML
-    private Button createButton;
-
-    @FXML
     private RadioButton adminUserRadio;
 
     @FXML
@@ -30,13 +27,7 @@ public class addUserController implements Initializable {
     private TextField passwordField;
 
     @FXML
-    private TextField emailField;
-
-    @FXML
-    private Label usernameLabel;
-
-    @FXML
-    private Button backButton;
+    private Label usernameLabel2;
 
     private ToggleGroup userRoleGroup;
 
@@ -69,22 +60,17 @@ public class addUserController implements Initializable {
         if (!nameField.getText().equals("") && !passwordField.getText().equals("")) {
             if (userRoleGroup.getSelectedToggle() == adminUserRadio) {
                 username = userSystem.createSystemAdministrator(nameField.getText(), passwordAuthentication.hash(passwordField.getText().toCharArray()));
-                usernameLabel.setText("New System Administrator: " + username);
+                usernameLabel2.setText("New System Administrator: " + username);
             }
             else if(userRoleGroup.getSelectedToggle() == producerUserRadio){
                 username = userSystem.createProducer(nameField.getText(), passwordAuthentication.hash(passwordField.getText().toCharArray()));
-                usernameLabel.setText("New producer: " + username);
+                usernameLabel2.setText("New producer: " + username);
             }
+            nameField.setText("");
+            passwordField.setText("");
 
         }
 
     }
-
-    @FXML
-    void userTypeButtonHandler(ActionEvent event) {
-
-    }
-
-
 }
 

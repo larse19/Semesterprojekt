@@ -29,6 +29,6 @@ public class ProgramRole implements IProgramRole {
 
     @Override
     public String toString() {
-        return "Program: " + programInfo.getName() + "   Role: " + role.getRole();
+        return "Program: " + programInfo.getName() + "   Rolle: " + role.getRole();
     }
 }

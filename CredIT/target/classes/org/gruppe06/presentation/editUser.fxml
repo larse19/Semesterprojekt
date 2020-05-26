@@ -5,21 +5,19 @@
 <?import javafx.scene.shape.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gruppe06.presentation.editUserController">
-   <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d21e1e" height="610.0" layoutX="-10.0" layoutY="-10.0" stroke="#d21e1e" strokeType="INSIDE" width="120.0" />
-      <Label fx:id="pageLabel" layoutX="150.0" layoutY="25.0" stylesheets="@../../../stylesheets/StyleTest.css" text="Rediger bruger" />
-      <ListView fx:id="usersList" layoutX="150.0" layoutY="120.0" prefHeight="427.0" prefWidth="235.0" />
-      <Label layoutX="559.0" layoutY="191.0" text="Navn" />
-      <Label layoutX="560.0" layoutY="120.0" text="Rolle" />
-      <Button fx:id="backButton" layoutX="14.0" layoutY="565.0" mnemonicParsing="false" onAction="#backButtonHandler" text="Back" />
-      <Button fx:id="updateButton" layoutX="540.0" layoutY="341.0" mnemonicParsing="false" onAction="#updateButtonHandler" text="Opdater" />
-      <TextField fx:id="nameField" layoutX="491.0" layoutY="214.0" />
-      <Label layoutX="545.0" layoutY="261.0" text="Password" />
-      <TextField fx:id="passwordField" layoutX="491.0" layoutY="287.0" />
-      <Button fx:id="deleteUserButton" layoutX="400.0" layoutY="520.0" mnemonicParsing="false" onAction="#deleteUserButtonHandler" text="Slet bruger" />
-      <TextField fx:id="userSearchField" layoutX="151.0" layoutY="80.0" prefHeight="27.0" prefWidth="185.0" />
-      <Button fx:id="searchButton" layoutX="336.0" layoutY="80.0" mnemonicParsing="false" onAction="#searchButtonHandler" prefHeight="27.0" prefWidth="49.0" text="Søg" />
-      <Label fx:id="errorLabel" layoutX="475.0" layoutY="525.0" prefHeight="17.0" prefWidth="171.0" />
-      <ComboBox fx:id="roleComboBox" layoutX="491.0" layoutY="146.0" prefHeight="27.0" prefWidth="167.0" promptText="Select role..." />
-   </children>
+   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d21e1e" height="610.0" layoutX="-10.0" layoutY="-10.0" stroke="#d21e1e" strokeType="INSIDE" width="120.0" />
+   <Label fx:id="pageLabel" layoutX="150.0" layoutY="25.0" stylesheets="@../../../stylesheets/StyleTest.css" text="Rediger bruger" />
+   <ListView fx:id="usersList" layoutX="150.0" layoutY="120.0" prefHeight="427.0" prefWidth="235.0" />
+   <Label layoutX="559.0" layoutY="191.0" text="Navn" />
+   <Label layoutX="560.0" layoutY="120.0" text="Rolle" />
+   <Button fx:id="backButton" layoutX="14.0" layoutY="565.0" mnemonicParsing="false" onAction="#backButtonHandler" text="Tilbage" />
+   <Button fx:id="updateButton" layoutX="540.0" layoutY="341.0" mnemonicParsing="false" onAction="#updateButtonHandler" text="Opdater" />
+   <TextField fx:id="nameField" layoutX="491.0" layoutY="214.0" />
+   <Label layoutX="545.0" layoutY="261.0" text="Kodeord" />
+   <TextField fx:id="passwordField" layoutX="491.0" layoutY="287.0" />
+   <Button fx:id="deleteUserButton" layoutX="400.0" layoutY="520.0" mnemonicParsing="false" onAction="#deleteUserButtonHandler" text="Slet bruger" />
+   <TextField fx:id="userSearchField" layoutX="151.0" layoutY="80.0" prefHeight="27.0" prefWidth="185.0" />
+   <Button fx:id="searchButton" layoutX="336.0" layoutY="80.0" mnemonicParsing="false" onAction="#searchButtonHandler" prefHeight="27.0" prefWidth="49.0" text="Søg" />
+   <Label fx:id="errorLabel" layoutX="475.0" layoutY="525.0" prefHeight="17.0" prefWidth="171.0" />
+   <ComboBox fx:id="roleComboBox" layoutX="491.0" layoutY="146.0" prefHeight="27.0" prefWidth="167.0" promptText="Vælg rolle" />
 </AnchorPane>

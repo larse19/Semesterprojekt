@@ -20,7 +20,7 @@ public class UserSystem {
     }
 
     public String createSystemAdministrator(String name, String password){
-        String username = createUsername(name);
+        String username = checkedUsername(name);
         if(systemAdministratorDataHandler.createSystemAdministrator(username, name, password)){
             return username;
         }
@@ -29,7 +29,7 @@ public class UserSystem {
     }
 
     public String createProducer(String name, String password){
-        String username = createUsername(name);
+        String username = checkedUsername(name);
         if(producerDataHandler.createProducer(username, name, password)){
             return username;
         }
@@ -37,37 +37,43 @@ public class UserSystem {
         return username;
     }
 
-    private String createUsername(String name){
+    public String createUsername(String name){
         StringBuilder username = new StringBuilder();
-        name = name.toLowerCase();
-        do {
-            String[] nameArray = name.split(" ");
+        String[] nameArray = name.split(" ");
 
-            String[] firstName = nameArray[0].split("");
-            for (String letter : firstName) {
-                username.append(letter);
-                if (username.length() == 3) {
-                    break;
-                }
-            }
-
-            String[] lastName = nameArray[nameArray.length - 1].split("");
-            int i = 0;
-            while (username.length() < 7) {
-                if (lastName.length >= i + 1) {
-                    username.append(lastName[i++]);
-                } else {
-                    break;
-                }
-            }
-            Random r = new Random();
-            while (username.length() < 11) {
-                username.append(r.nextInt(9));
+        String[] firstName = nameArray[0].split("");
+        for (String letter : firstName) {
+            username.append(letter);
+            if (username.length() == 3) {
+                break;
             }
         }
-        while(!systemAdministratorDataHandler.checkIfUsernameIsAvailable(username.toString()));
 
+        String[] lastName = nameArray[nameArray.length - 1].split("");
+        int i = 0;
+        while (username.length() < 7) {
+            if (lastName.length >= i + 1) {
+                username.append(lastName[i++]);
+            } else {
+                break;
+            }
+        }
+        Random r = new Random();
+        while (username.length() < 11) {
+            username.append(r.nextInt(9));
+        }
         return username.toString();
+    }
+
+    private String checkedUsername(String name){
+        String username;
+        name = name.toLowerCase();
+        do {
+            username = createUsername(name);
+        }
+        while(!systemAdministratorDataHandler.checkIfUsernameIsAvailable(username));
+
+        return username;
 
     }
 

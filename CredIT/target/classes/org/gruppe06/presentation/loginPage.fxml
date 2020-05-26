@@ -8,40 +8,42 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../../stylesheets/StyleTest.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gruppe06.presentation.loginPageController">
-   <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#afafaf" height="38.0" layoutY="562.0" opacity="0.2" stroke="#afafaf" strokeType="INSIDE" width="801.0" />
-      <TextField fx:id="username" layoutX="322.0" layoutY="242.0" promptText="Username">
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor></TextField>
-      <PasswordField fx:id="password" layoutX="322.0" layoutY="287.0" promptText="Password">
-         <cursor>
-            <Cursor fx:constant="TEXT" />
-         </cursor></PasswordField>
-      <Label fx:id="loginHeader" layoutX="365.0" layoutY="192.0" stylesheets="@../../../stylesheets/StyleTest.css" text="Log in">
-         <font>
-            <Font name="Arial Black" size="36.0" />
-         </font></Label>
-      <Button fx:id="loginButton" layoutX="380.0" layoutY="330.0" mnemonicParsing="false" onAction="#loginHandler" stylesheets="@../../../stylesheets/StyleTest.css" text="Login">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <Button fx:id="redBackButton" layoutX="14.0" layoutY="568.0" mnemonicParsing="false" onAction="#returnHandler" prefHeight="25.0" prefWidth="60.0" stylesheets="@../../../stylesheets/StyleTest.css" text="Back">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <ImageView fx:id="tv2icon" fitHeight="50.0" fitWidth="105.0" layoutX="350.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../IconsTV2CredIT/640px-Danish_TV_2_logo.png" />
-         </image></ImageView>
-      <Line endX="700.0" endY="-10.0" layoutX="100.0" layoutY="95.0" startX="-100.0" startY="-10.0" stroke="#00000040" strokeWidth="0.5" />
-      <Label fx:id="wrongCredentialsLabel" layoutX="293.0" layoutY="372.0" prefHeight="16.0" prefWidth="226.0" stylesheets="@../../../stylesheets/StyleTest.css" textAlignment="CENTER" textFill="RED">
-         <font>
-            <Font name="Arial Black" size="13.0" />
-         </font>
-      </Label>
-   </children>
    <cursor>
       <Cursor fx:constant="DEFAULT" />
    </cursor>
+   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#afafaf" height="38.0" layoutY="562.0" opacity="0.2" stroke="#afafaf" strokeType="INSIDE" width="801.0" />
+   <TextField fx:id="username" layoutX="322.0" layoutY="242.0" promptText="Brugernavn">
+      <cursor>
+         <Cursor fx:constant="TEXT" />
+      </cursor>
+   </TextField>
+   <PasswordField fx:id="password" layoutX="322.0" layoutY="287.0" promptText="Kodeord">
+      <cursor>
+         <Cursor fx:constant="TEXT" />
+      </cursor>
+   </PasswordField>
+   <Label fx:id="loginHeader" layoutX="355.0" layoutY="192.0" stylesheets="@../../../stylesheets/StyleTest.css" text="Log ind">
+      <font>
+         <Font name="Arial Black" size="36.0" />
+      </font>
+   </Label>
+   <Button fx:id="loginButton" layoutX="368.0" layoutY="330.0" maxWidth="-Infinity" mnemonicParsing="false" onAction="#loginHandler" stylesheets="@../../../stylesheets/StyleTest.css" text="Log ind">
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+   </Button>
+   <Button fx:id="redBackButton" layoutX="14.0" layoutY="568.0" mnemonicParsing="false" onAction="#returnHandler" prefHeight="25.0" stylesheets="@../../../stylesheets/StyleTest.css" text="Tilbage">
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
+   </Button>
+   <ImageView fx:id="tv2icon" fitHeight="50.0" fitWidth="105.0" layoutX="350.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../../IconsTV2CredIT/640px-Danish_TV_2_logo.png" />
+   </ImageView>
+   <Line endX="700.0" endY="-10.0" layoutX="100.0" layoutY="95.0" startX="-100.0" startY="-10.0" stroke="#00000040" strokeWidth="0.5" />
+   <Label fx:id="wrongCredentialsLabel" layoutX="293.0" layoutY="372.0" prefHeight="16.0" prefWidth="226.0" stylesheets="@../../../stylesheets/StyleTest.css" textAlignment="CENTER" textFill="RED">
+      <font>
+         <Font name="Arial Black" size="13.0" />
+      </font>
+   </Label>
 </AnchorPane>

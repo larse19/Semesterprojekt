@@ -25,6 +25,6 @@
    <TextField fx:id="editRoleField" layoutX="535.0" layoutY="360.0" prefHeight="27.0" prefWidth="154.0" />
    <Button fx:id="updateCastButton" layoutX="494.0" layoutY="403.0" mnemonicParsing="false" onAction="#updateCastHandler" text="Opdater" />
    <Button fx:id="deleteCastButton" layoutX="741.0" layoutY="403.0" mnemonicParsing="false" onAction="#deleteCastHandler" text="Slet" />
-   <Label fx:id="roleLabel" layoutX="500.0" layoutY="365.0" prefHeight="15.0" prefWidth="38.0" text="Role" />
+   <Label fx:id="roleLabel" layoutX="500.0" layoutY="365.0" prefHeight="15.0" prefWidth="38.0" text="Rolle" />
    <CheckBox fx:id="actorCheckBox" layoutX="695.0" layoutY="364.0" mnemonicParsing="false" text="Skuespiller" />
 </AnchorPane>

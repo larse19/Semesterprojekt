@@ -43,7 +43,6 @@ public class SearchController implements Initializable {
     @FXML
     public SearchSystem searchTextField;
 
-
     //The two shapes makes the search glass
     @FXML
     public Rectangle rectangleIcon;
@@ -79,23 +78,30 @@ public class SearchController implements Initializable {
 
     }
 
-    private Label programInformationLabel(IProgram program) {
-        Label programLabel = new Label();
-        programLabel.setText("\n" + "Title: " + "\n" + program.getName() + "\n\n" + "Release Year:\n" + program.getYear());
-        programLabel.setOnMouseClicked(mouseEvent -> {
+    private void programInformationLabel(IProgram program) {
+        Label titleText = new Label("\nTitel");
+        titleText.setStyle("-fx-font-size: 14px; " + "-fx-font-weight: bold;");
+        Label titleLabel = new Label(program.getName());
+        Label yearText = new Label("\nUdgivelsesår:\n");
+        yearText.setStyle("-fx-font-size: 14px; " + "-fx-font-weight: bold;");
+        Label yearLabel = new Label(program.getYear());
+
+        //Label programLabel = new Label();
+        //programLabel.setText("\n" + "Title: " + "\n" + program.getName() + "\n\n" + "Release Year:\n" + program.getYear());
+        titleLabel.setOnMouseClicked(mouseEvent -> {
             searchTextField.setText(program.getName());
             searchButton.fire();
         });
-        programLabel.hoverProperty().addListener((observable, oldValue, newValue) -> {
-            if (programLabel.isHover())
+        titleLabel.hoverProperty().addListener((observable, oldValue, newValue) -> {
+            if (titleLabel.isHover())
             {
-                programLabel.setStyle("-fx-underline: true; " + "-fx-font-weight: normal;" + "-fx-cursor: hand;");
+                titleLabel.setStyle("-fx-underline: true; " + "-fx-font-weight: normal;" + "-fx-cursor: hand;");
             }
-            else if (!programLabel.isHover()){
-                programLabel.setStyle("-fx-underline: false;" + "-fx-font-weight: normal;");
+            else if (!titleLabel.isHover()){
+                titleLabel.setStyle("-fx-underline: false;" + "-fx-font-weight: normal;");
             }
         });
-        return programLabel;
+        resultVBox.getChildren().addAll(titleText, titleLabel, yearText, yearLabel);
     }
 
     private Label getCastMembersLabel(ICastMember castMember) {
@@ -210,14 +216,18 @@ public class SearchController implements Initializable {
 
                 //Search program
                 IProgram program = programSystem.getProgram(searchTextField.getText());
-                resultVBox.getChildren().add(programInformationLabel(program));
+                programInformationLabel(program);
 
-                resultVBox.getChildren().add(new Text("\nProducers:"));
+                Label producerText = new Label("\nProducere:");
+                producerText.setStyle("-fx-font-size: 14px; " + "-fx-font-weight: bold;");
+                resultVBox.getChildren().add(producerText);
                 for (IProducer producer : program.getProducers()) {
                     resultVBox.getChildren().add(getProducersLabel(producer));
                 }
 
-                resultVBox.getChildren().add(new Text("\nCast:"));
+                Label castMemberText = new Label("\nMedvirkende:");
+                castMemberText.setStyle("-fx-font-size: 14px; " + "-fx-font-weight: bold;");
+                resultVBox.getChildren().add(castMemberText);
                 for (ICastMember castMember : program.getCast()) {
                     resultVBox.getChildren().add(getCastMembersLabel(castMember));
                 }
@@ -239,7 +249,7 @@ public class SearchController implements Initializable {
                             });
                             resultVBox.getChildren().add(didYouMeanLabel);
                         } catch (NullPointerException e4) {
-                            resultVBox.getChildren().add(new Label("No search result"));
+                            resultVBox.getChildren().add(new Label("Intet resultat"));
                         }
                     }
                 }

@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import org.gruppe06.domain.CastMemberSystem;
 import org.gruppe06.domain.CredIT;
 import org.gruppe06.domain.ProgramSystem;
+import org.gruppe06.domain.UserSystem;
 import org.gruppe06.interfaces.ICast;
 import org.gruppe06.interfaces.ICastMember;
 import org.gruppe06.interfaces.IProducer;
@@ -152,13 +153,15 @@ public class editProgramController implements Initializable {
 
     @FXML
     void updateButtonHandler(ActionEvent event) {
-        setEditCastVisible(false);
-        setUpdateProgramVisible(true);
-        addCastMember.setVisible(false);
+        if(programsListViewController.getSelectedProgramInfo() != null) {
+            setEditCastVisible(false);
+            setUpdateProgramVisible(true);
+            addCastMember.setVisible(false);
 
-        this.oldName = programsListViewController.getSelectedProgramInfo().getName();
-        updateProgramName.setText(programsListViewController.getSelectedProgramInfo().getName());
-        updateReleaseYear.setText(programsListViewController.getSelectedProgramInfo().getYear());
+            this.oldName = programsListViewController.getSelectedProgramInfo().getName();
+            updateProgramName.setText(programsListViewController.getSelectedProgramInfo().getName());
+            updateReleaseYear.setText(programsListViewController.getSelectedProgramInfo().getYear());
+        }
     }
 
     public void saveUpdateButtonHandler(ActionEvent actionEvent) {
@@ -172,11 +175,13 @@ public class editProgramController implements Initializable {
     }
 
     private void refreshEditListView(){
-        String programName = programsListViewController.getSelectedProgramInfo().getName();
-        ObservableList<ICast> programCast = FXCollections.observableArrayList();
-        programCast.setAll(programSystem.getProgram(programName).getCast());
-        programCast.addAll(programSystem.getProgram(programName).getProducers());
-        editCastListView.setItems(programCast);
+        if(programsListViewController.getSelectedProgramInfo() != null) {
+            String programName = programsListViewController.getSelectedProgramInfo().getName();
+            ObservableList<ICast> programCast = FXCollections.observableArrayList();
+            programCast.setAll(programSystem.getProgram(programName).getCast());
+            programCast.addAll(programSystem.getProgram(programName).getProducers());
+            editCastListView.setItems(programCast);
+        }
     }
 
     @FXML

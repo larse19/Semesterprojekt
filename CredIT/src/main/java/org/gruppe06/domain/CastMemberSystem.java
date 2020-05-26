@@ -28,8 +28,13 @@ public class CastMemberSystem {
 
     //Checks if a cast member exists in the database
     private boolean checkIfCastMemberExists(String ID){
-        ICastMember checkCastMember = castMemberDataHandler.getCastMemberFromID(ID);
-        return checkCastMember != null;
+        try {
+            ICastMember checkCastMember = castMemberDataHandler.getCastMemberFromID(ID);
+            return true;
+        }catch (NullPointerException ex){
+            return false;
+        }
+
     }
 
     //Creates new cast member, and adds them to the database

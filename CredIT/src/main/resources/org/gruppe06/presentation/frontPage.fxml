@@ -13,5 +13,5 @@
       <Image url="@../../../IconsTV2CredIT/640px-Danish_TV_2_logo.png" />
    </ImageView>
    <Line endX="717.0" endY="-57.0" layoutX="83.0" layoutY="177.0" startX="-83.0" startY="-57.0" stroke="#00000040" strokeWidth="0.5" />
-   <Button layoutX="14.0" layoutY="568.0" mnemonicParsing="false" onAction="#loginHandler" text="Login" />
+   <Button layoutX="14.0" layoutY="568.0" mnemonicParsing="false" onAction="#loginHandler" text="Log ind" />
 </AnchorPane>

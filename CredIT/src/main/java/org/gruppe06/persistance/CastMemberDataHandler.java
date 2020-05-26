@@ -78,7 +78,13 @@ public class CastMemberDataHandler {
             ArrayList<ProgramRole> programRoles = new ArrayList<>();
             while(programRolesRS.next()){
                 ProgramInfo programInfo = new ProgramInfo(programRolesRS.getInt("ID"),programRolesRS.getString("name"),programRolesRS.getString("release_year"));
-                Role role = new Role(programRolesRS.getString("role"));
+                String roleString = programRolesRS.getString("role");
+                Role role;
+                if(roleString.contains("{actor}")){
+                    role = new Role(roleString.split("}")[1]);
+                }else{
+                    role = new Role(roleString);
+                }
                 ProgramRole programRole = new ProgramRole(programInfo,role);
                 programRoles.add(programRole);
             }
@@ -92,7 +98,11 @@ public class CastMemberDataHandler {
 
     //Method to get a cast member from the database, based on ID. Throws NullPointerException, if the cast member doesn't exist
     public ICastMember getCastMemberFromID(String ID) throws NullPointerException{
-        return getCastMember(ID);
+        try {
+            return getCastMember(ID);
+        }catch (NullPointerException ex){
+            throw new NullPointerException();
+        }
     }
 
     public List<ICastMember> getAllCastMembers(){
