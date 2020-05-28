@@ -101,7 +101,7 @@ public class CreateCastMemberController implements Initializable {
     @FXML
     void updateButtonHandler(ActionEvent event) {
         if (castMemberSystem.updateCastMember(updateIDTextField.getText(), updateNameTextField.getText())) {
-            updateLabel.setText("Medvirkende:; " + updateIDTextField.getText() + "s navn er nu: " + updateNameTextField.getText());
+            updateLabel.setText("Medvirkende; " + updateIDTextField.getText() + "s navn er nu: " + updateNameTextField.getText());
             updateNameTextField.setText("");
             updateIDTextField.setText("");
         } else {

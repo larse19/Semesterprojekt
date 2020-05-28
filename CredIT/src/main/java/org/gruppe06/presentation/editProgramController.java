@@ -201,7 +201,6 @@ public class editProgramController implements Initializable {
                     irole = castMemberSystem.createRole(editRoleField.getText());
                 }
                 if (programSystem.updateCastMembersRoleOnProgram(programsListViewController.getSelectedProgramInfo(), castMember, irole)) {
-                    System.out.println("Cast member updated");
                     refreshEditListView();
                 } else {
                     System.out.println("Cast member not updated");
@@ -211,7 +210,6 @@ public class editProgramController implements Initializable {
                 if(programSystem.updateProducersRoleOnProgram(programsListViewController.getSelectedProgramInfo(), producer, editRoleField.getText())){
                     System.out.println(producer.getRole());
                     refreshEditListView();
-                    System.out.println("Producer updated");
                 }else{
                     System.out.println("Producer couldn't be updated");
                 }
