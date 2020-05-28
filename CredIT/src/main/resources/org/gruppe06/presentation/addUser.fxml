@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gruppe06.presentation.addUserController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gruppe06.presentation.addUserController">
    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d21e1e" height="610.0" layoutX="-10.0" layoutY="-10.0" stroke="#d21e1e" strokeType="INSIDE" width="120.0" />
    <Label fx:id="pageLabel" layoutX="150.0" layoutY="25.0" stylesheets="@../../../stylesheets/StyleTest.css" text="Tilføj bruger til systemet" />
    <Button layoutX="399.0" layoutY="334.0" mnemonicParsing="false" onAction="#createButtonHandler" text="Opret" />
@@ -17,6 +14,6 @@
    <Label layoutX="408.0" layoutY="192.0" text="Navn" />
    <TextField fx:id="passwordField" layoutX="270.0" layoutY="287.0" prefHeight="27.0" prefWidth="313.0" />
    <Label layoutX="397.0" layoutY="259.0" text="Kodeord" />
-   <Button layoutX="14.0" layoutY="565.0" mnemonicParsing="false" onAction="#backButtonHandler" prefHeight="25.0" text="Tilbage" />
+   <Button fx:id="backButton" layoutX="14.0" layoutY="565.0" mnemonicParsing="false" onAction="#backButtonHandler" prefHeight="25.0" text="Tilbage" />
    <Label fx:id="usernameLabel2" alignment="CENTER" layoutX="287.0" layoutY="397.0" prefHeight="17.0" prefWidth="270.0" textAlignment="CENTER" />
 </AnchorPane>

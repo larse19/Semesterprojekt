@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gruppe06.presentation.CreateCastMemberController">
    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d21e1e" height="610.0" layoutX="-10.0" layoutY="-10.0" stroke="#d21e1e" strokeType="INSIDE" width="120.0" />
-   <Button layoutX="14.0" layoutY="568.0" mnemonicParsing="false" onAction="#backButtonHandler" prefHeight="25.0" stylesheets="@../../../stylesheets/StyleTest.css" text="Tilbage" />
+   <Button fx:id="backButton" layoutX="14.0" layoutY="568.0" mnemonicParsing="false" onAction="#backButtonHandler" prefHeight="25.0" stylesheets="@../../../stylesheets/StyleTest.css" text="Tilbage" />
    <Label fx:id="pageLabel" layoutX="150.0" layoutY="25.0" prefHeight="34.0" stylesheets="@../../../stylesheets/StyleTest.css" text="Rediger Medvirkende">
       <font>
          <Font name="System Bold" size="28.0" />
